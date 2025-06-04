@@ -73,3 +73,159 @@
 .site-footer ul li a:hover {
   color: var(--teal-green);
 }
+
+/* Styles spécifiques pour tous les liens de menu du footer */
+.footer-quick-links ul li a,
+.footer-quick-links .menu a,
+#footer-quick-links a,
+.site-footer .menu-item a,
+.site-footer nav a,
+.site-footer .widget_nav_menu a {
+  color: var(--medium-gray) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.footer-quick-links ul li a:hover,
+.footer-quick-links .menu a:hover,
+#footer-quick-links a:hover,
+.site-footer .menu-item a:hover,
+.site-footer nav a:hover,
+.site-footer .widget_nav_menu a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Override Bootstrap text-secondary pour être plus lisible */
+.site-footer .text-secondary {
+  color: var(--medium-gray) !important;
+}
+
+/* Override spécifique pour éviter les conflits avec Bootstrap dans le footer */
+.site-footer .text-secondary,
+.site-footer .text-muted {
+  color: var(--medium-gray) !important;
+}
+
+.site-footer .text-secondary:hover,
+.site-footer .text-muted:hover {
+  color: var(--light-green) !important;
+}
+
+/* S'assurer que tous les liens du footer ont la couleur correcte */
+.site-footer a:not(.btn):not([class*="btn"]) {
+  color: var(--medium-gray) !important;
+}
+
+.site-footer a:not(.btn):not([class*="btn"]):hover {
+  color: var(--light-green) !important;
+}
+
+/* Exclusions pour les icônes sociales qui ont déjà leurs propres styles */
+.site-footer .d-flex a {
+  color: var(--medium-gray) !important;
+}
+
+.site-footer .d-flex a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Override pour tous les menus possibles générés par WordPress */
+.site-footer .wp-block-navigation a,
+.site-footer .wp-block-navigation-item a,
+.site-footer .wp-block-page-list a {
+  color: var(--medium-gray) !important;
+  text-decoration: none !important;
+}
+
+.site-footer .wp-block-navigation a:hover,
+.site-footer .wp-block-navigation-item a:hover,
+.site-footer .wp-block-page-list a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Styles supplémentaires pour tous les types de menus du footer */
+
+/* Menus WordPress par défaut sans classes spécifiques */
+.site-footer .menu,
+.site-footer .menu ul,
+.site-footer .nav-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer .menu li,
+.site-footer .nav-menu li {
+  margin-bottom: 0.5rem;
+}
+
+.site-footer .menu li a,
+.site-footer .nav-menu li a {
+  color: var(--medium-gray) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+  font-size: 0.875rem;
+}
+
+.site-footer .menu li a:hover,
+.site-footer .nav-menu li a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Menus générés par wp_nav_menu sans classes personnalisées */
+.site-footer .menu-item a {
+  color: var(--medium-gray) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.site-footer .menu-item a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Styles pour les widgets de navigation */
+.site-footer .widget_nav_menu ul,
+.site-footer .widget_pages ul,
+.site-footer .widget_categories ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer .widget_nav_menu li a,
+.site-footer .widget_pages li a,
+.site-footer .widget_categories li a {
+  color: var(--medium-gray) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+  display: block;
+  padding: 0.25rem 0;
+}
+
+.site-footer .widget_nav_menu li a:hover,
+.site-footer .widget_pages li a:hover,
+.site-footer .widget_categories li a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Override pour tous les liens dans la section des liens rapides */
+.footer-quick-links a {
+  color: var(--medium-gray) !important;
+}
+
+.footer-quick-links a:hover {
+  color: var(--light-green) !important;
+}
+
+/* Classe générale pour tous les liens de navigation du footer */
+.site-footer nav a,
+.site-footer .navigation a {
+  color: var(--medium-gray) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.site-footer nav a:hover,
+.site-footer .navigation a:hover {
+  color: var(--light-green) !important;
+}

@@ -100,7 +100,7 @@ class Mon_Theme_ACA_Nav_Walker extends Walker_Nav_Menu
 
         // Build HTML
         $output .= '<a href="' . esc_url($item->url) . '" 
-                       class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">'
+                       class="nav-link">'
             . $item->title . '</a>';
     }
 }
@@ -126,7 +126,7 @@ class Mon_Theme_ACA_Mobile_Nav_Walker extends Walker_Nav_Menu
 
         // Build HTML
         $output .= '<a href="' . esc_url($item->url) . '" 
-                       class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">'
+                       class="mobile-menu-item">'
             . $item->title . '</a>';
     }
 }

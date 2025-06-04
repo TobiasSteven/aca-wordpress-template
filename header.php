@@ -50,12 +50,12 @@
                     // Fallback if no menu is set
                     if (!has_nav_menu('primary')) {
                     ?>
-                        <a href="<?php echo esc_url(home_url('/')); ?>" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
-                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">À Propos</a>
-                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Membres</a>
-                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Actualités</a>
-                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Publications</a>
-                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="nav-link">Accueil</a>
+                        <a href="#" class="nav-link">À Propos</a>
+                        <a href="#" class="nav-link">Membres</a>
+                        <a href="#" class="nav-link">Actualités</a>
+                        <a href="#" class="nav-link">Publications</a>
+                        <a href="#" class="nav-link">Contact</a>
                     <?php } ?>
                 </div>
                 <!-- Section Droite: Langue et Bouton -->
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <!-- Bouton Devenir Membre -->
-                    <button class="bg-[#A8E6CF] hover:bg-[#2D9B8A] text-[#343A40] hover:text-white text-sm font-semibold px-4 py-2 rounded-lg shadow">
+                    <button class="member-button bg-[#A8E6CF] hover:bg-[#2D9B8A] text-[#343A40] hover:text-white text-sm font-semibold px-4 py-2 rounded-lg shadow">
                         Devenir Membre
                     </button>
                 </div>
