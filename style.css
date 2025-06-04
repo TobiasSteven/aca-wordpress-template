@@ -12,6 +12,21 @@ Tags: responsive, clean, modern, flexible
 */
 
 /* Réinitialisation et bases */
+:root {
+  /* Primary Colors */
+  --teal-green: #2d9b8a; /* Main brand color from logo */
+  --light-green: #a8e6cf; /* Accent color from logo */
+  --dark-teal: #1f6b5c; /* Darker variant for text/headers */
+
+  /* Secondary Colors */
+  --white: #ffffff; /* Background, cards */
+  --light-gray: #f8f9fa; /* Section backgrounds */
+  --medium-gray: #6c757d; /* Secondary text */
+  --dark-gray: #343a40; /* Primary text */
+  --success-green: #28a745; /* CTAs, success states */
+  --warning-orange: #fd7e14; /* Alerts, highlights */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,21 +34,21 @@ Tags: responsive, clean, modern, flexible
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #333;
-  background-color: #f8f8f8;
+  color: var(--dark-gray);
+  background-color: var(--light-gray);
 }
 
 a {
-  color: #007bff;
+  color: var(--teal-green);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #0056b3;
+  color: var(--dark-teal);
 }
 
 img {

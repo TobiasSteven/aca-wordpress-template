@@ -1,0 +1,50 @@
+/**
+ * Footer styles for Mon-Theme-ACA
+ */
+
+/* Footer color scheme */
+:root {
+  --teal-green: #2d9b8a;
+  --light-green: #a8e6cf;
+  --dark-teal: #1f6b5c;
+  --medium-gray: #6c757d;
+  --dark-gray: #343a40;
+  --light-gray: #f8f9fa;
+}
+
+.site-footer {
+  background-color: #1a1a1a !important;
+}
+
+.footer-link {
+  color: var(--medium-gray);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--teal-green) !important;
+}
+
+/* Bootstrap icons styles */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+/* Fix for WordPress menu classes */
+.site-footer ul {
+  padding-left: 0;
+  margin-left: 0;
+  list-style-type: none;
+}
+
+.site-footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+.site-footer ul li a {
+  color: var(--medium-gray);
+  text-decoration: none;
+}
+
+.site-footer ul li a:hover {
+  color: var(--teal-green);
+}

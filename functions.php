@@ -143,8 +143,17 @@ function mon_theme_aca_scripts()
     // Enqueue header styles
     wp_enqueue_style('mon-theme-aca-header', MON_THEME_ACA_URI . '/assets/css/header-styles.css', array(), MON_THEME_ACA_VERSION);
 
-    // Enqueue Google Fonts
-    wp_enqueue_style('mon-theme-aca-fonts', 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap', array(), null);
+    // Enqueue footer styles
+    wp_enqueue_style('mon-theme-aca-footer', MON_THEME_ACA_URI . '/assets/css/footer-styles.css', array(), MON_THEME_ACA_VERSION);
+
+    // Enqueue Bootstrap CSS
+    wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css', array(), '5.3.2');
+
+    // Enqueue Google Fonts - Inter for the design
+    wp_enqueue_style('mon-theme-aca-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
+
+    // Enqueue Bootstrap JS
+    wp_enqueue_script('bootstrap-bundle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js', array(), '5.3.2', true);
 
     // Enqueue main.js
     wp_enqueue_script('mon-theme-aca-main', MON_THEME_ACA_URI . '/assets/js/main.js', array('jquery'), MON_THEME_ACA_VERSION, true);
@@ -169,3 +178,15 @@ require MON_THEME_ACA_DIR . '/inc/template-functions.php';
  * Customizer additions.
  */
 require MON_THEME_ACA_DIR . '/inc/customizer.php';
+
+/**
+ * Add CSS classes to menu items
+ */
+function mon_theme_aca_add_menu_link_class($atts, $item, $args)
+{
+    if (property_exists($args, 'link_class')) {
+        $atts['class'] = $args->link_class;
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'mon_theme_aca_add_menu_link_class', 1, 3);
