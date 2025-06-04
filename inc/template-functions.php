@@ -100,7 +100,7 @@ class Mon_Theme_ACA_Nav_Walker extends Walker_Nav_Menu
 
         // Build HTML
         $output .= '<a href="' . esc_url($item->url) . '" 
-                       class="nav-link">'
+                       class="nav-link focus:outline-none">'
             . $item->title . '</a>';
     }
 }
@@ -126,7 +126,7 @@ class Mon_Theme_ACA_Mobile_Nav_Walker extends Walker_Nav_Menu
 
         // Build HTML
         $output .= '<a href="' . esc_url($item->url) . '" 
-                       class="mobile-menu-item">'
+                       class="mobile-menu-item focus:outline-none">'
             . $item->title . '</a>';
     }
 }

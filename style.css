@@ -179,6 +179,17 @@ img {
   font-size: 0.9rem;
 }
 
+/* Supprimer les bordures de contour pour tous les éléments de navigation */
+nav a,
+nav button,
+.nav-link,
+.main-navigation a,
+a:focus,
+button:focus {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Responsive */
 @media (min-width: 768px) {
   .site-header .container {

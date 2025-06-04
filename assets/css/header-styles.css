@@ -4,6 +4,29 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+/* Supprimer les bordures de contour par défaut pour tous les éléments de navigation */
+.nav-link,
+.nav-link:focus,
+.nav-link:active,
+.main-navigation a,
+.main-navigation a:focus,
+.main-navigation a:active,
+.lang-button,
+.lang-button:focus,
+.lang-button:active,
+.member-button,
+.member-button:focus,
+.member-button:active,
+#mobile-menu-button,
+#mobile-menu-button:focus,
+#mobile-menu-button:active,
+.mobile-menu-item,
+.mobile-menu-item:focus,
+.mobile-menu-item:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .logo-aca-square {
   background-color: #2d9b8a;
   color: white;

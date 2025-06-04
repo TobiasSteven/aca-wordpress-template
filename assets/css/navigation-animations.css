@@ -20,6 +20,19 @@
   --warning-orange: #fd7e14; /* Alerts, highlights */
 }
 
+/* Supprimer toutes les bordures de contour par défaut pour les éléments de navigation */
+button,
+a,
+.nav-link,
+.main-navigation a,
+.lang-button,
+.member-button,
+#mobile-menu-button,
+.mobile-menu-item {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Animation pour la navigation principale */
 .main-navigation a {
   position: relative;
@@ -460,22 +473,23 @@ button.member-button:hover {
   color: var(--white) !important;
 }
 
-/* États de focus pour l'accessibilité */
+/* États de focus pour l'accessibilité - utiliser un style plus subtil */
 .nav-link:focus,
 .main-navigation a:focus {
-  outline: 2px solid var(--teal-green);
-  outline-offset: 2px;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: rgba(45, 155, 138, 0.1);
   border-radius: 0.25rem;
 }
 
 .lang-button:focus {
-  outline: 2px solid var(--teal-green);
-  outline-offset: 2px;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .member-button:focus {
-  outline: 2px solid var(--dark-teal);
-  outline-offset: 2px;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* Animation au chargement de la page removed - no more top-to-bottom slide effects */
