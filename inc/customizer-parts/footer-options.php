@@ -61,25 +61,6 @@ function mon_theme_aca_register_footer_options($wp_customize)
         )
     );
 
-    // Afficher le logo dans la section À Propos
-    $wp_customize->add_setting(
-        'footer_display_logo',
-        array(
-            'default'           => false,
-            'sanitize_callback' => 'mon_theme_aca_sanitize_checkbox',
-            'transport'         => 'refresh',
-        )
-    );
-
-    $wp_customize->add_control(
-        'footer_display_logo',
-        array(
-            'label'    => __('Afficher le logo dans la section À Propos', 'mon-theme-aca'),
-            'section'  => 'mon_theme_aca_footer_options',
-            'type'     => 'checkbox',
-        )
-    );
-
     // Titre "Liens Rapides"
     $wp_customize->add_setting(
         'footer_links_title',

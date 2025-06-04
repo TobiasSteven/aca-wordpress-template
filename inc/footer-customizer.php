@@ -49,27 +49,6 @@ function mon_theme_aca_footer_customize_register($wp_customize)
         )
     );
 
-    // Option pour afficher le logo en blanc
-    $wp_customize->add_setting(
-        'footer_white_logo',
-        array(
-            'default'           => false,
-            'sanitize_callback' => 'mon_theme_aca_sanitize_checkbox',
-            'transport'         => 'refresh',
-        )
-    );
-
-    $wp_customize->add_control(
-        'footer_white_logo',
-        array(
-            'label'    => esc_html__('Afficher le logo en blanc', 'mon-theme-aca'),
-            'description' => esc_html__('Activez cette option si votre logo doit être affiché en blanc sur fond foncé', 'mon-theme-aca'),
-            'section'  => 'mon_theme_aca_footer_options',
-            'type'     => 'checkbox',
-            'priority' => 6,
-        )
-    );
-
     // Texte "À Propos"
     $wp_customize->add_setting(
         'footer_about_title',

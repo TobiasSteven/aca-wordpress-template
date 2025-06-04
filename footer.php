@@ -8,7 +8,7 @@
 
 ?>
 
-<footer id="colophon" class="site-footer bg-dark text-secondary pt-5 pb-4 <?php echo get_theme_mod('footer_white_logo', false) ? 'white-logo' : ''; ?>">
+<footer id="colophon" class="site-footer bg-dark text-secondary pt-5 pb-4">
     <div class="container">
         <div class="row mb-4">
             <!-- Section À Propos -->

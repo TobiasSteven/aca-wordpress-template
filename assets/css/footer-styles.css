@@ -24,12 +24,6 @@
   height: auto;
 }
 
-/* Pour les logos qui ont besoin d'être en blanc sur fond foncé */
-.white-logo .footer-logo img,
-.white-logo .footer-custom-logo {
-  filter: brightness(0) invert(1); /* Rend le logo blanc */
-}
-
 .site-footer {
   background-color: var(
     --dark-teal
