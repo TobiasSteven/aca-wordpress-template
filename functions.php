@@ -90,6 +90,14 @@ function mon_theme_aca_setup()
 
     // Add support for experimental cover block spacing.
     add_theme_support('custom-spacing');
+
+    // Add support for custom logo
+    add_theme_support('custom-logo', array(
+        'height'      => 80,
+        'width'       => 250,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
 }
 add_action('after_setup_theme', 'mon_theme_aca_setup');
 

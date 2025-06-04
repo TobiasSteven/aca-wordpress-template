@@ -29,19 +29,32 @@
             <div class="container mx-auto px-6 py-3 flex items-center justify-between">
                 <!-- Section Logo -->
                 <div class="flex items-center">
-                    <div class="logo-aca-square">
-                        <span class="text-xs leading-none">ACME<br>CORP</span>
-                    </div>
-                    <span class="logo-text-main ml-2">ACA</span>
+                    <?php echo mon_theme_aca_get_custom_logo(); ?>
                 </div>
                 <!-- Liens de navigation - Centre -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="<?php echo esc_url(home_url('/')); ?>" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
-                    <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">À Propos</a>
-                    <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Membres</a>
-                    <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Actualités</a>
-                    <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Publications</a>
-                    <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location' => 'primary',
+                            'menu_id'        => 'primary-menu',
+                            'container'      => false,
+                            'menu_class'     => 'flex items-center space-x-6',
+                            'fallback_cb'    => false,
+                            'items_wrap'     => '%3$s',
+                            'walker'         => new Mon_Theme_ACA_Nav_Walker(),
+                        )
+                    );
+                    // Fallback if no menu is set
+                    if (!has_nav_menu('primary')) {
+                    ?>
+                        <a href="<?php echo esc_url(home_url('/')); ?>" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Accueil</a>
+                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">À Propos</a>
+                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Membres</a>
+                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Actualités</a>
+                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Publications</a>
+                        <a href="#" class="text-[#343A40] hover:text-[#2D9B8A] px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    <?php } ?>
                 </div>
                 <!-- Section Droite: Langue et Bouton -->
                 <div class="flex items-center space-x-4">
@@ -78,12 +91,28 @@
             </div>
             <!-- Menu mobile (caché par défaut) -->
             <div id="mobile-menu" class="md:hidden hidden bg-white shadow-md">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Accueil</a>
-                <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">À Propos</a>
-                <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Membres</a>
-                <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Actualités</a>
-                <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Publications</a>
-                <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Contact</a>
+                <?php
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'primary',
+                        'menu_id'        => 'mobile-primary-menu',
+                        'container'      => false,
+                        'menu_class'     => '',
+                        'fallback_cb'    => false,
+                        'items_wrap'     => '%3$s',
+                        'walker'         => new Mon_Theme_ACA_Mobile_Nav_Walker(),
+                    )
+                );
+                // Fallback if no menu is set
+                if (!has_nav_menu('primary')) {
+                ?>
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Accueil</a>
+                    <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">À Propos</a>
+                    <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Membres</a>
+                    <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Actualités</a>
+                    <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Publications</a>
+                    <a href="#" class="block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium">Contact</a>
+                <?php } ?>
             </div>
         </nav>
         <script>
