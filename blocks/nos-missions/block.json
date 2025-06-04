@@ -1,0 +1,58 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/nos-missions",
+    "version": "1.0.0",
+    "title": "Nos Missions",
+    "category": "mon-theme-aca",
+    "icon": "admin-users",
+    "description": "Affiche les missions de l'organisation avec des cartes personnalisables.",
+    "keywords": [
+        "missions",
+        "objectifs",
+        "valeurs",
+        "cartes"
+    ],
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Nos Missions"
+        },
+        "missions": {
+            "type": "array",
+            "default": [
+                {
+                    "icon": "🌱",
+                    "title": "Soutenir les Agriculteurs",
+                    "description": "Nous offrons des ressources et des formations pour aider les agriculteurs à améliorer leurs pratiques et leurs revenus."
+                },
+                {
+                    "icon": "🌿",
+                    "title": "Promouvoir la Durabilité",
+                    "description": "Nous encourageons des pratiques agricoles durables pour préserver l'environnement et assurer la viabilité à long terme."
+                },
+                {
+                    "icon": "🤝",
+                    "title": "Renforcer la Coopération",
+                    "description": "Nous facilitons la coopération entre les acteurs de la filière pour un développement harmonieux."
+                }
+            ]
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css",
+    "render": "file:./render.php"
+}

@@ -1,0 +1,108 @@
+/* Editor-specific styles for Nos Missions block */
+
+.wp-block-mon-theme-aca-nos-missions {
+    margin: 20px 0;
+    width: 100%;
+    
+    .missions-container {
+        background-color: #FFFFFF;
+        padding: 40px 30px;
+        border-radius: 8px;
+        position: relative;
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    .missions-title {
+        color: #1F6B5C;
+        font-size: 2.2em;
+        margin-bottom: 25px;
+        text-align: center;
+        
+        &:focus {
+            outline: 2px solid #2D9B8A;
+            outline-offset: 2px;
+        }
+    }
+    
+    .missions-cards {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 100%;
+    }
+    
+    .mission-card {
+        background-color: #F8F9FA;
+        padding: 25px;
+        border-radius: 8px;
+        width: calc(33.333% - 15px);
+        min-width: 300px;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        flex: 1;
+        
+        &:hover {
+            border-color: #2D9B8A;
+            background-color: rgba(168, 230, 207, 0.1);
+        }
+        
+        .mission-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        h3 {
+            color: #1F6B5C;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-weight: 600;
+            
+            &:focus {
+                outline: 2px solid #2D9B8A;
+                outline-offset: 2px;
+            }
+        }
+        
+        p {
+            color: #6C757D;
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin: 0;
+            
+            &:focus {
+                outline: 2px solid #2D9B8A;
+                outline-offset: 2px;
+            }
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .missions-container {
+            padding: 30px 20px;
+            max-width: 100%;
+        }
+        
+        .missions-title {
+            font-size: 1.8em;
+        }
+        
+        .missions-cards {
+            gap: 20px;
+        }
+        
+        .mission-card {
+            width: calc(50% - 15px);
+            min-width: 280px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .mission-card {
+            width: 100%;
+            min-width: auto;
+        }
+    }
+}

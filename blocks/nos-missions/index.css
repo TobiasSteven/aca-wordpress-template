@@ -1,0 +1,109 @@
+/* Editor-specific styles for Nos Missions block */
+.wp-block-mon-theme-aca-nos-missions {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.wp-block-mon-theme-aca-nos-missions .missions-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.wp-block-mon-theme-aca-nos-missions .missions-title {
+  color: #1f6b5c;
+  font-size: 2.2em;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.wp-block-mon-theme-aca-nos-missions .missions-title:focus {
+  outline: 2px solid #2d9b8a;
+  outline-offset: 2px;
+}
+
+.wp-block-mon-theme-aca-nos-missions .missions-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #a8e6cf;
+  width: calc(33.333% - 15px);
+  min-width: 320px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card:hover {
+  border-color: #2d9b8a;
+  background-color: rgba(168, 230, 207, 0.1);
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-icon {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card h3 {
+  color: #1f6b5c;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card h3:focus {
+  outline: 2px solid #2d9b8a;
+  outline-offset: 2px;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card p {
+  color: #6c757d;
+  font-size: 0.95em;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card p:focus {
+  outline: 2px solid #2d9b8a;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .wp-block-mon-theme-aca-nos-missions .missions-container {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .wp-block-mon-theme-aca-nos-missions .missions-title {
+    font-size: 1.8em;
+  }
+
+  .wp-block-mon-theme-aca-nos-missions .missions-cards {
+    gap: 15px;
+  }
+
+  .wp-block-mon-theme-aca-nos-missions .mission-card {
+    width: calc(50% - 10px);
+    min-width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  .wp-block-mon-theme-aca-nos-missions .mission-card {
+    width: 100%;
+    min-width: auto;
+  }
+}

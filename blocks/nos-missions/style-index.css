@@ -1,0 +1,148 @@
+/* Nos Missions Block Styles */
+.nos-missions-block {
+  margin: 40px 0;
+  width: 100%;
+}
+
+.missions-container {
+  background-color: #ffffff;
+  padding: 50px 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.missions {
+  text-align: center;
+}
+
+.missions-title {
+  color: #1f6b5c;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.missions-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.mission-card {
+  background-color: #f8f9fa;
+  padding: 35px 25px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  width: calc(33.333% - 20px);
+  min-width: 300px;
+  box-sizing: border-box;
+  flex: 1;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.mission-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(45, 155, 138, 0.15);
+  border-color: #a8e6cf;
+}
+
+.mission-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.mission-card h3 {
+  color: #1f6b5c;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.mission-card p {
+  color: #6c757d;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .missions-container {
+    padding: 30px 20px;
+  }
+
+  .missions-title {
+    font-size: 2em;
+    margin-bottom: 25px;
+  }
+
+  .missions-cards {
+    gap: 20px;
+  }
+
+  .mission-card {
+    width: calc(50% - 15px);
+    min-width: 280px;
+    padding: 25px 15px;
+  }
+
+  .mission-icon {
+    font-size: 2.5em;
+  }
+
+  .mission-card h3 {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 576px) {
+  .missions-container {
+    padding: 20px 15px;
+  }
+
+  .missions-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .missions-cards {
+    gap: 15px;
+  }
+
+  .mission-card {
+    width: 100%;
+    min-width: auto;
+    padding: 20px 15px;
+  }
+
+  .mission-icon {
+    font-size: 2.2em;
+  }
+
+  .mission-card h3 {
+    font-size: 1.1em;
+    margin-bottom: 12px;
+  }
+
+  .mission-card p {
+    font-size: 0.95em;
+  }
+}
+
+/* Editor Styles */
+.wp-block-mon-theme-aca-nos-missions .mission-card {
+  cursor: pointer;
+}
+
+.wp-block-mon-theme-aca-nos-missions .mission-card:hover {
+  border-color: #2d9b8a;
+  background-color: #a8e6cf;
+}

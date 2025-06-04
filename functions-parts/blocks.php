@@ -19,6 +19,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc recent-news
     register_block_type(get_template_directory() . '/blocks/recent-news');
+
+    // Enregistrer le bloc nos-missions
+    register_block_type(get_template_directory() . '/blocks/nos-missions');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
