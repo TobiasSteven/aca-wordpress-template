@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/hero-slider",
+    "version": "1.0.0",
+    "title": "Hero Slider",
+    "category": "mon-theme-aca",
+    "icon": "slides",
+    "description": "Un slider hero avec images de fond, texte et boutons d'action personnalisables.",
+    "keywords": [
+        "slider",
+        "hero",
+        "images",
+        "carrousel"
+    ],
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "margin": true,
+            "padding": false
+        }
+    },
+    "attributes": {
+        "slides": {
+            "type": "array",
+            "default": [
+                {
+                    "backgroundImage": "",
+                    "title": "L'Association Africaine du Coton",
+                    "subtitle": "Promouvoir le développement durable de la filière coton en Afrique.",
+                    "primaryButtonText": "Découvrir l'ACA",
+                    "primaryButtonUrl": "#decouvrir",
+                    "secondaryButtonText": "Nous Rejoindre",
+                    "secondaryButtonUrl": "#rejoindre"
+                },
+                {
+                    "backgroundImage": "",
+                    "title": "Engagement pour une Filière Forte",
+                    "subtitle": "Ensemble, valorisons le coton africain sur le marché mondial.",
+                    "primaryButtonText": "Découvrir l'ACA",
+                    "primaryButtonUrl": "#decouvrir",
+                    "secondaryButtonText": "Nous Rejoindre",
+                    "secondaryButtonUrl": "#rejoindre"
+                },
+                {
+                    "backgroundImage": "",
+                    "title": "L'Avenir du Coton Africain",
+                    "subtitle": "Innovons pour une culture du coton respectueuse et productive.",
+                    "primaryButtonText": "Découvrir l'ACA",
+                    "primaryButtonUrl": "#decouvrir",
+                    "secondaryButtonText": "Nous Rejoindre",
+                    "secondaryButtonUrl": "#rejoindre"
+                }
+            ]
+        },
+        "sliderHeight": {
+            "type": "string",
+            "default": "80vh"
+        },
+        "autoPlay": {
+            "type": "boolean",
+            "default": true
+        },
+        "autoPlaySpeed": {
+            "type": "number",
+            "default": 5000
+        },
+        "showNavigation": {
+            "type": "boolean",
+            "default": true
+        },
+        "showIndicators": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}

@@ -4,9 +4,12 @@
     "description": "Un thème WordPress modulable avec des blocs personnalisés",
     "main": "index.js",
     "scripts": {
-        "build": "wp-scripts build blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
+        "build": "wp-scripts build blocks/stats-cards/index.js --output-path=blocks/stats-cards/build && wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build",
         "start": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
-        "dev": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build"
+        "dev": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
+        "build:hero-slider": "wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build",
+        "start:hero-slider": "wp-scripts start blocks/hero-slider/index.js --output-path=blocks/hero-slider/build",
+        "build:all": "npm run build"
     },
     "devDependencies": {
         "@wordpress/scripts": "^26.0.0"

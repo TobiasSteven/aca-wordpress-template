@@ -13,6 +13,9 @@ function mon_theme_aca_register_blocks()
 {
     // Enregistrer le bloc stats-cards
     register_block_type(get_template_directory() . '/blocks/stats-cards');
+
+    // Enregistrer le bloc hero-slider
+    register_block_type(get_template_directory() . '/blocks/hero-slider');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
