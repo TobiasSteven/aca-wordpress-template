@@ -11,7 +11,7 @@
 }
 
 .stat-card-editor {
-    background-color: #f0f7f0; /* Couleur de fond vert très clair des cartes comme le frontend */
+    background-color: #f0f7f0;
     border-radius: 12px;
     padding: 25px 20px;
     text-align: center;
@@ -29,13 +29,49 @@
 .stat-card-editor:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    border-color: #8cc68c;
+    border-color: #A8E6CF;
 }
 
 .stat-icon-editor {
     font-size: 42px;
     margin-bottom: 8px;
-    color: #8cc68c;
+    color: #2D9B8A !important;
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome", sans-serif !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    width: 100%;
+}
+
+/* S'assurer que toutes les icônes FontAwesome ont la bonne couleur et police dans l'éditeur */
+.stat-icon-editor i,
+.stat-icon-editor .fas,
+.stat-icon-editor .far,
+.stat-icon-editor .fab,
+.stat-icon-editor .fa,
+.stat-icon-editor [class*="fa-"],
+.stat-icon-editor [class^="fa-"] {
+    color: #2D9B8A !important;
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome", sans-serif !important;
+    font-weight: 900 !important;
+    font-style: normal !important;
+    display: inline-block !important;
+    line-height: 1 !important;
+}
+
+/* Fallback pour les icônes qui ne se chargent pas */
+.stat-icon-editor i:before {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome", sans-serif !important;
+    font-weight: 900 !important;
+}
+
+/* Style par défaut si l'icône ne se charge pas */
+.stat-icon-editor:empty:before {
+    content: "\f080"; /* Icône par défaut FontAwesome (chart-bar) */
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900 !important;
+    color: #2D9B8A !important;
 }
 
 .stat-label-editor {
@@ -49,14 +85,14 @@
 }
 
 .stat-label-editor:focus {
-    border-color: #8cc68c;
+    border-color: #2D9B8A;
     outline: none;
 }
 
 .stat-value-editor {
     font-size: 38px;
     font-weight: 700;
-    color: #8cc68c;
+    color: #2D9B8A;
     border: 1px dashed transparent;
     padding: 5px;
     border-radius: 4px;
@@ -64,7 +100,7 @@
 }
 
 .stat-value-editor:focus {
-    border-color: #8cc68c;
+    border-color: #2D9B8A;
     outline: none;
 }
 
@@ -82,17 +118,6 @@
 
 .stat-card-editor:hover::after {
     opacity: 1;
-}
-
-/* S'assurer que toutes les icônes FontAwesome ont la bonne couleur dans l'éditeur */
-.stat-icon-editor,
-.stat-icon-editor i,
-.stat-icon-editor .fas,
-.stat-icon-editor .far,
-.stat-icon-editor .fab,
-.stat-icon-editor .fa,
-.stat-icon-editor [class*="fa-"] {
-    color: #8cc68c !important;
 }
 
 /* Responsive design pour l'éditeur */

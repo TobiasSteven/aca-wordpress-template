@@ -16,7 +16,14 @@ export default function save({ attributes }) {
                 {cards.map((card, index) => (
                     <div key={index} className="stat-card">
                         <div className="icon">
-                            <i key={`${index}-${card.icon}`} className={card.icon}></i>
+                            <i
+                                key={`${index}-${card.icon}`}
+                                className={card.icon || 'fas fa-chart-bar'}
+                                style={{
+                                    fontFamily: '"Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome", sans-serif',
+                                    fontWeight: '900'
+                                }}
+                            ></i>
                         </div>
                         <div className="stat-label">
                             {card.label}
