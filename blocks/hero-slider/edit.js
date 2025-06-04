@@ -10,6 +10,7 @@ import {
     __experimentalHeading as Heading
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
+import { select } from '@wordpress/data';
 
 export default function Edit({ attributes, setAttributes }) {
     const { slides, sliderHeight, autoPlay, autoPlaySpeed, showNavigation, showIndicators } = attributes;
@@ -22,7 +23,7 @@ export default function Edit({ attributes, setAttributes }) {
     };
 
     const addSlide = () => {
-        const newSlides = [...slides, {
+        const newSlide = {
             backgroundImage: "",
             title: __("Nouveau slide", "mon-theme-aca"),
             subtitle: __("Votre sous-titre ici", "mon-theme-aca"),
@@ -30,8 +31,11 @@ export default function Edit({ attributes, setAttributes }) {
             primaryButtonUrl: "#",
             secondaryButtonText: __("Bouton secondaire", "mon-theme-aca"),
             secondaryButtonUrl: "#"
-        }];
+        };
+        const newSlides = [...slides, newSlide];
         setAttributes({ slides: newSlides });
+        // Mettre à jour le slide actuel vers le nouveau slide
+        setCurrentSlide(newSlides.length - 1);
     };
 
     const removeSlide = (index) => {
@@ -99,102 +103,168 @@ export default function Edit({ attributes, setAttributes }) {
                 </PanelBody>
 
                 <PanelBody title={__('Gestion des slides', 'mon-theme-aca')} initialOpen={false}>
-                    <div style={{ marginBottom: '20px' }}>
+                    <div style={{ marginBottom: '20px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+                        <p style={{ margin: '0 0 10px 0', fontWeight: 'bold' }}>
+                            {__('Nombre de slides :', 'mon-theme-aca')} {slides.length}
+                        </p>
                         <Button
                             variant="primary"
                             onClick={addSlide}
-                            style={{ marginBottom: '10px' }}
+                            style={{ marginBottom: '5px' }}
                         >
-                            {__('Ajouter un slide', 'mon-theme-aca')}
+                            {__('➕ Ajouter un slide', 'mon-theme-aca')}
                         </Button>
+                        <p style={{ margin: '5px 0 0 0', fontSize: '12px', color: '#666' }}>
+                            {__('Vous pouvez ajouter autant de slides que vous voulez', 'mon-theme-aca')}
+                        </p>
                     </div>
 
                     {slides.map((slide, index) => (
-                        <div key={index} style={{ marginBottom: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '4px' }}>
-                            <Heading level={4}>
-                                {__('Slide', 'mon-theme-aca')} {index + 1}
-                                {slides.length > 1 && (
+                        <div key={`slide-${index}`} style={{
+                            marginBottom: '20px',
+                            padding: '15px',
+                            border: index === currentSlide ? '2px solid #0073aa' : '1px solid #ddd',
+                            borderRadius: '4px',
+                            backgroundColor: index === currentSlide ? '#f0f8ff' : '#fff'
+                        }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                                <Heading level={4} style={{ margin: 0 }}>
+                                    {__('Slide', 'mon-theme-aca')} {index + 1}
+                                    {index === currentSlide && (
+                                        <span style={{ fontSize: '12px', color: '#0073aa', marginLeft: '10px' }}>
+                                            {__('(En cours de prévisualisation)', 'mon-theme-aca')}
+                                        </span>
+                                    )}
+                                </Heading>
+                                <div>
                                     <Button
                                         variant="secondary"
-                                        isDestructive
-                                        onClick={() => removeSlide(index)}
-                                        style={{ marginLeft: '10px', fontSize: '12px' }}
+                                        onClick={() => setCurrentSlide(index)}
+                                        style={{ marginRight: '5px', fontSize: '12px' }}
                                     >
-                                        {__('Supprimer', 'mon-theme-aca')}
+                                        {__('Prévisualiser', 'mon-theme-aca')}
                                     </Button>
-                                )}
-                            </Heading>
-
-                            <MediaUploadCheck>
-                                <MediaUpload
-                                    onSelect={(media) => updateSlide(index, 'backgroundImage', media.url)}
-                                    allowedTypes={['image']}
-                                    value={slide.backgroundImage}
-                                    render={({ open }) => (
-                                        <div style={{ marginBottom: '10px' }}>
-                                            <Button
-                                                variant={slide.backgroundImage ? 'secondary' : 'primary'}
-                                                onClick={open}
-                                            >
-                                                {slide.backgroundImage ? __('Changer l\'image', 'mon-theme-aca') : __('Sélectionner une image', 'mon-theme-aca')}
-                                            </Button>
-                                            {slide.backgroundImage && (
-                                                <div style={{ marginTop: '10px' }}>
-                                                    <img
-                                                        src={slide.backgroundImage}
-                                                        alt={__('Image de fond', 'mon-theme-aca')}
-                                                        style={{ maxWidth: '200px', height: 'auto' }}
-                                                    />
-                                                    <br />
-                                                    <Button
-                                                        variant="link"
-                                                        isDestructive
-                                                        onClick={() => updateSlide(index, 'backgroundImage', '')}
-                                                    >
-                                                        {__('Supprimer l\'image', 'mon-theme-aca')}
-                                                    </Button>
-                                                </div>
-                                            )}
-                                        </div>
+                                    {slides.length > 1 && (
+                                        <Button
+                                            variant="secondary"
+                                            isDestructive
+                                            onClick={() => removeSlide(index)}
+                                            style={{ fontSize: '12px' }}
+                                        >
+                                            {__('🗑️ Supprimer', 'mon-theme-aca')}
+                                        </Button>
                                     )}
+                                </div>
+                            </div>
+
+                            <div style={{ marginBottom: '15px' }}>
+                                <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>
+                                    {__('Image de fond', 'mon-theme-aca')}
+                                </label>
+                                <MediaUploadCheck
+                                    fallback={
+                                        <p>{__('Pour sélectionner une image, vous devez avoir les permissions de téléchargement.', 'mon-theme-aca')}</p>
+                                    }
+                                >
+                                    <MediaUpload
+                                        onSelect={(media) => {
+                                            console.log('Media selected:', media);
+                                            if (media && media.url) {
+                                                updateSlide(index, 'backgroundImage', media.url);
+                                            }
+                                        }}
+                                        allowedTypes={['image']}
+                                        value={slide.backgroundImage}
+                                        multiple={false}
+                                        render={({ open }) => (
+                                            <div>
+                                                <Button
+                                                    variant={slide.backgroundImage ? 'secondary' : 'primary'}
+                                                    onClick={open}
+                                                    style={{ display: 'block', marginBottom: '10px', width: '100%' }}
+                                                >
+                                                    {slide.backgroundImage ? __('📷 Changer l\'image', 'mon-theme-aca') : __('📷 Sélectionner une image', 'mon-theme-aca')}
+                                                </Button>
+                                                {slide.backgroundImage && (
+                                                    <div style={{ marginTop: '10px' }}>
+                                                        <img
+                                                            src={slide.backgroundImage}
+                                                            alt={__('Image de fond', 'mon-theme-aca')}
+                                                            style={{
+                                                                width: '100%',
+                                                                height: 'auto',
+                                                                maxHeight: '150px',
+                                                                objectFit: 'cover',
+                                                                border: '1px solid #ddd',
+                                                                borderRadius: '4px'
+                                                            }}
+                                                        />
+                                                        <Button
+                                                            variant="link"
+                                                            isDestructive
+                                                            onClick={() => updateSlide(index, 'backgroundImage', '')}
+                                                            style={{ marginTop: '5px', fontSize: '12px' }}
+                                                        >
+                                                            {__('❌ Supprimer l\'image', 'mon-theme-aca')}
+                                                        </Button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
+                                    />
+                                </MediaUploadCheck>
+                                <p style={{ fontSize: '11px', color: '#666', margin: '5px 0 0 0' }}>
+                                    {__('Formats supportés : JPG, PNG, GIF, WebP', 'mon-theme-aca')}
+                                </p>
+                            </div>
+
+                            <div style={{ display: 'grid', gap: '10px' }}>
+                                <TextControl
+                                    label={__('📝 Titre', 'mon-theme-aca')}
+                                    value={slide.title}
+                                    onChange={(value) => updateSlide(index, 'title', value)}
+                                    placeholder={__('Entrez le titre du slide', 'mon-theme-aca')}
                                 />
-                            </MediaUploadCheck>
 
-                            <TextControl
-                                label={__('Titre', 'mon-theme-aca')}
-                                value={slide.title}
-                                onChange={(value) => updateSlide(index, 'title', value)}
-                            />
+                                <TextControl
+                                    label={__('📄 Sous-titre', 'mon-theme-aca')}
+                                    value={slide.subtitle}
+                                    onChange={(value) => updateSlide(index, 'subtitle', value)}
+                                    placeholder={__('Entrez le sous-titre du slide', 'mon-theme-aca')}
+                                />
 
-                            <TextControl
-                                label={__('Sous-titre', 'mon-theme-aca')}
-                                value={slide.subtitle}
-                                onChange={(value) => updateSlide(index, 'subtitle', value)}
-                            />
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                    <TextControl
+                                        label={__('🔗 Texte bouton principal', 'mon-theme-aca')}
+                                        value={slide.primaryButtonText}
+                                        onChange={(value) => updateSlide(index, 'primaryButtonText', value)}
+                                        placeholder={__('Ex: Découvrir', 'mon-theme-aca')}
+                                    />
 
-                            <TextControl
-                                label={__('Texte bouton principal', 'mon-theme-aca')}
-                                value={slide.primaryButtonText}
-                                onChange={(value) => updateSlide(index, 'primaryButtonText', value)}
-                            />
+                                    <TextControl
+                                        label={__('🌐 URL bouton principal', 'mon-theme-aca')}
+                                        value={slide.primaryButtonUrl}
+                                        onChange={(value) => updateSlide(index, 'primaryButtonUrl', value)}
+                                        placeholder={__('Ex: #section', 'mon-theme-aca')}
+                                    />
+                                </div>
 
-                            <TextControl
-                                label={__('URL bouton principal', 'mon-theme-aca')}
-                                value={slide.primaryButtonUrl}
-                                onChange={(value) => updateSlide(index, 'primaryButtonUrl', value)}
-                            />
+                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                                    <TextControl
+                                        label={__('🔗 Texte bouton secondaire', 'mon-theme-aca')}
+                                        value={slide.secondaryButtonText}
+                                        onChange={(value) => updateSlide(index, 'secondaryButtonText', value)}
+                                        placeholder={__('Ex: En savoir plus', 'mon-theme-aca')}
+                                    />
 
-                            <TextControl
-                                label={__('Texte bouton secondaire', 'mon-theme-aca')}
-                                value={slide.secondaryButtonText}
-                                onChange={(value) => updateSlide(index, 'secondaryButtonText', value)}
-                            />
-
-                            <TextControl
-                                label={__('URL bouton secondaire', 'mon-theme-aca')}
-                                value={slide.secondaryButtonUrl}
-                                onChange={(value) => updateSlide(index, 'secondaryButtonUrl', value)}
-                            />
+                                    <TextControl
+                                        label={__('🌐 URL bouton secondaire', 'mon-theme-aca')}
+                                        value={slide.secondaryButtonUrl}
+                                        onChange={(value) => updateSlide(index, 'secondaryButtonUrl', value)}
+                                        placeholder={__('Ex: /contact', 'mon-theme-aca')}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </PanelBody>
