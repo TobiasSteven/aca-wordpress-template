@@ -1,0 +1,5 @@
+Le fichier screenshot.png est l'image de prévisualisation du thème dans l'interface d'administration WordPress.
+
+Remplacez ce fichier texte par une image de 1200x900 pixels (dimensions recommandées) au format PNG nommée "screenshot.png".
+
+Cette image servira à représenter visuellement votre thème dans l'écran de sélection des thèmes de WordPress.

@@ -1,0 +1,189 @@
+/*
+Theme Name: Mon Thème ACA
+Theme URI: https://example.com/mon-theme-aca
+Description: Un thème WordPress modulable et bien structuré
+Author: Votre Nom
+Author URI: https://example.com
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mon-theme-aca
+Tags: responsive, clean, modern, flexible
+*/
+
+/* Réinitialisation et bases */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f8f8;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Structure principale */
+.site {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-content {
+  flex-grow: 1;
+  padding: 2rem 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* En-tête */
+.site-header {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+}
+
+.site-branding {
+  display: flex;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.site-description {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Navigation */
+.main-navigation {
+  margin-top: 1rem;
+}
+
+.main-navigation ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-navigation li {
+  margin-right: 1.5rem;
+}
+
+.main-navigation a {
+  font-weight: 600;
+}
+
+/* Articles */
+.post {
+  margin-bottom: 2rem;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.entry-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.entry-meta {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.entry-content {
+  margin-bottom: 1.5rem;
+}
+
+/* Widgets et barre latérale */
+.widget-area {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.widget {
+  margin-bottom: 2rem;
+}
+
+.widget-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Pied de page */
+.site-footer {
+  background-color: #343a40;
+  color: #fff;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+.site-info {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .main-navigation {
+    margin-top: 0;
+  }
+
+  .content-area {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-navigation ul {
+    flex-direction: column;
+  }
+
+  .main-navigation li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}

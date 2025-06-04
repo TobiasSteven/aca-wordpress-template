@@ -1,0 +1,62 @@
+# WordPress specific files
+wp-config.php
+wp-content/advanced-cache.php
+wp-content/backup-*
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+wp-content/plugins/hello.php
+
+# WordPress core (in case someone included it in their repo)
+/wp-admin/
+/wp-includes/
+/wp-*.php
+/xmlrpc.php
+/license.txt
+/readme.html
+
+# Configuration files
+.htaccess
+.htaccess.bak
+
+# Log files
+*.log
+error_log
+access_log
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Temporary files
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Database exports
+*.sql
+*.gz
+
+# Development tools
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Compiled assets
+*.map
+*.min.css
+*.min.js
+
+# Other
+sitemap.xml
+sitemap.xml.gz
