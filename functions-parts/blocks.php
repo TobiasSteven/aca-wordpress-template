@@ -16,6 +16,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc hero-slider
     register_block_type(get_template_directory() . '/blocks/hero-slider');
+
+    // Enregistrer le bloc recent-news
+    register_block_type(get_template_directory() . '/blocks/recent-news');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -31,8 +34,33 @@ function mon_theme_aca_enqueue_block_assets()
         array(),
         '6.5.1'
     );
+
+    // S'assurer que les styles des blocks sont chargés
+    if (has_block('mon-theme-aca/recent-news')) {
+        wp_enqueue_style(
+            'mon-theme-aca-recent-news-style',
+            get_template_directory_uri() . '/blocks/recent-news/build/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/recent-news/build/style-index.css')
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'mon_theme_aca_enqueue_block_assets');
+
+/**
+ * Force l'enqueue des styles de blocks même si has_block ne fonctionne pas
+ */
+function mon_theme_aca_force_block_styles()
+{
+    // Enqueue forcé des styles du block recent-news
+    wp_enqueue_style(
+        'mon-theme-aca-recent-news-frontend',
+        get_template_directory_uri() . '/blocks/recent-news/build/style-index.css',
+        array(),
+        filemtime(get_template_directory() . '/blocks/recent-news/build/style-index.css')
+    );
+}
+add_action('wp_enqueue_scripts', 'mon_theme_aca_force_block_styles', 20);
 
 /**
  * Enqueue block editor assets

@@ -1,0 +1,83 @@
+# French (France) translations for Recent News Block
+# This file is distributed under the same license as the Mon-Theme-ACA package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Mon-Theme-ACA 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/mon-theme-aca\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WordPress\n"
+
+#: blocks/recent-news/edit.js:60
+msgid "Paramètres des actualités"
+msgstr "Paramètres des actualités"
+
+#: blocks/recent-news/edit.js:61
+msgid "Titre de la section"
+msgstr "Titre de la section"
+
+#: blocks/recent-news/edit.js:65
+msgid "Nombre d'articles"
+msgstr "Nombre d'articles"
+
+#: blocks/recent-news/edit.js:70
+msgid "Trier par"
+msgstr "Trier par"
+
+#: blocks/recent-news/edit.js:81
+msgid "Ordre"
+msgstr "Ordre"
+
+#: blocks/recent-news/edit.js:89
+msgid "Afficher la date"
+msgstr "Afficher la date"
+
+#: blocks/recent-news/edit.js:94
+msgid "Afficher l'extrait"
+msgstr "Afficher l'extrait"
+
+#: blocks/recent-news/edit.js:99
+msgid "Catégories"
+msgstr "Catégories"
+
+#: blocks/recent-news/edit.js:100
+msgid "Chargement des catégories..."
+msgstr "Chargement des catégories..."
+
+#: blocks/recent-news/edit.js:111
+msgid "Actualités Récentes"
+msgstr "Actualités Récentes"
+
+#: blocks/recent-news/edit.js:114
+msgid "Chargement des articles..."
+msgstr "Chargement des articles..."
+
+#: blocks/recent-news/edit.js:118
+msgid "Aucun article trouvé avec ces paramètres."
+msgstr "Aucun article trouvé avec ces paramètres."
+
+#: blocks/recent-news/edit.js:130
+msgid "Pas d'image"
+msgstr "Pas d'image"
+
+#: blocks/recent-news/edit.js:146
+msgid "Lire plus"
+msgstr "Lire plus"
+
+#: blocks/recent-news/render.php:37
+msgid "Actualités Récentes"
+msgstr "Actualités Récentes"
+
+#: blocks/recent-news/render.php:53
+msgid "Pas d'image"
+msgstr "Pas d'image"
+
+#: blocks/recent-news/render.php:70
+msgid "Lire plus"
+msgstr "Lire plus"
+
+#: blocks/recent-news/render.php:76
+msgid "Aucun article trouvé avec ces paramètres."
+msgstr "Aucun article trouvé avec ces paramètres."

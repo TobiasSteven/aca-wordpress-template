@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/recent-news",
+    "version": "0.1.0",
+    "title": "Actualités Récentes",
+    "category": "mon-theme-aca",
+    "icon": "admin-post",
+    "description": "Affiche un nombre donné d'articles selon les catégories sélectionnées.",
+    "example": {},
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Actualités Récentes"
+        },
+        "numberOfPosts": {
+            "type": "number",
+            "default": 3
+        },
+        "selectedCategories": {
+            "type": "array",
+            "default": []
+        },
+        "showDate": {
+            "type": "boolean",
+            "default": true
+        },
+        "showExcerpt": {
+            "type": "boolean",
+            "default": true
+        },
+        "orderBy": {
+            "type": "string",
+            "default": "date"
+        },
+        "order": {
+            "type": "string",
+            "default": "desc"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css",
+    "render": "file:./render.php"
+}
