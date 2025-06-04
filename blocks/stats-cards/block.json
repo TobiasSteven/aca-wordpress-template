@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/stats-cards",
+    "version": "1.0.0",
+    "title": "Cartes de Statistiques",
+    "category": "mon-theme-aca",
+    "icon": "chart-bar",
+    "description": "Affiche des cartes de statistiques avec icônes et valeurs personnalisables.",
+    "keywords": [
+        "statistiques",
+        "cartes",
+        "données",
+        "métriques"
+    ],
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "cards": {
+            "type": "array",
+            "default": [
+                {
+                    "icon": "fas fa-users",
+                    "label": "Nombre de membres",
+                    "value": "250+"
+                },
+                {
+                    "icon": "fas fa-globe-americas",
+                    "label": "Pays représentés",
+                    "value": "15"
+                },
+                {
+                    "icon": "fas fa-leaf",
+                    "label": "Tonnes de coton produites",
+                    "value": "500,000+"
+                },
+                {
+                    "icon": "fas fa-clipboard-list",
+                    "label": "Projets en cours",
+                    "value": "30+"
+                }
+            ]
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#F8F9FA"
+        },
+        "cardsPerRow": {
+            "type": "number",
+            "default": 4
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

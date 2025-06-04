@@ -1,0 +1,77 @@
+/* Styles pour l'éditeur */
+.stats-container-editor {
+    background-color: #F8F9FA;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 200px;
+}
+
+.stat-card-editor {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px dashed transparent;
+}
+
+.stat-card-editor:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-color: #2D9B8A;
+}
+
+.stat-icon-editor {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #A8E6CF;
+}
+
+.stat-label-editor {
+    font-size: 16px;
+    color: #6C757D;
+    margin-bottom: 8px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed transparent;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.stat-label-editor:focus {
+    border-color: #2D9B8A;
+    outline: none;
+}
+
+.stat-value-editor {
+    font-size: 38px;
+    font-weight: bold;
+    color: #28A745;
+    border: 1px dashed transparent;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.stat-value-editor:focus {
+    border-color: #2D9B8A;
+    outline: none;
+}
+
+/* Message d'aide pour les utilisateurs */
+.stat-card-editor::after {
+    content: "Cliquez pour modifier";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 10px;
+    color: #6C757D;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card-editor:hover::after {
+    opacity: 1;
+}
