@@ -1,14 +1,25 @@
 # Bloc Cartes de Statistiques
 
-Ce bloc permet de créer facilement des sections de statistiques avec des cartes visuellement attrayantes.
+Ce bloc permet de créer facilement des sections de statistiques avec des cartes visuellement attrayantes au design moderne et épuré.
 
 ## Fonctionnalités
 
 - **Cartes personnalisables** : Ajoutez, modifiez ou supprimez des cartes de statistiques
 - **Icônes FontAwesome** : Utilisez n'importe quelle icône FontAwesome pour vos statistiques
-- **Design responsive** : S'adapte automatiquement à tous les types d'écrans
-- **Couleurs du thème** : Utilise la palette de couleurs définie dans les instructions
-- **Animations fluides** : Effets de survol et animations d'entrée
+- **Design moderne** : Fond vert clair (#f0f7f0) avec couleurs harmonieuses
+- **Responsive** : S'adapte automatiquement à tous les types d'écrans
+- **Animations fluides** : Effets de survol subtils
+- **Aperçu en temps réel** : Visualisation des icônes dans l'éditeur
+
+## Design
+
+Le nouveau design utilise :
+
+- **Fond des cartes** : Vert très clair (#f0f7f0)
+- **Icônes et valeurs** : Vert moyen (#8cc68c)
+- **Labels** : Gris foncé (#5f6368)
+- **Ombres** : Subtiles et modernes (0 4px 12px rgba(0, 0, 0, 0.08))
+- **Disposition** : Flex avec espacement optimal (gap: 20px)
 
 ## Comment utiliser le bloc
 

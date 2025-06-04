@@ -53,10 +53,6 @@
         "backgroundColor": {
             "type": "string",
             "default": "#F8F9FA"
-        },
-        "cardsPerRow": {
-            "type": "number",
-            "default": 4
         }
     },
     "textdomain": "mon-theme-aca",

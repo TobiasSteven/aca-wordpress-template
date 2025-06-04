@@ -1,7 +1,7 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-    const { cards, backgroundColor, cardsPerRow } = attributes;
+    const { cards, backgroundColor } = attributes;
 
     const blockProps = useBlockProps.save({
         className: 'wp-block-mon-theme-aca-stats-cards',
@@ -15,8 +15,8 @@ export default function save({ attributes }) {
             <div className="stats-container">
                 {cards.map((card, index) => (
                     <div key={index} className="stat-card">
-                        <div className="stat-icon">
-                            <i className={card.icon}></i>
+                        <div className="icon">
+                            <i key={`${index}-${card.icon}`} className={card.icon}></i>
                         </div>
                         <div className="stat-label">
                             {card.label}

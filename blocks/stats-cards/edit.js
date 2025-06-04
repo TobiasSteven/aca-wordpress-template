@@ -8,7 +8,6 @@ import {
     PanelBody,
     Button,
     TextControl,
-    RangeControl,
     ColorPicker
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
@@ -16,7 +15,7 @@ import { Fragment } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes }) {
-    const { cards, backgroundColor, cardsPerRow } = attributes;
+    const { cards, backgroundColor } = attributes;
 
     const addCard = () => {
         const newCard = {
@@ -50,14 +49,6 @@ export default function Edit({ attributes, setAttributes }) {
         <Fragment>
             <InspectorControls>
                 <PanelBody title={__('Paramètres des cartes', 'mon-theme-aca')}>
-                    <RangeControl
-                        label={__('Cartes par ligne', 'mon-theme-aca')}
-                        value={cardsPerRow}
-                        onChange={(value) => setAttributes({ cardsPerRow: value })}
-                        min={1}
-                        max={6}
-                    />
-
                     <div style={{ marginBottom: '16px' }}>
                         <label>{__('Couleur de fond', 'mon-theme-aca')}</label>
                         <ColorPicker
@@ -85,8 +76,20 @@ export default function Edit({ attributes, setAttributes }) {
                             label={__('Icône (classe FontAwesome)', 'mon-theme-aca')}
                             value={card.icon}
                             onChange={(value) => updateCard(index, 'icon', value)}
-                            help={__('Ex: fas fa-users, fas fa-chart-bar', 'mon-theme-aca')}
+                            help={__('Ex: fas fa-users, fas fa-chart-bar, fas fa-leaf', 'mon-theme-aca')}
                         />
+
+                        {card.icon && (
+                            <div style={{ marginBottom: '16px', textAlign: 'center' }}>
+                                <label style={{ fontSize: '12px', color: '#666', display: 'block', marginBottom: '8px' }}>
+                                    {__('Aperçu de l\'icône:', 'mon-theme-aca')}
+                                </label>
+                                <i
+                                    className={card.icon}
+                                    style={{ fontSize: '24px', color: '#A8E6CF' }}
+                                ></i>
+                            </div>
+                        )}
 
                         <TextControl
                             label={__('Étiquette', 'mon-theme-aca')}
@@ -112,16 +115,11 @@ export default function Edit({ attributes, setAttributes }) {
             </InspectorControls>
 
             <div {...blockProps}>
-                <div className="stats-container-editor" style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${cardsPerRow}, 1fr)`,
-                    gap: '20px',
-                    padding: '20px'
-                }}>
+                <div className="stats-container-editor">
                     {cards.map((card, index) => (
                         <div key={index} className="stat-card-editor">
                             <div className="stat-icon-editor">
-                                <i className={card.icon}></i>
+                                <i key={`${index}-${card.icon}`} className={card.icon}></i>
                             </div>
                             <RichText
                                 tagName="div"
