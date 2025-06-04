@@ -5,12 +5,13 @@
     width: 100%;
     
     .missions-container {
-        background-color: #FFFFFF;
         padding: 40px 30px;
         border-radius: 8px;
         position: relative;
         margin: 0 auto;
         width: 100%;
+        max-width: 1200px;
+        /* Background color is applied inline via style attribute */
     }
     
     .missions-title {
@@ -100,6 +101,10 @@
     }
     
     @media (max-width: 576px) {
+        .missions-container {
+            padding: 20px 15px;
+        }
+        
         .mission-card {
             width: 100%;
             min-width: auto;

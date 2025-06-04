@@ -1,52 +1,50 @@
-# Block Nos Missions
+# Bloc "Nos Missions"
 
-## Description
+Ce bloc WordPress personnalisé permet d'afficher les missions de l'organisation dans un format de cartes élégant avec **fond pleine largeur personnalisable**.
 
-Le block "Nos Missions" permet d'afficher les missions, objectifs et valeurs de votre organisation sous forme de cartes attractives et responsive.
+## ✨ Fonctionnalités
 
-## Fonctionnalités
+- **Fond pleine largeur** : Le bloc s'étend sur toute la largeur de la page
+- **Couleur de fond personnalisable** : Palette de couleurs disponible dans l'éditeur
+- **Titre personnalisable** avec éditeur de texte riche
+- **Cartes de mission** avec icônes, titres et descriptions
+- **Gestion des missions** : ajout/suppression dynamique dans l'éditeur
+- **Design responsive** adapté aux mobiles et tablettes
+- **Interface intuitive** dans l'éditeur WordPress
 
-- **Titre personnalisable** : Le titre principal de la section peut être modifié
-- **Missions dynamiques** : Ajout, suppression et modification de missions
-- **Icônes** : Support des emojis pour illustrer chaque mission
-- **Design responsive** : Adaptation automatique sur mobile et tablette
-- **Couleurs thématiques** : Utilise la palette de couleurs du thème ACA
+## 🎨 Personnalisation des Couleurs
 
-## Structure des données
+Le bloc propose une palette de couleurs prédéfinies :
 
-Chaque mission contient :
+- **Blanc** (#ffffff) - Par défaut
+- **Vert Teal** (#2D9B8A) - Couleur principale de la marque
+- **Vert Clair** (#A8E6CF) - Couleur d'accent
+- **Vert Foncé** (#1F6B5C) - Pour les variantes sombres
+- **Gris Clair** (#F8F9FA) - Fond neutre
+- **Gris** (#6C757D) - Couleur secondaire
+- **Gris Foncé** (#343A40) - Pour un contraste élevé
 
-- **Icône** : Emoji ou caractère spécial
-- **Titre** : Nom de la mission
-- **Description** : Description détaillée de la mission
+## 📱 Responsive Design
 
-## Missions par défaut
+- **Desktop** : 3 cartes par ligne avec fond pleine largeur
+- **Tablette** (768px) : 2 cartes par ligne
+- **Mobile** (576px) : 1 carte par ligne
 
-1. **Soutenir les Agriculteurs** 🌱
+## 🔧 Utilisation
 
-   - Ressources et formations pour améliorer les pratiques et revenus
+1. **Ajouter le bloc** dans l'éditeur WordPress
+2. **Personnaliser le titre** directement dans l'éditeur
+3. **Choisir la couleur de fond** dans le panneau "Couleurs"
+4. **Gérer les missions** via le panneau "Paramètres des Missions"
+5. **Prévisualiser** le résultat en temps réel
 
-2. **Promouvoir la Durabilité** 🌿
+## 🚀 Nouveautés Version 2.0
 
-   - Encouragement des pratiques agricoles durables
-
-3. **Renforcer la Coopération** 🤝
-   - Facilitation de la coopération entre acteurs de la filière
-
-## Utilisation
-
-1. Ajouter le block "Nos Missions" dans l'éditeur Gutenberg
-2. Personnaliser le titre principal
-3. Modifier, ajouter ou supprimer des missions via le panneau latéral
-4. Utiliser des emojis pour les icônes des missions
-
-## Couleurs utilisées
-
-- **Titre principal** : Dark Teal (#1F6B5C)
-- **Titres des cartes** : Dark Teal (#1F6B5C)
-- **Texte description** : Medium Gray (#6C757D)
-- **Fond des cartes** : Light Gray (#F8F9FA)
-- **Effets hover** : Light Green (#A8E6CF)
+- ✅ Fond pleine largeur qui s'étend sur toute la page
+- ✅ Sélecteur de couleur de fond avec palette prédéfinie
+- ✅ Suppression des bordures en pointillés
+- ✅ Optimisation de l'espace horizontal
+- ✅ Interface améliorée dans l'éditeur
 
 ## Responsive
 

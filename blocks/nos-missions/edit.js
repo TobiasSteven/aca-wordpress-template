@@ -6,6 +6,7 @@ import {
     useBlockProps,
     InspectorControls,
     RichText,
+    ColorPalette,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -18,7 +19,7 @@ import {
  * Edit component
  */
 export default function Edit({ attributes, setAttributes }) {
-    const { title, missions } = attributes;
+    const { title, missions, backgroundColor } = attributes;
     const blockProps = useBlockProps({
         className: 'nos-missions-block',
     });
@@ -67,6 +68,23 @@ export default function Edit({ attributes, setAttributes }) {
                     </Button>
                 </PanelBody>
 
+                <PanelBody title={__('Couleurs', 'mon-theme-aca')}>
+                    <p>{__('Couleur de fond de la section', 'mon-theme-aca')}</p>
+                    <ColorPalette
+                        value={backgroundColor}
+                        onChange={(value) => setAttributes({ backgroundColor: value || '#ffffff' })}
+                        colors={[
+                            { name: 'Blanc', color: '#ffffff' },
+                            { name: 'Vert Teal', color: '#2D9B8A' },
+                            { name: 'Vert Clair', color: '#A8E6CF' },
+                            { name: 'Vert Foncé', color: '#1F6B5C' },
+                            { name: 'Gris Clair', color: '#F8F9FA' },
+                            { name: 'Gris', color: '#6C757D' },
+                            { name: 'Gris Foncé', color: '#343A40' },
+                        ]}
+                    />
+                </PanelBody>
+
                 {missions.map((mission, index) => (
                     <PanelBody
                         key={index}
@@ -101,7 +119,10 @@ export default function Edit({ attributes, setAttributes }) {
             </InspectorControls>
 
             <div {...blockProps}>
-                <div className="missions-container">
+                <div
+                    className="missions-container"
+                    style={{ backgroundColor: backgroundColor }}
+                >
                     <RichText
                         tagName="h2"
                         className="missions-title"

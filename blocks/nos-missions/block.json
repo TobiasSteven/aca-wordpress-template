@@ -48,6 +48,10 @@
                     "description": "Nous facilitons la coopération entre les acteurs de la filière pour un développement harmonieux."
                 }
             ]
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#ffffff"
         }
     },
     "textdomain": "mon-theme-aca",
