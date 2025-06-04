@@ -12,18 +12,49 @@
   --light-gray: #f8f9fa;
 }
 
+/* Logo dans le footer */
+.footer-logo {
+  max-width: 150px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo img,
+.footer-custom-logo {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Pour les logos qui ont besoin d'être en blanc sur fond foncé */
+.white-logo .footer-logo img,
+.white-logo .footer-custom-logo {
+  filter: brightness(0) invert(1); /* Rend le logo blanc */
+}
+
 .site-footer {
-  background-color: #1a1a1a !important;
+  background-color: var(
+    --dark-teal
+  ) !important; /* Utilisation de la couleur Dark Teal */
+}
+
+.site-footer h5 {
+  color: var(--light-green) !important; /* Light Green pour les titres */
 }
 
 .footer-link {
-  color: var(--medium-gray);
+  color: var(--light-gray);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .footer-link:hover {
-  color: var(--teal-green) !important;
+  color: var(--light-green) !important;
+}
+
+/* Ligne de séparation */
+.site-footer hr.border-secondary {
+  border-color: var(
+    --teal-green
+  ) !important; /* Teal Green pour la séparation */
 }
 
 /* Bootstrap icons styles */

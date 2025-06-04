@@ -190,3 +190,8 @@ function mon_theme_aca_add_menu_link_class($atts, $item, $args)
     return $atts;
 }
 add_filter('nav_menu_link_attributes', 'mon_theme_aca_add_menu_link_class', 1, 3);
+
+/**
+ * Includes
+ */
+require MON_THEME_ACA_DIR . '/inc/footer-customizer.php'; // Ajout de la personnalisation du footer

@@ -8,21 +8,33 @@
 
 ?>
 
-<footer id="colophon" class="site-footer bg-dark text-secondary pt-5 pb-4">
+<footer id="colophon" class="site-footer bg-dark text-secondary pt-5 pb-4 <?php echo get_theme_mod('footer_white_logo', false) ? 'white-logo' : ''; ?>">
     <div class="container">
         <div class="row mb-4">
             <!-- Section À Propos -->
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-light fw-semibold mb-3">À Propos de l'ACA</h5>
+                <?php
+                $footer_logo_id = get_theme_mod('footer_logo');
+                if ($footer_logo_id) :
+                ?>
+                    <div class="footer-logo mb-3">
+                        <?php echo wp_get_attachment_image($footer_logo_id, 'full', false, array(
+                            'class' => 'footer-custom-logo',
+                            'alt' => esc_attr(get_bloginfo('name'))
+                        )); ?>
+                    </div>
+                <?php endif; ?>
+
+                <h5 class="text-light fw-semibold mb-3"><?php echo esc_html(get_theme_mod('footer_about_title', esc_html__('À Propos de l\'ACA', 'mon-theme-aca'))); ?></h5>
+
                 <p class="small">
-                    L'Association Africaine du Coton (ACA) œuvre pour le développement durable
-                    et la promotion de la filière coton en Afrique.
+                    <?php echo esc_html(get_theme_mod('footer_about_description', esc_html__('L\'Association Africaine du Coton (ACA) œuvre pour le développement durable et la promotion de la filière coton en Afrique.', 'mon-theme-aca'))); ?>
                 </p>
             </div>
 
             <!-- Section Liens Rapides -->
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-light fw-semibold mb-3">Liens Rapides</h5>
+                <h5 class="text-light fw-semibold mb-3"><?php echo esc_html(get_theme_mod('footer_links_title', esc_html__('Liens Rapides', 'mon-theme-aca'))); ?></h5>
                 <?php
                 wp_nav_menu(
                     array(
@@ -39,28 +51,32 @@
 
             <!-- Section Contactez-nous -->
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-light fw-semibold mb-3">Contactez-nous</h5>
+                <h5 class="text-light fw-semibold mb-3"><?php echo esc_html(get_theme_mod('footer_contact_title', esc_html__('Contactez-nous', 'mon-theme-aca'))); ?></h5>
                 <address class="small mb-0">
-                    <p>123 Rue du Coton, Cotonou, Bénin</p>
-                    <p>Email: <a href="mailto:info@aca-coton.org" class="text-secondary footer-link">info@aca-coton.org</a></p>
-                    <p>Téléphone: <a href="tel:+22912345678" class="text-secondary footer-link">+229 12 34 56 78</a></p>
+                    <p><?php echo esc_html(get_theme_mod('footer_contact_address', esc_html__('123 Rue du Coton, Cotonou, Bénin', 'mon-theme-aca'))); ?></p>
+                    <?php
+                    $email = get_theme_mod('footer_contact_email', 'info@aca-coton.org');
+                    $phone = get_theme_mod('footer_contact_phone', '+229 12 34 56 78');
+                    ?>
+                    <p>Email: <a href="mailto:<?php echo esc_attr($email); ?>" class="text-secondary footer-link"><?php echo esc_html($email); ?></a></p>
+                    <p>Téléphone: <a href="tel:<?php echo esc_attr(preg_replace('/[^0-9+]/', '', $phone)); ?>" class="text-secondary footer-link"><?php echo esc_html($phone); ?></a></p>
                 </address>
             </div>
 
             <!-- Section Suivez-nous -->
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-light fw-semibold mb-3">Suivez-nous</h5>
+                <h5 class="text-light fw-semibold mb-3"><?php echo esc_html(get_theme_mod('footer_social_title', esc_html__('Suivez-nous', 'mon-theme-aca'))); ?></h5>
                 <div class="d-flex gap-3">
                     <!-- Icône Facebook -->
-                    <a href="#" aria-label="Facebook" class="text-secondary footer-link">
+                    <a href="<?php echo esc_url(get_theme_mod('footer_facebook_url', '#')); ?>" aria-label="Facebook" class="text-secondary footer-link">
                         <i class="bi bi-facebook fs-5"></i>
                     </a>
                     <!-- Icône Twitter -->
-                    <a href="#" aria-label="Twitter" class="text-secondary footer-link">
+                    <a href="<?php echo esc_url(get_theme_mod('footer_twitter_url', '#')); ?>" aria-label="Twitter" class="text-secondary footer-link">
                         <i class="bi bi-twitter-x fs-5"></i>
                     </a>
                     <!-- Icône LinkedIn -->
-                    <a href="#" aria-label="LinkedIn" class="text-secondary footer-link">
+                    <a href="<?php echo esc_url(get_theme_mod('footer_linkedin_url', '#')); ?>" aria-label="LinkedIn" class="text-secondary footer-link">
                         <i class="bi bi-linkedin fs-5"></i>
                     </a>
                 </div>
