@@ -22,6 +22,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc nos-missions
     register_block_type(get_template_directory() . '/blocks/nos-missions');
+
+    // Enregistrer le bloc events
+    register_block_type(get_template_directory() . '/blocks/events');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -62,6 +65,16 @@ function mon_theme_aca_force_block_styles()
         array(),
         filemtime(get_template_directory() . '/blocks/recent-news/build/style-index.css')
     );
+
+    // Enqueue forcé des styles du block events
+    if (file_exists(get_template_directory() . '/blocks/events/build/style-index.css')) {
+        wp_enqueue_style(
+            'mon-theme-aca-events-frontend',
+            get_template_directory_uri() . '/blocks/events/build/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/events/build/style-index.css')
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'mon_theme_aca_force_block_styles', 20);
 

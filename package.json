@@ -4,7 +4,7 @@
     "description": "Un thème WordPress modulable avec des blocs personnalisés",
     "main": "index.js",
     "scripts": {
-        "build": "wp-scripts build blocks/stats-cards/index.js --output-path=blocks/stats-cards/build && wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build && wp-scripts build blocks/recent-news/index.js --output-path=blocks/recent-news/build && wp-scripts build blocks/nos-missions/index.js --output-path=blocks/nos-missions/build",
+        "build": "wp-scripts build blocks/stats-cards/index.js --output-path=blocks/stats-cards/build && wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build && wp-scripts build blocks/recent-news/index.js --output-path=blocks/recent-news/build && wp-scripts build blocks/nos-missions/index.js --output-path=blocks/nos-missions/build && wp-scripts build blocks/events/index.js --output-path=blocks/events/build",
         "start": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
         "dev": "wp-scripts start blocks/stats-cards/index.js --output-path=blocks/stats-cards/build",
         "build:hero-slider": "wp-scripts build blocks/hero-slider/index.js --output-path=blocks/hero-slider/build",
@@ -13,6 +13,8 @@
         "start:recent-news": "wp-scripts start blocks/recent-news/index.js --output-path=blocks/recent-news/build",
         "build:nos-missions": "wp-scripts build blocks/nos-missions/index.js --output-path=blocks/nos-missions/build",
         "start:nos-missions": "wp-scripts start blocks/nos-missions/index.js --output-path=blocks/nos-missions/build",
+        "build:events": "wp-scripts build blocks/events/index.js --output-path=blocks/events/build",
+        "start:events": "wp-scripts start blocks/events/index.js --output-path=blocks/events/build",
         "build:all": "npm run build"
     },
     "devDependencies": {
