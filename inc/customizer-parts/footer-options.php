@@ -99,6 +99,26 @@ function mon_theme_aca_register_footer_options($wp_customize)
         )
     );
 
+    // Menu Liens Rapides
+    $wp_customize->add_setting(
+        'footer_quick_links_menu_id',
+        array(
+            'default'           => 0,
+            'sanitize_callback' => 'absint',
+            'transport'         => 'refresh',
+        )
+    );
+
+    $wp_customize->add_control(
+        'footer_quick_links_menu_id',
+        array(
+            'label'    => __('Menu Liens Rapides', 'mon-theme-aca'),
+            'section'  => 'mon_theme_aca_footer_options',
+            'type'     => 'select',
+            'choices'  => mon_theme_aca_get_menu_choices(),
+        )
+    );
+
     // Titre "Contactez-nous"
     $wp_customize->add_setting(
         'footer_contact_title',

@@ -111,3 +111,22 @@ function mon_theme_aca_adjust_brightness($hex, $steps)
 
     return '#' . $r_hex . $g_hex . $b_hex;
 }
+
+/**
+ * Get available navigation menus for customizer select dropdown
+ *
+ * @return array Array of menu choices with ID as key and name as value
+ */
+function mon_theme_aca_get_menu_choices()
+{
+    $menus = wp_get_nav_menus();
+    $choices = array(
+        0 => __('— Sélectionner un menu —', 'mon-theme-aca')
+    );
+
+    foreach ($menus as $menu) {
+        $choices[$menu->term_id] = $menu->name;
+    }
+
+    return $choices;
+}

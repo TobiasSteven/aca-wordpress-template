@@ -46,8 +46,9 @@ function mon_theme_aca_setup()
     // Register navigation menus
     register_nav_menus(
         array(
-            'primary' => esc_html__('Menu principal', 'mon-theme-aca'),
-            'footer'  => esc_html__('Menu pied de page', 'mon-theme-aca'),
+            'primary'            => esc_html__('Menu principal', 'mon-theme-aca'),
+            'footer'             => esc_html__('Menu pied de page', 'mon-theme-aca'),
+            'footer_quick_links' => esc_html__('Liens Rapides du Pied de Page', 'mon-theme-aca'),
         )
     );
 

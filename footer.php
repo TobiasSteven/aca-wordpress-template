@@ -33,20 +33,29 @@
             </div>
 
             <!-- Section Liens Rapides -->
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
-                <h5 class="text-light fw-semibold mb-3"><?php echo esc_html(get_theme_mod('footer_links_title', esc_html__('Liens Rapides', 'mon-theme-aca'))); ?></h5>
+            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 footer-quick-links">
                 <?php
-                wp_nav_menu(
-                    array(
-                        'theme_location' => 'footer',
-                        'menu_id'        => 'footer-quick-links',
-                        'depth'          => 1,
-                        'menu_class'     => 'list-unstyled small',
-                        'link_class'     => 'text-secondary footer-link',
-                        'container'      => false,
-                    )
-                );
+                // Get the selected menu ID from Customizer
+                $footer_quick_links_menu_id = get_theme_mod('footer_quick_links_menu_id', 0);
+
+                // Display the section only if a menu is selected
+                if ($footer_quick_links_menu_id && $footer_quick_links_menu_id != 0) :
                 ?>
+                    <h5 class="text-light fw-semibold mb-3"><?php echo esc_html(get_theme_mod('footer_links_title', esc_html__('Liens Rapides', 'mon-theme-aca'))); ?></h5>
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'menu'           => $footer_quick_links_menu_id,
+                            'menu_id'        => 'footer-quick-links',
+                            'depth'          => 1,
+                            'menu_class'     => 'list-unstyled small',
+                            'link_class'     => 'text-secondary footer-link',
+                            'container'      => false,
+                            'fallback_cb'    => false, // Don't show fallback if menu doesn't exist
+                        )
+                    );
+                    ?>
+                <?php endif; ?>
             </div>
 
             <!-- Section Contactez-nous -->
