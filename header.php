@@ -17,6 +17,8 @@
     <!-- Inclusion de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <?php wp_head(); ?>
 </head>
 
@@ -61,13 +63,9 @@
                     <!-- Sélecteur de langue -->
                     <div class="lang-dropdown">
                         <button id="lang-menu-button" class="lang-button focus:outline-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.33 6.332A6.001 6.001 0 0110 4c.77 0 1.502.144 2.171.403A4.001 4.001 0 0010 3a4 4 0 00-3.032 1.228.997.997 0 00-.139.096l-.04.028a.999.999 0 00-.197.187C5.25 4.94 4.623 5.59 4.33 6.332zM15.67 13.668A6.001 6.001 0 0110 16c-.77 0-1.502-.144-2.171-.403A4.001 4.001 0 0010 17a4 4 0 003.032-1.228.997.997 0 00.139-.096l.04-.028a.999.999 0 00.197.187c1.339-.74 1.966-1.39 2.257-2.132zM8.5 7.5a.5.5 0 000 1h3a.5.5 0 000-1h-3zM6 10a.5.5 0 01.5-.5h7a.5.5 0 010 1h-7A.5.5 0 016 10zm2.5 2.5a.5.5 0 000 1h3a.5.5 0 000-1h-3z" clip-rule="evenodd" />
-                            </svg>
+                            <i class="bi bi-globe mr-1 text-lg"></i>
                             FR
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
+                            <i class="bi bi-chevron-down ml-1 text-sm"></i>
                         </button>
                         <!-- Menu déroulant langues -->
                         <div id="lang-menu" class="lang-dropdown-menu">
@@ -83,9 +81,7 @@
                 <!-- Bouton Burger pour mobile -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-[#343A40] hover:text-[#2D9B8A] hover:bg-[#F8F9FA] p-2 rounded-md transition-all duration-150 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
+                        <i class="bi bi-list text-2xl"></i>
                     </button>
                 </div>
             </div>
