@@ -14,7 +14,11 @@ export default function Edit({ attributes, setAttributes }) {
     const [selectedPartnerIndex, setSelectedPartnerIndex] = useState(null);
 
     const blockProps = useBlockProps({
-        className: 'partners-block-editor'
+        className: 'partners-block-editor',
+        style: {
+            backgroundColor: backgroundColor,
+            width: '100%'
+        }
     });
 
     const addPartner = () => {
@@ -103,109 +107,113 @@ export default function Edit({ attributes, setAttributes }) {
                         </div>
                     ))}
                 </PanelBody>
-            </InspectorControls>
-
-            <div className="partners-section-editor" style={{
-                backgroundColor: backgroundColor,
+            </InspectorControls>            <div className="partners-section-editor" style={{
                 padding: '40px 20px',
                 textAlign: 'center',
                 border: showBorders ? '5px solid #e0e0e0' : 'none',
                 borderTop: showBorders ? '5px solid #e0e0e0' : 'none',
-                borderBottom: showBorders ? '5px solid #e0e0e0' : 'none'
+                borderBottom: showBorders ? '5px solid #e0e0e0' : 'none',
+                width: '100%'
             }}>
-                <h2 style={{
-                    fontSize: '2.5em',
-                    fontWeight: 'bold',
-                    color: '#000000',
-                    marginBottom: '40px'
+                <div className="partners-content-editor" style={{
+                    width: '100%',
+                    maxWidth: '1200px',
+                    margin: '0 auto'
                 }}>
-                    {title}
-                </h2>
+                    <h2 style={{
+                        fontSize: '2.5em',
+                        fontWeight: 'bold',
+                        color: '#343A40',
+                        marginBottom: '40px'
+                    }}>
+                        {title}
+                    </h2>
 
-                <div className="partners-logos-editor" style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    gap: '20px'
-                }}>
-                    {partners.map((partner, index) => (
-                        <div key={partner.id} className="partner-logo-editor" style={{
-                            width: '150px',
-                            height: '150px',
-                            backgroundColor: '#6c757d',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            overflow: 'hidden',
-                            border: '2px solid #ddd',
-                            borderRadius: '4px',
-                            position: 'relative'
-                        }}>
-                            {partner.url ? (
-                                <img
-                                    src={partner.url}
-                                    alt={partner.alt}
-                                    style={{
-                                        width: '100%',
-                                        height: '100%',
-                                        objectFit: 'cover'
-                                    }}
-                                />
-                            ) : (
-                                <div style={{
-                                    color: '#fff',
-                                    textAlign: 'center',
-                                    fontSize: '14px'
-                                }}>
-                                    {__('Aucune image', 'mon-theme-aca')}
-                                </div>
-                            )}
-
-                            <div style={{
-                                position: 'absolute',
-                                top: '50%',
-                                left: '50%',
-                                transform: 'translate(-50%, -50%)',
-                                background: 'rgba(0,0,0,0.8)',
-                                padding: '8px',
+                    <div className="partners-logos-editor" style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        gap: '20px'
+                    }}>
+                        {partners.map((partner, index) => (
+                            <div key={partner.id} className="partner-logo-editor" style={{
+                                width: '150px',
+                                height: '150px',
+                                backgroundColor: '#6c757d',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                overflow: 'hidden',
+                                border: '2px solid #ddd',
                                 borderRadius: '4px',
-                                opacity: 0,
-                                transition: 'opacity 0.3s'
-                            }}
-                                onMouseEnter={(e) => e.target.style.opacity = 1}
-                                onMouseLeave={(e) => e.target.style.opacity = 0}>
-                                <MediaUploadCheck>
-                                    <MediaUpload
-                                        onSelect={(media) => onSelectMedia(media, index)}
-                                        allowedTypes={['image']}
-                                        value={partner.id}
-                                        render={({ open }) => (
-                                            <Button
-                                                onClick={open}
-                                                isSecondary
-                                                isSmall
-                                            >
-                                                {partner.url ? __('Changer', 'mon-theme-aca') : __('Choisir', 'mon-theme-aca')}
-                                            </Button>
-                                        )}
+                                position: 'relative'
+                            }}>
+                                {partner.url ? (
+                                    <img
+                                        src={partner.url}
+                                        alt={partner.alt}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover'
+                                        }}
                                     />
-                                </MediaUploadCheck>
-                            </div>
-                        </div>
-                    ))}
+                                ) : (
+                                    <div style={{
+                                        color: '#fff',
+                                        textAlign: 'center',
+                                        fontSize: '14px'
+                                    }}>
+                                        {__('Aucune image', 'mon-theme-aca')}
+                                    </div>
+                                )}
 
-                    {partners.length === 0 && (
-                        <div style={{
-                            padding: '40px',
-                            textAlign: 'center',
-                            color: '#666',
-                            border: '2px dashed #ddd',
-                            borderRadius: '4px',
-                            width: '100%'
-                        }}>
-                            <p>{__('Aucun partenaire ajouté. Utilisez le panneau de droite pour ajouter des partenaires.', 'mon-theme-aca')}</p>
-                        </div>
-                    )}
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    background: 'rgba(0,0,0,0.8)',
+                                    padding: '8px',
+                                    borderRadius: '4px',
+                                    opacity: 0,
+                                    transition: 'opacity 0.3s'
+                                }}
+                                    onMouseEnter={(e) => e.target.style.opacity = 1}
+                                    onMouseLeave={(e) => e.target.style.opacity = 0}>
+                                    <MediaUploadCheck>
+                                        <MediaUpload
+                                            onSelect={(media) => onSelectMedia(media, index)}
+                                            allowedTypes={['image']}
+                                            value={partner.id}
+                                            render={({ open }) => (
+                                                <Button
+                                                    onClick={open}
+                                                    isSecondary
+                                                    isSmall
+                                                >
+                                                    {partner.url ? __('Changer', 'mon-theme-aca') : __('Choisir', 'mon-theme-aca')}
+                                                </Button>
+                                            )}
+                                        />
+                                    </MediaUploadCheck>
+                                </div>
+                            </div>
+                        ))}
+
+                        {partners.length === 0 && (
+                            <div style={{
+                                padding: '40px',
+                                textAlign: 'center',
+                                color: '#666',
+                                border: '2px dashed #ddd',
+                                borderRadius: '4px',
+                                width: '100%'
+                            }}>
+                                <p>{__('Aucun partenaire ajouté. Utilisez le panneau de droite pour ajouter des partenaires.', 'mon-theme-aca')}</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

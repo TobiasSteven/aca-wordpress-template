@@ -1,16 +1,30 @@
 /* Styles pour le bloc Partenaires - Frontend */
 
 .partners-block {
-    width: 100%;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    /* Le background-color sera appliqué via les attributs inline */
 }
 
 .partners-section {
     text-align: center;
     width: 100%;
+    /* Background-color retiré d'ici car appliqué sur le wrapper */
+    padding: 40px 20px;
+    /* Centrer le contenu avec une largeur max */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.partners-content {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    background-color: #ffffff;
-    padding: 40px 20px;
 }
 
 .partners-title {
@@ -78,14 +92,34 @@
 }
 
 /* Alignement pour les blocs larges et pleine largeur */
-.wp-block-mon-theme-aca-partners.alignwide .partners-section {
-    max-width: 1200px;
+.wp-block-mon-theme-aca-partners.alignwide .partners-content {
+    max-width: 1400px;
 }
 
-.wp-block-mon-theme-aca-partners.alignfull .partners-section {
+.wp-block-mon-theme-aca-partners.alignfull .partners-content {
     max-width: none;
     padding-left: 40px;
     padding-right: 40px;
+}
+
+/* Force la pleine largeur par défaut pour tous les blocs partners */
+.wp-block-mon-theme-aca-partners {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+/* Style spécial pour forcer la pleine largeur */
+.wp-block-mon-theme-aca-partners.alignfull .partners-block {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
 
 /* Media Queries pour la responsivité */

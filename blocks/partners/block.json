@@ -54,7 +54,7 @@
         },
         "showBorders": {
             "type": "boolean",
-            "default": true
+            "default": false
         }
     },
     "textdomain": "mon-theme-aca",
