@@ -1,0 +1,96 @@
+.wp-block-mon-theme-aca-newsletter {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
+  margin: 0;
+}
+.newsletter-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+.newsletter-section h2 {
+  font-size: 2.2em;
+  font-weight: 600;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+.newsletter-section .subtitle {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 550px;
+}
+.newsletter-form {
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 500px;
+}
+.newsletter-form input[type="email"] {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #343a40;
+  flex-grow: 1;
+  font-size: 1em;
+  margin-right: -1px;
+  padding: 15px 20px;
+  z-index: 1;
+}
+.newsletter-form input[type="email"]::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+.newsletter-form input[type="email"]::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+.newsletter-form input[type="email"]:focus {
+  outline: 2px solid #1f6b5c;
+  outline-offset: -1px;
+}
+.newsletter-form button {
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 700;
+  margin-left: 10px;
+  padding: 15px 25px;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .newsletter-section h2 {
+    font-size: 1.8em;
+  }
+  .newsletter-section .subtitle {
+    font-size: 1em;
+  }
+  .newsletter-form {
+    flex-direction: column;
+  }
+  .newsletter-form input[type="email"] {
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-right: 0;
+    width: 100%;
+  }
+  .newsletter-form button {
+    box-sizing: border-box;
+    margin-left: 0;
+    width: 100%;
+  }
+}

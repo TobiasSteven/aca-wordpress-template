@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/newsletter",
+    "version": "0.1.0",
+    "title": "Abonnement Newsletter",
+    "category": "mon-theme-aca",
+    "icon": "email",
+    "description": "Permet aux visiteurs de s'abonner à la newsletter.",
+    "example": {},
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Abonnez-vous à notre newsletter"
+        },
+        "subtitle": {
+            "type": "string",
+            "default": "Restez informé des dernières actualités, événements et initiatives de l'ACA."
+        },
+        "buttonText": {
+            "type": "string",
+            "default": "S'inscrire"
+        },
+        "placeholderText": {
+            "type": "string",
+            "default": "Votre adresse email"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#28A745"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "buttonColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "buttonTextColor": {
+            "type": "string",
+            "default": "#343A40"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css",
+    "render": "file:./render.php"
+}

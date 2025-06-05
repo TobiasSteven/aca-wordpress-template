@@ -31,6 +31,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc partners
     register_block_type(get_template_directory() . '/blocks/partners');
+
+    // Enregistrer le bloc newsletter
+    register_block_type(get_template_directory() . '/blocks/newsletter');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -54,6 +57,16 @@ function mon_theme_aca_enqueue_block_assets()
             get_template_directory_uri() . '/blocks/recent-news/build/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/recent-news/build/style-index.css')
+        );
+    }
+
+    // S'assurer que les styles du block newsletter sont chargés
+    if (has_block('mon-theme-aca/newsletter')) {
+        wp_enqueue_style(
+            'mon-theme-aca-newsletter-style',
+            get_template_directory_uri() . '/blocks/newsletter/build/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/newsletter/build/style-index.css')
         );
     }
 }
@@ -89,6 +102,16 @@ function mon_theme_aca_force_block_styles()
             get_template_directory_uri() . '/blocks/testimonials/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/testimonials/style-index.css')
+        );
+    }
+
+    // Enqueue forcé des styles du block newsletter
+    if (file_exists(get_template_directory() . '/blocks/newsletter/build/style-index.css')) {
+        wp_enqueue_style(
+            'mon-theme-aca-newsletter-frontend',
+            get_template_directory_uri() . '/blocks/newsletter/build/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/newsletter/build/style-index.css')
         );
     }
 }

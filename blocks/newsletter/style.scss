@@ -1,0 +1,100 @@
+/* 
+ * Style de la newsletter pour le frontend
+ */
+
+.wp-block-mon-theme-aca-newsletter {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.newsletter-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.newsletter-section h2 {
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.newsletter-section .subtitle {
+    font-size: 1.1em;
+    margin-bottom: 35px;
+    line-height: 1.6;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    align-items: stretch; /* Makes input and button same height */
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form input[type="email"] {
+    flex-grow: 1;
+    padding: 15px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFFFFF; /* White */
+    color: #343A40; /* Dark Gray for text typed */
+    margin-right: -1px; /* Allows borders to overlap if they had them, or just sit flush */
+    z-index: 1; /* Ensures it's above the button's potential shared border */
+    box-sizing: border-box;
+}
+
+.newsletter-form input[type="email"]::placeholder {
+    color: #6C757D; /* Medium Gray */
+    opacity: 1; /* Firefox fix */
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: 2px solid #1F6B5C; /* Dark Teal for focus outline, example */
+    outline-offset: -1px;
+}
+
+.newsletter-form button {
+    padding: 15px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    white-space: nowrap; /* Prevents text from wrapping */
+    margin-left: 10px; /* Space between input and button */
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .newsletter-section h2 {
+        font-size: 1.8em;
+    }
+
+    .newsletter-section .subtitle {
+        font-size: 1em;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+    }
+
+    .newsletter-form input[type="email"] {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box; /* Ensures padding doesn't add to width */
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        box-sizing: border-box;
+        margin-left: 0; /* Remove left margin on mobile */
+    }
+}

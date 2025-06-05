@@ -1,0 +1,18 @@
+/* 
+ * Style pour l'éditeur uniquement
+ */
+
+.wp-block-mon-theme-aca-newsletter {
+    /* Styles spécifiques à l'éditeur */
+    margin: 0;
+
+    .color-picker-wrapper {
+        margin-bottom: 15px;
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+    }
+}
