@@ -69,6 +69,37 @@ function mon_theme_aca_enqueue_block_assets()
             filemtime(get_template_directory() . '/blocks/newsletter/build/style-index.css')
         );
     }
+
+    // Enqueue des scripts JavaScript pour les blocs
+    if (has_block('mon-theme-aca/events')) {
+        wp_enqueue_script(
+            'mon-theme-aca-events-view',
+            get_template_directory_uri() . '/blocks/events/view.js',
+            array(),
+            filemtime(get_template_directory() . '/blocks/events/view.js'),
+            true
+        );
+    }
+
+    if (has_block('mon-theme-aca/partners')) {
+        wp_enqueue_script(
+            'mon-theme-aca-partners-view',
+            get_template_directory_uri() . '/blocks/partners/view.js',
+            array(),
+            filemtime(get_template_directory() . '/blocks/partners/view.js'),
+            true
+        );
+    }
+
+    if (has_block('mon-theme-aca/hero-slider')) {
+        wp_enqueue_script(
+            'mon-theme-aca-hero-slider-view',
+            get_template_directory_uri() . '/blocks/hero-slider/view.js',
+            array(),
+            filemtime(get_template_directory() . '/blocks/hero-slider/view.js'),
+            true
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'mon_theme_aca_enqueue_block_assets');
 
@@ -92,6 +123,39 @@ function mon_theme_aca_force_block_styles()
             get_template_directory_uri() . '/blocks/events/build/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/events/build/style-index.css')
+        );
+    }
+
+    // Enqueue forcé du script JavaScript du block events
+    if (file_exists(get_template_directory() . '/blocks/events/view.js')) {
+        wp_enqueue_script(
+            'mon-theme-aca-events-view-js',
+            get_template_directory_uri() . '/blocks/events/view.js',
+            array(),
+            filemtime(get_template_directory() . '/blocks/events/view.js'),
+            true
+        );
+    }
+
+    // Enqueue forcé du script JavaScript du block partners
+    if (file_exists(get_template_directory() . '/blocks/partners/view.js')) {
+        wp_enqueue_script(
+            'mon-theme-aca-partners-view-js',
+            get_template_directory_uri() . '/blocks/partners/view.js',
+            array(),
+            filemtime(get_template_directory() . '/blocks/partners/view.js'),
+            true
+        );
+    }
+
+    // Enqueue forcé du script JavaScript du block hero-slider
+    if (file_exists(get_template_directory() . '/blocks/hero-slider/view.js')) {
+        wp_enqueue_script(
+            'mon-theme-aca-hero-slider-view-js',
+            get_template_directory_uri() . '/blocks/hero-slider/view.js',
+            array(),
+            filemtime(get_template_directory() . '/blocks/hero-slider/view.js'),
+            true
         );
     }
 

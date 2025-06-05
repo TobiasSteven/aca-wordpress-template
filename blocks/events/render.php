@@ -324,7 +324,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
             <?php endif; ?>
 
             <div class="events-section">
-                <h1><?php echo esc_html($section_title); ?></h1>
+                <h1 data-original-title="<?php echo esc_attr($section_title); ?>"><?php echo esc_html($section_title); ?></h1>
 
                 <?php if ($events_query->have_posts()) : ?>
                     <div class="events-list">
@@ -371,7 +371,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
                             $event_types = wp_get_post_terms(get_the_ID(), 'event_type');
                         ?>
-                            <div class="event-card">
+                            <div class="event-card" data-event-date="<?php echo esc_attr($event_date); ?>">
                                 <div class="event-date">
                                     <span class="day"><?php echo $day; ?></span>
                                     <span class="month"><?php echo $month; ?></span>
