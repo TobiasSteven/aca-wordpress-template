@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/* Styles pour l'éditeur du bloc Partenaires */
+.partners-block-editor {
+  margin: 20px 0;
+}
+
+.partners-section-editor {
+  border-radius: 4px;
+  margin: 0;
+}
+
+.partners-logos-editor {
+  min-height: 200px;
+}
+
+.partner-logo-editor {
+  cursor: pointer;
+  position: relative;
+}
+
+.partner-logo-editor:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+.partner-logo-editor:hover .partner-controls {
+  opacity: 1 !important;
+}
+
+/* Amélioration de l'affichage des contrôles dans l'éditeur */
+.components-panel__body .components-base-control {
+  margin-bottom: 16px;
+}
+
+.components-color-picker {
+  margin-top: 8px;
+}

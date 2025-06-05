@@ -1,0 +1,56 @@
+# Traductions pour le bloc Partenaires
+# French (France)
+
+# Block metadata
+msgid "Nos Partenaires"
+msgstr "Nos Partenaires"
+
+msgid "Affiche une section avec les logos des partenaires."
+msgstr "Affiche une section avec les logos des partenaires."
+
+# Editor interface
+msgid "Paramètres généraux"
+msgstr "Paramètres généraux"
+
+msgid "Titre"
+msgstr "Titre"
+
+msgid "Afficher les bordures"
+msgstr "Afficher les bordures"
+
+msgid "Couleur de fond"
+msgstr "Couleur de fond"
+
+msgid "Gestion des partenaires"
+msgstr "Gestion des partenaires"
+
+msgid "Ajouter un partenaire"
+msgstr "Ajouter un partenaire"
+
+msgid "Partenaire"
+msgstr "Partenaire"
+
+msgid "Texte alternatif"
+msgstr "Texte alternatif"
+
+msgid "Lien (optionnel)"
+msgstr "Lien (optionnel)"
+
+msgid "Supprimer"
+msgstr "Supprimer"
+
+msgid "Aucune image"
+msgstr "Aucune image"
+
+msgid "Changer"
+msgstr "Changer"
+
+msgid "Choisir"
+msgstr "Choisir"
+
+msgid "Aucun partenaire ajouté. Utilisez le panneau de droite pour ajouter des partenaires."
+msgstr "Aucun partenaire ajouté. Utilisez le panneau de droite pour ajouter des partenaires."
+
+# Frontend
+msgid "Aucun partenaire configuré."
+msgstr "Aucun partenaire configuré."

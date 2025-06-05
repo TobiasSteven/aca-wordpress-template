@@ -1,0 +1,134 @@
+@charset "UTF-8";
+/* Styles pour le bloc Partenaires - Frontend */
+.partners-block {
+  width: 100%;
+}
+
+.partners-section {
+  text-align: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding: 40px 20px;
+}
+
+.partners-title {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #343A40; /* Dark Gray from color palette */
+  margin-bottom: 40px;
+  margin-top: 0;
+}
+
+.partners-logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.partner-logo {
+  width: 150px;
+  height: 150px;
+  background-color: #F8F9FA; /* Light Gray from color palette */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #e0e0e0;
+}
+
+.partner-logo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.partner-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.partner-logo:hover img {
+  transform: scale(1.05);
+}
+
+.partner-logo a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.partner-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #6C757D; /* Medium Gray from color palette */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partners-empty {
+  padding: 40px;
+  color: #6C757D; /* Medium Gray from color palette */
+}
+
+/* Alignement pour les blocs larges et pleine largeur */
+.wp-block-mon-theme-aca-partners.alignwide .partners-section {
+  max-width: 1200px;
+}
+
+.wp-block-mon-theme-aca-partners.alignfull .partners-section {
+  max-width: none;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* Media Queries pour la responsivité */
+@media (max-width: 768px) {
+  .partners-title {
+    font-size: 2em;
+  }
+  .partner-logo {
+    width: 120px;
+    height: 120px;
+  }
+  .partners-logos {
+    gap: 15px;
+  }
+  .partners-section {
+    padding: 30px 15px;
+  }
+}
+@media (max-width: 480px) {
+  .partners-title {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+  }
+  .partner-logo {
+    width: 100px;
+    height: 100px;
+  }
+  .partners-logos {
+    gap: 10px;
+  }
+  .partners-section {
+    padding: 20px 10px;
+  }
+  .wp-block-mon-theme-aca-partners.alignfull .partners-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+/* Styles spéciaux pour quelques logos comme dans l'exemple original */
+.partner-logo:nth-child(3n) {
+  background-color: #E9ECEF;
+}
+
+.partner-logo:nth-child(4n) {
+  background-color: #DEE2E6;
+}

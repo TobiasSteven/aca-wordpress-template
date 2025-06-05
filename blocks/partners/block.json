@@ -1,0 +1,65 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/partners",
+    "version": "0.1.0",
+    "title": "Nos Partenaires",
+    "category": "mon-theme-aca",
+    "icon": "groups",
+    "description": "Affiche une section avec les logos des partenaires.",
+    "keywords": [
+        "partenaires",
+        "logos",
+        "sponsors",
+        "clients"
+    ],
+    "example": {},
+    "supports": {
+        "html": false,
+        "anchor": true,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "default": "Nos Partenaires"
+        },
+        "partners": {
+            "type": "array",
+            "default": [],
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "alt": {
+                        "type": "string"
+                    },
+                    "link": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "showBorders": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css",
+    "render": "file:./render.php"
+}

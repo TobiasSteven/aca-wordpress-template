@@ -28,6 +28,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc testimonials
     register_block_type(get_template_directory() . '/blocks/testimonials');
+
+    // Enregistrer le bloc partners
+    register_block_type(get_template_directory() . '/blocks/partners');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 

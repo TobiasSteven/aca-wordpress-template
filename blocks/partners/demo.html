@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Démonstration du Bloc Partenaires</title>
+    <link rel="stylesheet" href="style-index.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        padding: 20px;
+      }
+      .demo-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .demo-header {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #343a40;
+      }
+      .demo-description {
+        background: #f8f9fa;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        border-left: 4px solid #2d9b8a;
+      }
+      .usage-info {
+        background: #e3f2fd;
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-container">
+      <div class="demo-header">
+        <h1>Démonstration du Bloc Partenaires</h1>
+        <p>
+          Voici comment le bloc s'affiche sur le frontend avec différentes
+          configurations
+        </p>
+      </div>
+
+      <div class="demo-description">
+        <h3>Configuration par défaut</h3>
+        <p>Bloc avec titre par défaut, bordures activées et fond blanc.</p>
+      </div>
+
+      <!-- Bloc Partenaires - Configuration par défaut -->
+      <div class="partners-block">
+        <div
+          class="partners-section"
+          style="
+            background-color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 5px solid #e0e0e0;
+            border-bottom: 5px solid #e0e0e0;
+          "
+        >
+          <h2 class="partners-title">Nos Partenaires</h2>
+
+          <div class="partners-logos">
+            <div class="partner-logo">
+              <a
+                href="https://example1.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://picsum.photos/seed/partner1/300/300"
+                  alt="Partenaire Technologies Inc."
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="partner-logo">
+              <a
+                href="https://example2.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://picsum.photos/seed/partner2/300/300"
+                  alt="Innovation Solutions"
+                  loading="lazy"
+                />
+              </a>
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/partner3/300/300"
+                alt="Digital Agency"
+                loading="lazy"
+              />
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/partner4/300/300"
+                alt="Creative Studio"
+                loading="lazy"
+              />
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/partner5/300/300"
+                alt="Tech Partners"
+                loading="lazy"
+              />
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/partner6/300/300"
+                alt="Business Solutions"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-description" style="margin-top: 50px">
+        <h3>Configuration personnalisée</h3>
+        <p>Bloc avec titre personnalisé, fond coloré et sans bordures.</p>
+      </div>
+
+      <!-- Bloc Partenaires - Configuration personnalisée -->
+      <div class="partners-block">
+        <div
+          class="partners-section"
+          style="
+            background-color: #a8e6cf;
+            padding: 40px 20px;
+            text-align: center;
+          "
+        >
+          <h2 class="partners-title">Nos Sponsors Officiels</h2>
+
+          <div class="partners-logos">
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/sponsor1/300/300"
+                alt="Sponsor Premium"
+                loading="lazy"
+              />
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/sponsor2/300/300"
+                alt="Sponsor Gold"
+                loading="lazy"
+              />
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/sponsor3/300/300"
+                alt="Sponsor Silver"
+                loading="lazy"
+              />
+            </div>
+            <div class="partner-logo">
+              <img
+                src="https://picsum.photos/seed/sponsor4/300/300"
+                alt="Sponsor Bronze"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="usage-info">
+        <h3>🔧 Utilisation dans WordPress</h3>
+        <ol>
+          <li>
+            Recherchez "Nos Partenaires" dans l'éditeur de blocs Gutenberg
+          </li>
+          <li>Ajoutez le bloc à votre page ou article</li>
+          <li>
+            Configurez le titre et les paramètres dans le panneau de droite
+          </li>
+          <li>
+            Ajoutez vos partenaires en cliquant sur "Ajouter un partenaire"
+          </li>
+          <li>Sélectionnez les images depuis la médiathèque</li>
+          <li>Ajoutez des textes alternatifs et des liens optionnels</li>
+          <li>Personnalisez la couleur de fond et les bordures</li>
+        </ol>
+
+        <h4>📱 Fonctionnalités responsive :</h4>
+        <ul>
+          <li>Desktop : 6 logos par ligne (150x150px)</li>
+          <li>Tablette : logos adaptés (120x120px)</li>
+          <li>Mobile : logos compacts (100x100px)</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
