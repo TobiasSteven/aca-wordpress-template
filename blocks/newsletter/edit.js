@@ -5,6 +5,8 @@ import { __ } from '@wordpress/i18n';
 import {
     useBlockProps,
     InspectorControls,
+    BlockControls,
+    AlignmentToolbar,
 } from '@wordpress/block-editor';
 import {
     Panel,
@@ -26,6 +28,7 @@ export default function Edit({ attributes, setAttributes }) {
         textColor,
         buttonColor,
         buttonTextColor,
+        align,
     } = attributes;
 
     // Update functions for each attribute
@@ -59,6 +62,10 @@ export default function Edit({ attributes, setAttributes }) {
 
     const onChangeButtonTextColor = (newColor) => {
         setAttributes({ buttonTextColor: newColor.hex });
+    };
+
+    const onChangeAlign = (newAlign) => {
+        setAttributes({ align: newAlign });
     };
 
     // Inline styles for the editor preview
@@ -123,6 +130,13 @@ export default function Edit({ attributes, setAttributes }) {
     // Render the block in the editor
     return (
         <>
+            <BlockControls>
+                <AlignmentToolbar
+                    value={align}
+                    onChange={onChangeAlign}
+                />
+            </BlockControls>
+
             <InspectorControls>
                 <Panel>
                     <PanelBody title={__('Paramètres de la newsletter', 'mon-theme-aca')} initialOpen={true}>
@@ -185,7 +199,9 @@ export default function Edit({ attributes, setAttributes }) {
                 </Panel>
             </InspectorControls>
 
-            <div {...useBlockProps()}>
+            <div {...useBlockProps({
+                className: align === 'full' ? 'alignfull' : '',
+            })}>
                 <div style={sectionStyle}>
                     <h2 style={titleStyle}>{sectionTitle}</h2>
                     <p style={subtitleStyle}>{subtitle}</p>

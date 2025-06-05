@@ -13,8 +13,8 @@ $button_text = $attributes['buttonText'] ?? 'S\'inscrire';
 $placeholder_text = $attributes['placeholderText'] ?? 'Votre adresse email';
 $background_color = $attributes['backgroundColor'] ?? '#28A745';
 $text_color = $attributes['textColor'] ?? '#FFFFFF';
-$button_color = $attributes['buttonColor'] ?? '#FFFFFF';
-$button_text_color = $attributes['buttonTextColor'] ?? '#343A40';
+$button_color = $attributes['buttonColor'] ?? '#2D9B8A'; // Updated to theme's teal green
+$button_text_color = $attributes['buttonTextColor'] ?? '#FFFFFF'; // Updated to white
 
 // Génération d'un ID unique pour le formulaire
 $form_id = 'newsletter-form-' . uniqid();
@@ -85,6 +85,11 @@ $styles = "
         font-weight: bold;
         white-space: nowrap;
         margin-left: 10px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .newsletter-section-{$form_id} .newsletter-form button:hover {
+        background-color: #1F6B5C; /* Dark Teal on hover */
     }
     
     @media (max-width: 600px) {
@@ -117,8 +122,20 @@ $styles = "
 
 // Classes du bloc
 $wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'newsletter-section newsletter-section-' . $form_id
+    'class' => 'newsletter-section newsletter-section-' . $form_id . ' alignfull'
 ]);
+
+// Si l'attribut align existe et n'est pas "full", on supprime la classe alignfull
+if (isset($attributes['align']) && $attributes['align'] !== 'full') {
+    $wrapper_attributes = get_block_wrapper_attributes([
+        'class' => 'newsletter-section newsletter-section-' . $form_id
+    ]);
+} else {
+    // Par défaut, on met en pleine largeur
+    $wrapper_attributes = get_block_wrapper_attributes([
+        'class' => 'newsletter-section newsletter-section-' . $form_id . ' alignfull'
+    ]);
+}
 
 ?>
 

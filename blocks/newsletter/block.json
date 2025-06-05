@@ -13,7 +13,9 @@
         "align": [
             "wide",
             "full"
-        ]
+        ],
+        "alignWide": true,
+        "defaultAlign": "full"
     },
     "attributes": {
         "sectionTitle": {
@@ -42,11 +44,15 @@
         },
         "buttonColor": {
             "type": "string",
-            "default": "#FFFFFF"
+            "default": "#2D9B8A"
         },
         "buttonTextColor": {
             "type": "string",
-            "default": "#343A40"
+            "default": "#FFFFFF"
+        },
+        "align": {
+            "type": "string",
+            "default": "full"
         }
     },
     "textdomain": "mon-theme-aca",
