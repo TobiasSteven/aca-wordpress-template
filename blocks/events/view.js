@@ -389,10 +389,15 @@ function initializeEventCalendar(blockElement) {
         }
     });
 
-    // Rendre les jours focusables
-    calendarGrid.querySelectorAll('.day-number:not(.empty)').forEach(day => {
-        day.setAttribute('tabindex', '0');
-        day.setAttribute('role', 'button');
-        day.setAttribute('aria-label', `Sélectionner le ${day.textContent}`);
-    });
+    // Initialiser le calendrier au chargement
+    updateCalendar();
+
+    // Rendre les jours focusables après l'initialisation
+    setTimeout(() => {
+        calendarGrid.querySelectorAll('.day-number:not(.empty)').forEach(day => {
+            day.setAttribute('tabindex', '0');
+            day.setAttribute('role', 'button');
+            day.setAttribute('aria-label', `Sélectionner le ${day.textContent}`);
+        });
+    }, 100);
 }
