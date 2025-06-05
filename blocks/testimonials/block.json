@@ -1,0 +1,60 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/testimonials",
+    "version": "1.0.0",
+    "title": "Témoignages",
+    "category": "mon-theme-aca",
+    "icon": "format-quote",
+    "description": "Affiche une section de témoignages avec photos, citations et informations des témoins.",
+    "keywords": [
+        "témoignages",
+        "citations",
+        "avis",
+        "clients"
+    ],
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "spacing": {
+            "margin": true,
+            "padding": true
+        }
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Témoignages"
+        },
+        "testimonials": {
+            "type": "array",
+            "default": [
+                {
+                    "image": "https://picsum.photos/seed/fatoudiallo/100/100",
+                    "quote": "Grâce à l'ACA, j'ai pu améliorer mes techniques agricoles et augmenter ma production. Leur soutien a été inestimable.",
+                    "name": "Fatou Diallo",
+                    "title": "Agricultrice, Sénégal"
+                },
+                {
+                    "image": "https://picsum.photos/seed/kwamemensah/100/100",
+                    "quote": "L'ACA joue un rôle crucial dans le développement de la filière coton en Afrique, en favorisant l'innovation et la collaboration.",
+                    "name": "Dr. Kwame Mensah",
+                    "title": "Chercheur Agronome, Ghana"
+                },
+                {
+                    "image": "https://picsum.photos/seed/aishatraore/100/100",
+                    "quote": "L'ACA nous a aidé à étendre notre réseau et à trouver de nouveaux marchés pour notre coton. Nous sommes très reconnaissants.",
+                    "name": "Aisha Traoré",
+                    "title": "Exportatrice de Coton, Mali"
+                }
+            ]
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./style-index.css"
+}

@@ -25,6 +25,9 @@ function mon_theme_aca_register_blocks()
 
     // Enregistrer le bloc events
     register_block_type(get_template_directory() . '/blocks/events');
+
+    // Enregistrer le bloc testimonials
+    register_block_type(get_template_directory() . '/blocks/testimonials');
 }
 add_action('init', 'mon_theme_aca_register_blocks');
 
@@ -73,6 +76,16 @@ function mon_theme_aca_force_block_styles()
             get_template_directory_uri() . '/blocks/events/build/style-index.css',
             array(),
             filemtime(get_template_directory() . '/blocks/events/build/style-index.css')
+        );
+    }
+
+    // Enqueue forcé des styles du block testimonials
+    if (file_exists(get_template_directory() . '/blocks/testimonials/style-index.css')) {
+        wp_enqueue_style(
+            'mon-theme-aca-testimonials-frontend',
+            get_template_directory_uri() . '/blocks/testimonials/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/testimonials/style-index.css')
         );
     }
 }

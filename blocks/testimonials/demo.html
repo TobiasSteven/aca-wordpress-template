@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Démo Bloc Témoignages - WordPress</title>
+    <link rel="stylesheet" href="style-index.css" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #ffffff;
+        line-height: 1.6;
+      }
+      .demo-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .demo-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .demo-header h1 {
+        color: #1f6b5c;
+        margin-bottom: 10px;
+      }
+      .demo-header p {
+        color: #6c757d;
+        font-size: 1.1em;
+      }
+      .demo-info {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        border-left: 4px solid #2d9b8a;
+      }
+      .demo-info h3 {
+        color: #1f6b5c;
+        margin-top: 0;
+      }
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+      .feature-list li {
+        padding: 5px 0;
+        position: relative;
+        padding-left: 25px;
+      }
+      .feature-list li::before {
+        content: "✓";
+        color: #2d9b8a;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-container">
+      <div class="demo-header">
+        <h1>Bloc WordPress Témoignages</h1>
+        <p>
+          Démonstration du bloc personnalisé de témoignages pour le thème ACA
+        </p>
+      </div>
+
+      <div class="demo-info">
+        <h3>Fonctionnalités du bloc</h3>
+        <ul class="feature-list">
+          <li>Titre de section personnalisable</li>
+          <li>Témoignages multiples avec possibilité d'ajouter/supprimer</li>
+          <li>Upload d'images ou URL directe pour les photos des témoins</li>
+          <li>Citations éditables avec formatage riche</li>
+          <li>Nom et fonction/lieu personnalisables</li>
+          <li>Design responsive et moderne</li>
+          <li>Couleurs adaptées au thème ACA</li>
+          <li>Effets de survol élégants</li>
+        </ul>
+      </div>
+
+      <!-- Bloc Témoignages -->
+      <div class="wp-block-mon-theme-aca-testimonials">
+        <section class="testimonials-section">
+          <h2>Témoignages</h2>
+
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <img
+                src="https://picsum.photos/seed/fatoudiallo/100/100"
+                alt="Photo de Fatou Diallo"
+              />
+              <p class="quote">
+                Grâce à l'ACA, j'ai pu améliorer mes techniques agricoles et
+                augmenter ma production. Leur soutien a été inestimable.
+              </p>
+              <p class="name">Fatou Diallo</p>
+              <p class="title">Agricultrice, Sénégal</p>
+            </div>
+
+            <div class="testimonial-card">
+              <img
+                src="https://picsum.photos/seed/kwamemensah/100/100"
+                alt="Photo de Dr. Kwame Mensah"
+              />
+              <p class="quote">
+                L'ACA joue un rôle crucial dans le développement de la filière
+                coton en Afrique, en favorisant l'innovation et la
+                collaboration.
+              </p>
+              <p class="name">Dr. Kwame Mensah</p>
+              <p class="title">Chercheur Agronome, Ghana</p>
+            </div>
+
+            <div class="testimonial-card">
+              <img
+                src="https://picsum.photos/seed/aishatraore/100/100"
+                alt="Photo de Aisha Traoré"
+              />
+              <p class="quote">
+                L'ACA nous a aidé à étendre notre réseau et à trouver de
+                nouveaux marchés pour notre coton. Nous sommes très
+                reconnaissants.
+              </p>
+              <p class="name">Aisha Traoré</p>
+              <p class="title">Exportatrice de Coton, Mali</p>
+            </div>
+
+            <div class="testimonial-card">
+              <img
+                src="https://picsum.photos/seed/amirabbas/100/100"
+                alt="Photo de Amir Abbas"
+              />
+              <p class="quote">
+                Les formations proposées par l'ACA ont transformé notre approche
+                de la culture du coton. Les résultats sont impressionnants.
+              </p>
+              <p class="name">Amir Abbas</p>
+              <p class="title">Directeur de Coopérative, Égypte</p>
+            </div>
+
+            <div class="testimonial-card">
+              <img
+                src="https://picsum.photos/seed/mariasilva/100/100"
+                alt="Photo de Maria Silva"
+              />
+              <p class="quote">
+                La collaboration avec l'ACA nous a permis d'accéder à de
+                nouvelles technologies et d'améliorer notre compétitivité sur le
+                marché international.
+              </p>
+              <p class="name">Maria Silva</p>
+              <p class="title">Exportatrice, Brésil</p>
+            </div>
+
+            <div class="testimonial-card">
+              <img
+                src="https://picsum.photos/seed/johnsmith/100/100"
+                alt="Photo de John Smith"
+              />
+              <p class="quote">
+                L'expertise de l'ACA en matière de développement durable nous
+                aide à adopter des pratiques plus respectueuses de
+                l'environnement.
+              </p>
+              <p class="name">John Smith</p>
+              <p class="title">Consultant Agricole, États-Unis</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="demo-info" style="margin-top: 40px">
+        <h3>Comment utiliser ce bloc dans WordPress</h3>
+        <ol>
+          <li>
+            Dans l'éditeur Gutenberg, cliquez sur le bouton "+" pour ajouter un
+            bloc
+          </li>
+          <li>
+            Recherchez "Témoignages" ou naviguez vers la catégorie "Mon Thème
+            ACA"
+          </li>
+          <li>Cliquez sur le bloc "Témoignages" pour l'ajouter</li>
+          <li>
+            Utilisez le panneau latéral pour configurer chaque témoignage :
+            <ul style="margin-top: 10px">
+              <li>Uploader une image ou saisir une URL</li>
+              <li>Éditer la citation directement ou via le panneau</li>
+              <li>Modifier le nom et la fonction</li>
+              <li>Ajouter/supprimer des témoignages selon vos besoins</li>
+            </ul>
+          </li>
+          <li>Personnaliser le titre de la section si nécessaire</li>
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>
