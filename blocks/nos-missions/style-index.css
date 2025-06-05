@@ -133,12 +133,15 @@
 
   .missions-cards {
     gap: 15px;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .mission-card {
     width: 100%;
     min-width: auto;
     padding: 20px 15px;
+    margin-bottom: 15px;
   }
 
   .mission-icon {
