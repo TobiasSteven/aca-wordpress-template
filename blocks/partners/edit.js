@@ -88,6 +88,61 @@ export default function Edit({ attributes, setAttributes }) {
                             borderRadius: '4px'
                         }}>
                             <h4>{__('Partenaire', 'mon-theme-aca')} {index + 1}</h4>
+
+                            {/* Ajout du contrôle de téléchargement d'image */}
+                            <div style={{ marginBottom: '16px' }}>
+                                <label style={{ display: 'block', marginBottom: '8px' }}>
+                                    {__('Image du partenaire', 'mon-theme-aca')}
+                                </label>
+                                <div style={{
+                                    border: '1px solid #e0e0e0',
+                                    padding: '8px',
+                                    borderRadius: '4px',
+                                    backgroundColor: '#f8f9fa',
+                                    marginBottom: '8px'
+                                }}>
+                                    {partner.url && (
+                                        <div style={{
+                                            marginBottom: '8px',
+                                            textAlign: 'center'
+                                        }}>
+                                            <img
+                                                src={partner.url}
+                                                alt={partner.alt}
+                                                style={{
+                                                    maxWidth: '100%',
+                                                    maxHeight: '120px',
+                                                    border: '1px solid #ddd',
+                                                    borderRadius: '4px',
+                                                    backgroundColor: 'white',
+                                                    padding: '4px'
+                                                }}
+                                            />
+                                        </div>
+                                    )}
+                                    <MediaUploadCheck>
+                                        <MediaUpload
+                                            onSelect={(media) => onSelectMedia(media, index)}
+                                            allowedTypes={['image']}
+                                            value={partner.id}
+                                            render={({ open }) => (
+                                                <Button
+                                                    onClick={open}
+                                                    isPrimary={!partner.url}
+                                                    isSecondary={!!partner.url}
+                                                    style={{ width: '100%' }}
+                                                >
+                                                    {partner.url
+                                                        ? __('Changer l\'image', 'mon-theme-aca')
+                                                        : __('Sélectionner une image', 'mon-theme-aca')
+                                                    }
+                                                </Button>
+                                            )}
+                                        />
+                                    </MediaUploadCheck>
+                                </div>
+                            </div>
+
                             <TextControl
                                 label={__('Texte alternatif', 'mon-theme-aca')}
                                 value={partner.alt}

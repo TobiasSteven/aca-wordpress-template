@@ -6,6 +6,7 @@ Ce bloc permet d'afficher une section avec les logos des partenaires de votre or
 
 - **Titre personnalisable** : Modifiez le titre de la section (par défaut "Nos Partenaires")
 - **Gestion des logos** : Ajoutez, supprimez et réorganisez les logos des partenaires
+- **Upload direct d'images** : Chargez des images directement depuis le panneau latéral
 - **Liens optionnels** : Chaque logo peut avoir un lien vers le site du partenaire
 - **Texte alternatif** : Support complet de l'accessibilité avec textes alternatifs
 - **Couleur de fond personnalisable** : Changez la couleur de fond de la section
@@ -34,7 +35,7 @@ Ce bloc permet d'afficher une section avec les logos des partenaires de votre or
 ### Gestion des partenaires
 
 - **Ajouter un partenaire** : Bouton pour ajouter un nouveau partenaire
-- **Image** : Logo du partenaire (formats image supportés)
+- **Image** : Logo du partenaire (formats image supportés) - peut être chargé directement depuis le panneau latéral
 - **Texte alternatif** : Description pour l'accessibilité
 - **Lien** : URL optionnelle vers le site du partenaire (s'ouvre dans un nouvel onglet)
 
