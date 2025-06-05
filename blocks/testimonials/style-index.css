@@ -9,7 +9,7 @@
   text-align: center;
   font-size: 2.2em;
   font-weight: 600;
-  color: #1F6B5C; /* Dark Teal */
+  color: #1f6b5c; /* Dark Teal */
   margin-bottom: 50px;
 }
 .wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid {
@@ -18,8 +18,11 @@
   justify-content: center;
   gap: 30px;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card {
-  background-color: #F8F9FA; /* Light Gray */
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card {
+  background-color: #f8f9fa; /* Light Gray */
   border-radius: 15px;
   padding: 30px;
   text-align: center;
@@ -28,52 +31,81 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card:hover {
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card img {
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card
+  img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 4px solid #2D9B8A; /* Teal Green */
+  border: 4px solid #2d9b8a; /* Teal Green */
   margin-bottom: 20px;
   object-fit: cover;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .quote {
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card
+  .quote {
   font-style: italic;
-  color: #6C757D; /* Medium Gray */
+  color: #6c757d; /* Medium Gray */
   font-size: 0.95em;
   margin-bottom: 20px;
   flex-grow: 1;
   position: relative;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .quote::before {
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card
+  .quote::before {
   content: '"';
   font-size: 1.5em;
-  color: #2D9B8A; /* Teal Green */
+  color: #2d9b8a; /* Teal Green */
   position: absolute;
   left: -15px;
   top: -5px;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .quote::after {
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card
+  .quote::after {
   content: '"';
   font-size: 1.5em;
-  color: #2D9B8A; /* Teal Green */
+  color: #2d9b8a; /* Teal Green */
   position: absolute;
   right: -15px;
   bottom: -15px;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .name {
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card
+  .name {
   font-weight: bold;
-  color: #343A40; /* Dark Gray */
+  color: #343a40; /* Dark Gray */
   font-size: 1.1em;
   margin-bottom: 5px;
 }
-.wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .title {
-  color: #6C757D; /* Medium Gray */
+.wp-block-mon-theme-aca-testimonials
+  .testimonials-section
+  .testimonials-grid
+  .testimonial-card
+  .title {
+  color: #2d9b8a; /* Teal Green - Couleur primaire */
   font-size: 0.9em;
 }
 
@@ -83,19 +115,34 @@
     font-size: 1.8em;
     margin-bottom: 30px;
   }
-  .wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card {
+  .wp-block-mon-theme-aca-testimonials
+    .testimonials-section
+    .testimonials-grid
+    .testimonial-card {
     flex-basis: 90%;
     max-width: 400px;
     padding: 25px;
   }
-  .wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card img {
+  .wp-block-mon-theme-aca-testimonials
+    .testimonials-section
+    .testimonials-grid
+    .testimonial-card
+    img {
     width: 80px;
     height: 80px;
   }
-  .wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .quote {
+  .wp-block-mon-theme-aca-testimonials
+    .testimonials-section
+    .testimonials-grid
+    .testimonial-card
+    .quote {
     font-size: 0.9em;
   }
-  .wp-block-mon-theme-aca-testimonials .testimonials-section .testimonials-grid .testimonial-card .name {
+  .wp-block-mon-theme-aca-testimonials
+    .testimonials-section
+    .testimonials-grid
+    .testimonial-card
+    .name {
     font-size: 1em;
   }
 }
