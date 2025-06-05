@@ -69,12 +69,25 @@ $inline_css = "
     margin: 0 0 5px 0 !important;
 }
 .wp-block-mon-theme-aca-events .event-details .time,
-.wp-block-mon-theme-aca-events .event-details .location {
+.wp-block-mon-theme-aca-events .event-details .location,
+.wp-block-mon-theme-aca-events .event-details .end-date {
     font-size: 13px !important;
     color: #777 !important;
     margin-bottom: 3px !important;
     display: flex !important;
     align-items: center !important;
+    flex-wrap: wrap !important;
+}
+.wp-block-mon-theme-aca-events .event-details .time-label,
+.wp-block-mon-theme-aca-events .event-details .date-label {
+    color: #555 !important;
+    font-weight: 600 !important;
+    margin-right: 5px !important;
+    font-size: 12px !important;
+}
+.wp-block-mon-theme-aca-events .event-details .time-separator {
+    margin: 0 5px !important;
+    color: #999 !important;
 }
 .wp-block-mon-theme-aca-events .event-tag {
     display: inline-block !important;
@@ -322,6 +335,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
                             $event_time = get_post_meta(get_the_ID(), 'event_time', true);
                             $event_location = get_post_meta(get_the_ID(), 'event_location', true);
                             $event_end_date = get_post_meta(get_the_ID(), 'event_end_date', true);
+                            $event_end_time = get_post_meta(get_the_ID(), 'event_end_time', true);
 
                             if (empty($event_date)) {
                                 $event_date = get_the_date('Y-m-d');
@@ -365,8 +379,28 @@ $wrapper_attributes = get_block_wrapper_attributes([
                                 <div class="event-details">
                                     <h2><?php the_title(); ?></h2>
                                     <?php if ($show_time && !empty($event_time)) : ?>
-                                        <p class="time"><?php echo esc_html($event_time); ?></p>
+                                        <p class="time">
+                                            <span class="time-label">Début:</span> <?php echo esc_html($event_time); ?>
+                                            <?php if (!empty($event_end_time)) : ?>
+                                                <span class="time-separator">-</span> <?php echo esc_html($event_end_time); ?>
+                                            <?php endif; ?>
+                                        </p>
                                     <?php endif; ?>
+
+                                    <?php if ($show_time && !empty($event_end_date) && $event_end_date != $event_date) : ?>
+                                        <p class="end-date">
+                                            <span class="date-label">Jusqu'au:</span>
+                                            <?php
+                                            try {
+                                                $end_date = new DateTime($event_end_date);
+                                                echo esc_html($end_date->format('j') . ' ' . $month_translations[strtoupper($end_date->format('M'))] ?? strtoupper($end_date->format('M')) . ' ' . $end_date->format('Y'));
+                                            } catch (Exception $e) {
+                                                echo esc_html($event_end_date);
+                                            }
+                                            ?>
+                                        </p>
+                                    <?php endif; ?>
+
                                     <?php if ($show_location && !empty($event_location)) : ?>
                                         <p class="location"><?php echo esc_html($event_location); ?></p>
                                     <?php endif; ?>
