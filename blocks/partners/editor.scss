@@ -1,12 +1,51 @@
 /* Styles pour l'éditeur du bloc Partenaires */
 
+/* Assurer l'alignement correct du bloc dans l'éditeur */
+.wp-block-mon-theme-aca-partners {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block;
+    width: 100% !important;
+    text-align: center;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+}
+
+/* Container du block dans l'éditeur */
 .partners-block-editor {
-    margin: 20px 0;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
 }
 
 .partners-section-editor {
     border-radius: 4px;
-    margin: 0;
+    margin: 0 auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    /* S'assurer que le contenu est centré */
+    justify-content: center;
+}
+
+.partners-content-editor {
+    /* Ajout pour s'assurer du centrage du contenu */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100% !important;
+    max-width: 1200px;
+    margin: 0 auto !important;
 }
 
 .partners-logos-editor {

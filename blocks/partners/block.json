@@ -16,11 +16,7 @@
     "example": {},
     "supports": {
         "html": false,
-        "anchor": true,
-        "align": [
-            "wide",
-            "full"
-        ]
+        "anchor": true
     },
     "attributes": {
         "title": {

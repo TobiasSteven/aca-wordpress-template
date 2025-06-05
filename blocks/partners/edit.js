@@ -17,7 +17,9 @@ export default function Edit({ attributes, setAttributes }) {
         className: 'partners-block-editor',
         style: {
             backgroundColor: backgroundColor,
-            width: '100%'
+            margin: '0 auto',
+            width: '100%',
+            maxWidth: '100%'
         }
     });
 
@@ -113,7 +115,11 @@ export default function Edit({ attributes, setAttributes }) {
                 border: showBorders ? '5px solid #e0e0e0' : 'none',
                 borderTop: showBorders ? '5px solid #e0e0e0' : 'none',
                 borderBottom: showBorders ? '5px solid #e0e0e0' : 'none',
-                width: '100%'
+                width: '100%',
+                margin: '0 auto',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
             }}>
                 <div className="partners-content-editor" style={{
                     width: '100%',
