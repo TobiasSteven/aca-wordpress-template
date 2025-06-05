@@ -122,6 +122,132 @@
     margin-right: -50vw;
 }
 
+/* Styles pour le slider de partenaires */
+.partners-slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.partners-slider {
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.3s ease;
+    width: 100%;
+}
+
+.slider-item {
+    flex: 0 0 25%; /* 4 items par vue */
+    padding: 0 10px;
+}
+
+.slider-nav {
+    background: #2D9B8A;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(45, 155, 138, 0.3);
+}
+
+.slider-nav:hover {
+    background: #1F6B5C;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-prev {
+    left: -25px;
+}
+
+.slider-next {
+    right: -25px;
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #2D9B8A;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+    background: #2D9B8A;
+}
+
+.slider-dot:hover {
+    background: #1F6B5C;
+    border-color: #1F6B5C;
+}
+
+/* Media Queries pour le slider */
+@media (max-width: 768px) {
+    .slider-item {
+        flex: 0 0 50%; /* 2 items par vue sur tablette */
+    }
+    
+    .slider-nav {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .slider-prev {
+        left: -20px;
+    }
+    
+    .slider-next {
+        right: -20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-item {
+        flex: 0 0 100%; /* 1 item par vue sur mobile */
+    }
+    
+    .slider-nav {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .slider-prev {
+        left: -17px;
+    }
+    
+    .slider-next {
+        right: -17px;
+    }
+}
+
 /* Media Queries pour la responsivité */
 @media (max-width: 768px) {
     .partners-title {
