@@ -223,10 +223,29 @@ export default function Edit({ attributes, setAttributes }) {
                                         const eventTime = event.meta?.event_time || '';
                                         const eventLocation = event.meta?.event_location || '';
                                         const eventEndDate = event.meta?.event_end_date || '';
+                                        const eventEndTime = event.meta?.event_end_time || '';
 
                                         const date = new Date(eventDate);
                                         const day = date.getDate();
-                                        const month = date.toLocaleDateString('fr-FR', { month: 'short' }).toUpperCase();
+
+                                        // Traduction des mois pour correspondre au frontend
+                                        const monthTranslations = {
+                                            'JAN': 'JAN',
+                                            'FEB': 'FÉV',
+                                            'MAR': 'MAR',
+                                            'APR': 'AVR',
+                                            'MAY': 'MAI',
+                                            'JUN': 'JUN',
+                                            'JUL': 'JUL',
+                                            'AUG': 'AOÛT',
+                                            'SEP': 'SEP',
+                                            'OCT': 'OCT',
+                                            'NOV': 'NOV',
+                                            'DEC': 'DÉC'
+                                        };
+
+                                        const monthEn = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+                                        const month = monthTranslations[monthEn] || monthEn;
 
                                         return (
                                             <div key={event.id} className="event-card">
@@ -236,12 +255,40 @@ export default function Edit({ attributes, setAttributes }) {
                                                 </div>
                                                 <div className="event-details">
                                                     <h2 dangerouslySetInnerHTML={{ __html: event.title.rendered }} />
+
                                                     {showTime && eventTime && (
-                                                        <p className="time">{eventTime}</p>
+                                                        <p className="time">
+                                                            <span className="time-label">Début:</span> {eventTime}
+                                                            {eventEndTime && (
+                                                                <>
+                                                                    <span className="time-separator">-</span> {eventEndTime}
+                                                                </>
+                                                            )}
+                                                        </p>
                                                     )}
+
+                                                    {showTime && eventEndDate && eventEndDate !== eventDate && (
+                                                        <p className="end-date">
+                                                            <span className="date-label">Jusqu'au:</span>
+                                                            {(() => {
+                                                                try {
+                                                                    const endDate = new Date(eventEndDate);
+                                                                    const endDay = endDate.getDate();
+                                                                    const endMonthEn = endDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+                                                                    const endMonth = monthTranslations[endMonthEn] || endMonthEn;
+                                                                    const endYear = endDate.getFullYear();
+                                                                    return `${endDay} ${endMonth} ${endYear}`;
+                                                                } catch (e) {
+                                                                    return eventEndDate;
+                                                                }
+                                                            })()}
+                                                        </p>
+                                                    )}
+
                                                     {showLocation && eventLocation && (
                                                         <p className="location">{eventLocation}</p>
                                                     )}
+
                                                     {showEventType && event._embedded && event._embedded['wp:term'] && (
                                                         <span className="event-tag">
                                                             {event._embedded['wp:term'][0]?.[0]?.name || __('Événement', 'mon-theme-aca')}
