@@ -600,3 +600,126 @@ function mon_theme_aca_insert_sample_events()
     }
 }
 add_action('after_switch_theme', 'mon_theme_aca_insert_sample_events');
+
+/**
+ * Add REST API support for custom event meta fields
+ */
+function mon_theme_aca_register_event_meta_rest_fields()
+{
+    $meta_fields = array(
+        'event_date',
+        'event_time',
+        'event_end_date',
+        'event_end_time',
+        'event_location',
+        'event_address',
+        'event_organizer',
+        'event_contact_email',
+        'event_contact_phone',
+        'event_website',
+        'event_price',
+        'event_capacity'
+    );
+
+    foreach ($meta_fields as $field) {
+        register_rest_field(
+            'event',
+            $field,
+            array(
+                'get_callback' => function ($post) use ($field) {
+                    return get_post_meta($post['id'], $field, true);
+                },
+                'update_callback' => function ($value, $post) use ($field) {
+                    return update_post_meta($post->ID, $field, $value);
+                },
+                'schema' => array(
+                    'description' => sprintf(__('Event %s field', 'mon-theme-aca'), $field),
+                    'type' => 'string',
+                    'context' => array('view', 'edit'),
+                ),
+            )
+        );
+    }
+}
+add_action('rest_api_init', 'mon_theme_aca_register_event_meta_rest_fields');
+
+/**
+ * Add REST API support for ordering by event_date meta field
+ */
+function mon_theme_aca_events_rest_orderby_params($params)
+{
+    $params['orderby']['enum'][] = 'event_date';
+    $params['orderby']['description'] .= ' ' . __('Can also be "event_date" to sort by event date meta field.', 'mon-theme-aca');
+
+    return $params;
+}
+add_filter('rest_event_collection_params', 'mon_theme_aca_events_rest_orderby_params');
+
+/**
+ * Handle REST API queries for custom orderby values
+ */
+function mon_theme_aca_events_rest_query($args, $request)
+{
+    $orderby = $request->get_param('orderby');
+
+    if ($orderby === 'event_date') {
+        $args['meta_key'] = 'event_date';
+        $args['orderby'] = 'meta_value';
+        $args['meta_type'] = 'DATE';
+    }
+
+    return $args;
+}
+add_filter('rest_event_query', 'mon_theme_aca_events_rest_query', 10, 2);
+
+/**
+ * Add custom REST API query parameters for events
+ */
+function mon_theme_aca_add_event_rest_query_vars($valid_vars)
+{
+    $valid_vars = array_merge($valid_vars, array('meta_key', 'meta_value', 'meta_type'));
+    return $valid_vars;
+}
+add_filter('rest_query_vars', 'mon_theme_aca_add_event_rest_query_vars');
+
+/**
+ * Expose event meta fields in REST API response
+ */
+function mon_theme_aca_add_event_meta_to_rest()
+{
+    register_rest_field(
+        'event',
+        'meta',
+        array(
+            'get_callback' => function ($post) {
+                $meta_fields = array(
+                    'event_date',
+                    'event_time',
+                    'event_end_date',
+                    'event_end_time',
+                    'event_location',
+                    'event_address',
+                    'event_organizer',
+                    'event_contact_email',
+                    'event_contact_phone',
+                    'event_website',
+                    'event_price',
+                    'event_capacity'
+                );
+
+                $meta = array();
+                foreach ($meta_fields as $field) {
+                    $meta[$field] = get_post_meta($post['id'], $field, true);
+                }
+
+                return $meta;
+            },
+            'schema' => array(
+                'description' => __('Event meta fields', 'mon-theme-aca'),
+                'type' => 'object',
+                'context' => array('view', 'edit'),
+            ),
+        )
+    );
+}
+add_action('rest_api_init', 'mon_theme_aca_add_event_meta_to_rest');
