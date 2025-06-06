@@ -38,13 +38,13 @@ function mon_theme_aca_register_blocks()
 add_action('init', 'mon_theme_aca_register_blocks');
 
 /**
- * Enqueue block assets for frontend
+ * Enqueue block assets for both frontend and editor
  */
 function mon_theme_aca_enqueue_block_assets()
 {
-    // Enqueue FontAwesome pour les icônes
+    // Enqueue FontAwesome pour les icônes - works for both frontend and editor
     wp_enqueue_style(
-        'font-awesome',
+        'fontawesome',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
         array(),
         '6.5.1'
@@ -101,7 +101,7 @@ function mon_theme_aca_enqueue_block_assets()
         );
     }
 }
-add_action('wp_enqueue_scripts', 'mon_theme_aca_enqueue_block_assets');
+add_action('enqueue_block_assets', 'mon_theme_aca_enqueue_block_assets');
 
 /**
  * Force l'enqueue des styles de blocks même si has_block ne fonctionne pas
@@ -182,19 +182,11 @@ function mon_theme_aca_force_block_styles()
 add_action('wp_enqueue_scripts', 'mon_theme_aca_force_block_styles', 20);
 
 /**
- * Enqueue block editor assets
+ * Enqueue block editor specific assets
  */
 function mon_theme_aca_enqueue_block_editor_assets()
 {
-    // Enqueue FontAwesome pour l'éditeur Gutenberg avec priorité élevée
-    wp_enqueue_style(
-        'font-awesome-editor',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
-        array(),
-        '6.5.1'
-    );
-
-    // Ajouter CSS personnalisé pour forcer l'affichage des icônes dans l'éditeur
+    // Add CSS personnalisé pour forcer l'affichage des icônes dans l'éditeur
     $custom_css = '
         .wp-block-mon-theme-aca-stats-cards .stat-icon-editor i {
             font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 6 Brands", "FontAwesome" !important;
@@ -219,9 +211,10 @@ function mon_theme_aca_enqueue_block_editor_assets()
         }
     ';
 
-    wp_add_inline_style('font-awesome-editor', $custom_css);
+    // FontAwesome is enqueued via enqueue_block_assets hook, so we can add inline styles to it
+    wp_add_inline_style('fontawesome', $custom_css);
 }
-add_action('enqueue_block_editor_assets', 'mon_theme_aca_enqueue_block_editor_assets', 5);
+add_action('enqueue_block_editor_assets', 'mon_theme_aca_enqueue_block_editor_assets', 15);
 
 /**
  * Add block category for theme blocks

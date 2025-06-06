@@ -23,8 +23,7 @@ function mon_theme_aca_scripts()
     // Enqueue Google Fonts - Inter for the design
     wp_enqueue_style('mon-theme-aca-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', array(), null);
 
-    // Enqueue FontAwesome for icons
-    wp_enqueue_style('fontawesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1');
+    // FontAwesome is now enqueued via enqueue_block_assets in blocks.php
 
     // Enqueue Bootstrap JS
     wp_enqueue_script('bootstrap-bundle', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js', array(), '5.3.2', true);
