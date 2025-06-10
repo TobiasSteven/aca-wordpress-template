@@ -190,6 +190,8 @@ button:focus {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* === Commentaires - Styles dans assets/css/comments.css === */
+
 /* Responsive */
 @media (min-width: 768px) {
   .site-header .container {

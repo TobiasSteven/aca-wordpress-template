@@ -17,6 +17,9 @@ function mon_theme_aca_scripts()
     // Enqueue navigation animations
     wp_enqueue_style('mon-theme-aca-nav-animations', MON_THEME_ACA_URI . '/assets/css/navigation-animations.css', array(), MON_THEME_ACA_VERSION);
 
+    // Enqueue comments styles
+    wp_enqueue_style('mon-theme-aca-comments', MON_THEME_ACA_URI . '/assets/css/comments.css', array(), MON_THEME_ACA_VERSION);
+
     // Enqueue Bootstrap CSS
     wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css', array(), '5.3.2');
 
