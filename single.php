@@ -199,105 +199,14 @@
                         </div>
                     </div>
                     <div class="mt-12">
-                        <h3 class="text-2xl font-bold text-[#1F6B5C] mb-6">
-                            Commentaires (3)
-                        </h3>
-                        <div class="space-y-6">
-                            <div class="bg-[#f9fbf9] p-4 rounded-lg">
-                                <div class="flex items-center mb-2">
-                                    <img
-                                        alt="Avatar utilisateur"
-                                        class="w-10 h-10 rounded-full mr-3"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_A-behppLiZvgUI70aqyGb7twjhZvQTcyFgmllAMbnFgSn41jfF3G962nYU3figZ_wNba3NiVJr3_DZcoRvzwQXT3PHkwQQ00A9jXtFlBj6GTiMnA2W66WCCJpohyqpIQPKn-AShZpR0rdhsQwlop17Hcd80B0FW8QCQsEH5MdBAPjWqD55m5aSxYf-jFLdbOAap4X4Hxen_WeTejJqeiQcjYrNmJzKTDI-JpoH1k2UCS77SUHevJ3rqjs2ckK2QlLYdDccJNETQ" />
-                                    <div>
-                                        <p class="font-semibold text-[#1F6B5C]">
-                                            Moussa Traoré
-                                        </p>
-                                        <p class="text-xs text-gray-500">20 Juillet 2024</p>
-                                    </div>
-                                </div>
-                                <p class="text-[#343A40]">
-                                    Article très instructif ! La technologie est vraiment la
-                                    clé pour l'avenir du coton africain.
-                                </p>
+                        <?php
+                        // Affichage dynamique des commentaires WordPress
+                        if (comments_open() || get_comments_number()) :
+                        ?>
+                            <div class="mt-12">
+                                <?php comments_template(); ?>
                             </div>
-                            <div class="bg-[#f9fbf9] p-4 rounded-lg ml-8">
-                                <div class="flex items-center mb-2">
-                                    <img
-                                        alt="Avatar utilisateur"
-                                        class="w-10 h-10 rounded-full mr-3"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcQTV-7NcvMjtbarimkHBEGL5RKV2UzfC1G6LxDTr2GMmTPInKF7pewOmf6XMJVcRmo1OCo4WRGecFu4ccaEZi4PvrcFAjXjK-ennZr74z73li4Cd49qi65orZLhZyg4NQMAFdDcb8aOcxVqDEGlNDRUNZGh7HpO1aRe0LA7Ff8yNcSS6xV0CLGMmG8-hL2T4piQTZQLc0T0vwKQ4hlD0H59PKebkELCBjqRRHBjhA4QaI6WZw6_8J3xmFC9xCl4W_8BAFia0WtUY" />
-                                    <div>
-                                        <p class="font-semibold text-[#1F6B5C]">
-                                            Amina Diallo
-                                        </p>
-                                        <p class="text-xs text-gray-500">21 Juillet 2024</p>
-                                    </div>
-                                </div>
-                                <p class="text-[#343A40]">
-                                    Je suis d'accord. En tant qu'agricultrice, j'aimerais
-                                    voir plus de soutien pour accéder à ces outils.
-                                </p>
-                            </div>
-                            <div class="bg-[#f9fbf9] p-4 rounded-lg">
-                                <div class="flex items-center mb-2">
-                                    <img
-                                        alt="Avatar utilisateur"
-                                        class="w-10 h-10 rounded-full mr-3"
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBll0xK7vGUH3JYMJOxhqTYMYNdfvPQmm2_WyuCyBvfngx7E3e_TZUNTkIso0S9KB5NkeBq3GPU3n3VQhe5XXyWHmE21pnye3k1gYkBlyuz1nm0Z0kZ1sY36XggrJSV8cEJNJRK_zidbAU3iig8f8y7VYFycH9A0LWayjl76sGatOOyE21Dq1D_sJhzKjtUIn4lSFQtbZa0VqiXhF5VT2uh_adDbXKNFbf-R8n-1795kyj0PFWBXngIvzBJIIGv_Dd_pwXt4eMniXQ" />
-                                    <div>
-                                        <p class="font-semibold text-[#1F6B5C]">
-                                            David Okello
-                                        </p>
-                                        <p class="text-xs text-gray-500">22 Juillet 2024</p>
-                                    </div>
-                                </div>
-                                <p class="text-[#343A40]">
-                                    Excellent point sur les défis. L'infrastructure et la
-                                    formation sont cruciales.
-                                </p>
-                            </div>
-                        </div>
-                        <form class="mt-8">
-                            <h4 class="text-xl font-semibold text-[#1F6B5C] mb-3">
-                                Laisser un commentaire
-                            </h4>
-                            <div class="mb-4">
-                                <label
-                                    class="block text-sm font-medium text-[#343A40] mb-1"
-                                    for="comment_name">Nom</label>
-                                <input
-                                    class="form-input w-full rounded-md border-gray-300 focus:border-[#2D9B8A] focus:ring focus:ring-[#A8E6CF] focus:ring-opacity-50"
-                                    id="comment_name"
-                                    required=""
-                                    type="text" />
-                            </div>
-                            <div class="mb-4">
-                                <label
-                                    class="block text-sm font-medium text-[#343A40] mb-1"
-                                    for="comment_email">Email</label>
-                                <input
-                                    class="form-input w-full rounded-md border-gray-300 focus:border-[#2D9B8A] focus:ring focus:ring-[#A8E6CF] focus:ring-opacity-50"
-                                    id="comment_email"
-                                    required=""
-                                    type="email" />
-                            </div>
-                            <div class="mb-4">
-                                <label
-                                    class="block text-sm font-medium text-[#343A40] mb-1"
-                                    for="comment_body">Commentaire</label>
-                                <textarea
-                                    class="form-textarea w-full rounded-md border-gray-300 focus:border-[#2D9B8A] focus:ring focus:ring-[#A8E6CF] focus:ring-opacity-50"
-                                    id="comment_body"
-                                    required=""
-                                    rows="4"></textarea>
-                            </div>
-                            <button
-                                class="px-6 py-2 bg-[#2D9B8A] text-white font-semibold rounded-lg hover:bg-[#1F6B5C] transition-colors"
-                                type="submit">
-                                Soumettre
-                            </button>
-                        </form>
+                        <?php endif; ?>
                     </div>
                 </article>
                 <aside class="w-full lg:w-1/3 space-y-8">
