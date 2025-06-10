@@ -301,64 +301,79 @@
                     </div>
                 </article>
                 <aside class="w-full lg:w-1/3 space-y-8">
+                    <!-- Articles similaires -->
                     <div class="bg-[#f9fbf9] p-6 rounded-lg shadow-sm">
                         <h3 class="text-xl font-semibold text-[#1F6B5C] mb-4">
                             Articles Similaires
                         </h3>
-                        <ul class="space-y-3">
-                            <li>
-                                <a class="group" href="#">
-                                    <p
-                                        class="font-medium text-[#343A40] group-hover:text-[#2D9B8A]">
-                                        Les défis de la certification du coton biologique en
-                                        Afrique
-                                    </p>
-                                    <p class="text-xs text-gray-500">10 Juillet 2024</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="group" href="#">
-                                    <p
-                                        class="font-medium text-[#343A40] group-hover:text-[#2D9B8A]">
-                                        L'innovation au service des petits producteurs de
-                                        coton
-                                    </p>
-                                    <p class="text-xs text-gray-500">5 Juillet 2024</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="group" href="#">
-                                    <p
-                                        class="font-medium text-[#343A40] group-hover:text-[#2D9B8A]">
-                                        Le rôle des femmes dans la chaîne de valeur du coton
-                                    </p>
-                                    <p class="text-xs text-gray-500">28 Juin 2024</p>
-                                </a>
-                            </li>
-                        </ul>
+                        <?php
+                        // Articles similaires
+                        $current_post_id = get_the_ID();
+                        $categories = get_the_category($current_post_id);
+                        $related_posts = array();
+
+                        if (!empty($categories)) {
+                            $category_ids = array();
+                            foreach ($categories as $category) {
+                                $category_ids[] = $category->term_id;
+                            }
+
+                            $related_posts = get_posts(array(
+                                'category__in' => $category_ids,
+                                'post__not_in' => array($current_post_id),
+                                'posts_per_page' => 3,
+                                'orderby' => 'rand'
+                            ));
+                        }
+
+                        if (!empty($related_posts)) : ?>
+                            <ul class="space-y-3">
+                                <?php foreach ($related_posts as $related_post) : ?>
+                                    <li>
+                                        <a class="group" href="<?php echo esc_url(get_permalink($related_post->ID)); ?>">
+                                            <p class="font-medium text-[#343A40] group-hover:text-[#2D9B8A]">
+                                                <?php echo esc_html($related_post->post_title); ?>
+                                            </p>
+                                            <p class="text-xs text-gray-500">
+                                                <?php echo esc_html(get_the_date('j F Y', $related_post->ID)); ?>
+                                            </p>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else : ?>
+                            <p class="text-[#6C757D] text-sm italic">
+                                Aucun article similaire trouvé pour le moment.
+                            </p>
+                        <?php endif; ?>
                     </div>
-                    <div class="bg-[#f9fbf9] p-6 rounded-lg shadow-sm">
-                        <h3 class="text-xl font-semibold text-[#1F6B5C] mb-4">
-                            Catégories
-                        </h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <a class="text-[#343A40] hover:text-[#2D9B8A]" href="#">Technologie Agricole (5)</a>
-                            </li>
-                            <li>
-                                <a class="text-[#343A40] hover:text-[#2D9B8A]" href="#">Durabilité (8)</a>
-                            </li>
-                            <li>
-                                <a class="text-[#343A40] hover:text-[#2D9B8A]" href="#">Marché du Coton (3)</a>
-                            </li>
-                            <li>
-                                <a class="text-[#343A40] hover:text-[#2D9B8A]" href="#">Politiques Agricoles (2)</a>
-                            </li>
-                            <li>
-                                <a class="text-[#343A40] hover:text-[#2D9B8A]" href="#">Innovation (6)</a>
-                            </li>
-                        </ul>
-                    </div>
+
+                    <?php
+                    // Catégories dynamiques
+                    $categories = get_categories(array(
+                        'orderby' => 'count',
+                        'order' => 'DESC',
+                        'number' => 5,
+                        'hide_empty' => true
+                    ));
+
+                    if (!empty($categories)) : ?>
+                        <div class="bg-[#f9fbf9] p-6 rounded-lg shadow-sm">
+                            <h3 class="text-xl font-semibold text-[#1F6B5C] mb-4">
+                                Catégories
+                            </h3>
+                            <ul class="space-y-2">
+                                <?php foreach ($categories as $category) : ?>
+                                    <li>
+                                        <a class="text-[#343A40] hover:text-[#2D9B8A]"
+                                            href="<?php echo esc_url(get_category_link($category->term_id)); ?>">
+                                            <?php echo esc_html($category->name); ?> (<?php echo $category->count; ?>)
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
                     <div class="newsletter-gradient text-white p-8 rounded-xl shadow-lg relative overflow-hidden">
                         <!-- Decorative elements -->
                         <div class="absolute top-0 right-0 w-20 h-20 bg-[#A8E6CF] opacity-10 rounded-full -mr-10 -mt-10"></div>
