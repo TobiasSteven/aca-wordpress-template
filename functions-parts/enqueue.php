@@ -36,3 +36,18 @@ function mon_theme_aca_scripts()
     }
 }
 add_action('wp_enqueue_scripts', 'mon_theme_aca_scripts');
+/**
+ * Enqueue single post stylesheet only on single post pages.
+ */
+function mon_theme_aca_single_post_styles()
+{
+    if (is_single()) {
+        wp_enqueue_style(
+            'mon-theme-aca-single-post',
+            MON_THEME_ACA_URI . '/assets/css/single-post.css',
+            array(),
+            MON_THEME_ACA_VERSION
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'mon_theme_aca_single_post_styles');

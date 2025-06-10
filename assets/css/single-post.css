@@ -1,0 +1,26 @@
+.hero-overlay {
+  background-color: rgba(45, 155, 138, 0.6);
+}
+.link-style {
+  color: #2d9b8a;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+.link-style:hover {
+  color: #1f6b5c;
+}
+.blockquote-style {
+  border-left: 4px solid #a8e6cf;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #6c757d;
+}
+.social-share-button {
+  background-color: #2d9b8a;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+.social-share-button:hover {
+  background-color: #1f6b5c;
+}
