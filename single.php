@@ -2,18 +2,17 @@
 
 <main class="flex-1 bg-white">
     <nav class="bg-[#f9fbf9] py-4 px-6 md:px-10">
-        <ol
-            class="list-none p-0 inline-flex items-center text-sm text-gray-600">
+        <ol class="list-none p-0 inline-flex items-center text-sm text-gray-600">
             <li class="flex items-center">
-                <a class="hover:text-[#2D9B8A]" href="#">Accueil</a>
+                <a class="hover:text-[#2D9B8A]" href="<?php echo esc_url(home_url('/')); ?>">Accueil</a>
                 <i class="fas fa-chevron-right text-sm mx-2 text-gray-500"></i>
             </li>
             <li class="flex items-center">
-                <a class="hover:text-[#2D9B8A]" href="#">Actualités</a>
+                <a class="hover:text-[#2D9B8A]" href="<?php echo esc_url(get_post_type_archive_link('post')); ?>">Actualités</a>
                 <i class="fas fa-chevron-right text-sm mx-2 text-gray-500"></i>
             </li>
             <li class="text-[#1F6B5C] font-medium">
-                Impact de la technologie sur la culture du coton en Afrique
+                <?php echo esc_html(get_the_title()); ?>
             </li>
         </ol>
     </nav>
