@@ -345,22 +345,44 @@
                         </li>
                     </ul>
                 </div>
-                <div class="bg-[#2D9B8A] text-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-semibold mb-3">Newsletter</h3>
-                    <p class="text-sm mb-4 text-[#A8E6CF]">
-                        Restez informé des dernières actualités de l'ACA.
-                    </p>
-                    <form class="flex flex-col space-y-3">
-                        <input
-                            class="form-input w-full rounded-md border-none bg-white text-[#343A40] placeholder-gray-500 focus:ring-2 focus:ring-[#1F6B5C]"
-                            placeholder="Votre adresse email"
-                            type="email" />
-                        <button
-                            class="px-4 py-2 bg-[#1F6B5C] text-white font-semibold rounded-md hover:bg-opacity-90 transition-colors"
-                            type="submit">
-                            S'inscrire
-                        </button>
-                    </form>
+                <div class="newsletter-gradient text-white p-8 rounded-xl shadow-lg relative overflow-hidden">
+                    <!-- Decorative elements -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-[#A8E6CF] opacity-10 rounded-full -mr-10 -mt-10"></div>
+                    <div class="absolute bottom-0 left-0 w-16 h-16 bg-[#A8E6CF] opacity-10 rounded-full -ml-8 -mb-8"></div>
+
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-envelope-open-text text-2xl text-[#A8E6CF] mr-3"></i>
+                            <h3 class="text-2xl font-bold">Newsletter</h3>
+                        </div>
+                        <p class="text-[#A8E6CF] mb-6 leading-relaxed">
+                            Restez informé des dernières actualités de l'ACA et recevez nos insights exclusifs directement dans votre boîte mail.
+                        </p>
+                        <form class="space-y-4" id="newsletter-form">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-[#6C757D]"></i>
+                                </div>
+                                <input
+                                    class="form-input w-full pl-10 pr-4 py-3 rounded-lg border-none bg-white text-[#343A40] placeholder-[#6C757D] focus:ring-2 focus:ring-[#A8E6CF] focus:outline-none transition-all duration-200 shadow-sm"
+                                    placeholder="Votre adresse email"
+                                    type="email"
+                                    name="email"
+                                    id="newsletter-email"
+                                    required />
+                            </div>
+                            <button
+                                class="w-full px-6 py-3 bg-[#28A745] text-white font-semibold rounded-lg hover:bg-[#28A745]/90 focus:bg-[#28A745]/90 focus:ring-2 focus:ring-[#A8E6CF] focus:outline-none transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 flex items-center justify-center group"
+                                type="submit">
+                                <span>S'inscrire maintenant</span>
+                                <i class="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </button>
+                        </form>
+                        <p class="text-xs text-[#A8E6CF]/80 mt-3 text-center">
+                            <i class="fas fa-shield-alt mr-1"></i>
+                            Vos données sont protégées. Désabonnement possible à tout moment.
+                        </p>
+                    </div>
                 </div>
             </aside>
         </div>

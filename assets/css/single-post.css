@@ -24,3 +24,87 @@
 .social-share-button:hover {
   background-color: #1f6b5c;
 }
+
+/* Newsletter Section Enhancements */
+.newsletter-gradient {
+  background: linear-gradient(135deg, #2d9b8a 0%, #1f6b5c 100%);
+  position: relative;
+}
+
+.newsletter-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 230, 207, 0.1) 0%,
+    rgba(168, 230, 207, 0.05) 100%
+  );
+  border-radius: inherit;
+}
+
+/* Newsletter form input focus animations */
+.newsletter-gradient input:focus {
+  transform: translateY(-1px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 2px #a8e6cf;
+}
+
+/* Newsletter submit button enhanced */
+.newsletter-gradient button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+}
+
+.newsletter-gradient button:active {
+  transform: translateY(0);
+}
+
+/* Icon animations */
+.newsletter-gradient .fa-envelope-open-text {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Input placeholder animation */
+.newsletter-gradient input::placeholder {
+  transition: opacity 0.3s ease;
+}
+
+.newsletter-gradient input:focus::placeholder {
+  opacity: 0.6;
+}
+
+/* Success state for form submission */
+.newsletter-success {
+  background: linear-gradient(135deg, #28a745 0%, #1f6b5c 100%);
+}
+
+.newsletter-success .success-icon {
+  animation: checkmark 0.6s ease-in-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

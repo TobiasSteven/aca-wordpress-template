@@ -82,12 +82,73 @@
         });
     }
 
+    // Newsletter form enhancement
+    function setupNewsletterForm() {
+        const form = document.getElementById('newsletter-form');
+        const emailInput = document.getElementById('newsletter-email');
+
+        if (form && emailInput) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const email = emailInput.value.trim();
+                const button = form.querySelector('button[type="submit"]');
+                const buttonText = button.querySelector('span');
+                const buttonIcon = button.querySelector('i');
+
+                // Simple email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailRegex.test(email)) {
+                    // Show error state
+                    emailInput.classList.add('ring-red-500', 'ring-2');
+                    emailInput.classList.remove('focus:ring-[#A8E6CF]');
+
+                    setTimeout(() => {
+                        emailInput.classList.remove('ring-red-500', 'ring-2');
+                        emailInput.classList.add('focus:ring-[#A8E6CF]');
+                    }, 3000);
+
+                    return;
+                }
+
+                // Show loading state
+                button.disabled = true;
+                buttonText.textContent = 'Inscription en cours...';
+                buttonIcon.className = 'fas fa-spinner fa-spin ml-2';
+                button.classList.add('opacity-75');
+
+                // Simulate API call
+                setTimeout(() => {
+                    // Show success state
+                    buttonText.textContent = 'Inscrit avec succès !';
+                    buttonIcon.className = 'fas fa-check ml-2 success-icon';
+                    button.classList.remove('bg-[#28A745]', 'hover:bg-[#28A745]/90');
+                    button.classList.add('newsletter-success');
+
+                    // Reset form
+                    emailInput.value = '';
+
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        button.disabled = false;
+                        buttonText.textContent = 'S\'inscrire maintenant';
+                        buttonIcon.className = 'fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1';
+                        button.classList.remove('newsletter-success', 'opacity-75');
+                        button.classList.add('bg-[#28A745]', 'hover:bg-[#28A745]/90');
+                    }, 3000);
+                }, 1500);
+            });
+        }
+    }
+
     // Document ready
     $(document).ready(function () {
         toggleMobileMenu();
         setupSubMenuToggles();
         setupSmoothScroll();
         setupBackToTop();
+        setupNewsletterForm();
     });
 
 })(jQuery);
