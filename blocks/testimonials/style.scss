@@ -1,9 +1,17 @@
 /* Styles pour le front-end - bloc témoignages */
 .wp-block-mon-theme-aca-testimonials {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 40px 0;
+
     .testimonials-section {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 0 20px;
 
         h2 {
             text-align: center;

@@ -1,7 +1,13 @@
 /* Style pour le bloc Hero Slider */
 .wp-block-mon-theme-aca-hero-slider {
   position: relative;
-  margin: 0;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 0;
+  margin-bottom: 0;
   font-family: "Inter", sans-serif;
 }
 

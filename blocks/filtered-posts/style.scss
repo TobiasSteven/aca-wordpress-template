@@ -3,7 +3,19 @@
  */
 
 .wp-block-mon-theme-aca-filtered-posts {
-    margin: 2rem 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 40px 0;
+}
+
+.filtered-posts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 
     .section-title {
         font-size: 2.5rem;

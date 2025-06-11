@@ -12,8 +12,21 @@
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
-  padding: 40px 20px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 40px 0;
   min-height: auto;
+}
+
+.stats-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .stats-container {

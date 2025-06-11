@@ -13,6 +13,10 @@ Dark Gray: #343A40 (Primary text)
 Success Green: #28A745 (CTAs, success states)
 Warning Orange: #FD7E14 (Alerts, highlights)
 
+### To Use
+
+- Make all blocks full width.
+
 ### Wordpress version 6.8
 
 link: http://developer.wordpress.org/themes/

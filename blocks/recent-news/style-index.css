@@ -1,9 +1,21 @@
 /* Styles pour le frontend */
 .wp-block-mon-theme-aca-recent-news {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 40px 0;
+}
+
+.recent-news-section {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .recent-news {
