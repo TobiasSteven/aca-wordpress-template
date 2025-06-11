@@ -1,0 +1,70 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/filtered-posts",
+    "version": "0.1.0",
+    "title": "Liste d'articles filtrable",
+    "category": "mon-theme-aca",
+    "icon": "filter",
+    "description": "Affiche une grille d'articles avec une barre latérale de filtres dynamiques.",
+    "example": {},
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "attributes": {
+        "sectionTitle": {
+            "type": "string",
+            "default": "Articles"
+        },
+        "postsPerPage": {
+            "type": "number",
+            "default": 6
+        },
+        "showSearchFilter": {
+            "type": "boolean",
+            "default": true
+        },
+        "showCategoryFilter": {
+            "type": "boolean",
+            "default": true
+        },
+        "showTemporalFilter": {
+            "type": "boolean",
+            "default": true
+        },
+        "showGeographicFilter": {
+            "type": "boolean",
+            "default": true
+        },
+        "showSortControls": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPagination": {
+            "type": "boolean",
+            "default": true
+        },
+        "paginationType": {
+            "type": "string",
+            "default": "numbered"
+        },
+        "defaultSortBy": {
+            "type": "string",
+            "default": "date"
+        },
+        "defaultOrder": {
+            "type": "string",
+            "default": "desc"
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css",
+    "viewScript": "file:./view.js",
+    "render": "file:./render.php"
+}

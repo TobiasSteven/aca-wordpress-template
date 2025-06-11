@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "mon-theme-aca/featured-post",
+    "version": "0.1.0",
+    "title": "Article en Vedette",
+    "category": "mon-theme-aca",
+    "icon": "star-filled",
+    "description": "Affiche dynamiquement le dernier article ayant une catégorie ou un tag spécifique.",
+    "example": {},
+    "supports": {
+        "html": false,
+        "align": [
+            "wide",
+            "full"
+        ]
+    },
+    "attributes": {
+        "filterType": {
+            "type": "string",
+            "default": "category"
+        },
+        "selectedCategory": {
+            "type": "number",
+            "default": 0
+        },
+        "selectedTag": {
+            "type": "number",
+            "default": 0
+        }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css",
+    "render": "file:./render.php"
+}

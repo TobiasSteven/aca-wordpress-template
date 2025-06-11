@@ -1,0 +1,117 @@
+/**
+ * Editor styles for Featured Post block
+ */
+
+.wp-block-mon-theme-aca-featured-post {
+    .featured-post-preview {
+        border: 2px dashed #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        background: #f9f9f9;
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .no-posts {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #7db8a8 0%, #9cc7b8 100%);
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+
+            .content-wrapper {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                align-items: center;
+            }
+
+            .text-content {
+                color: white;
+
+                .featured-badge {
+                    display: inline-block;
+                    background: #5da85c;
+                    color: white;
+                    padding: 6px 15px;
+                    border-radius: 25px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    margin-bottom: 15px;
+                }
+
+                .main-title {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    line-height: 1.2;
+                    margin-bottom: 15px;
+                    color: white;
+                }
+
+                .subtitle {
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                    margin-bottom: 20px;
+                    opacity: 0.95;
+                    font-weight: 300;
+                }
+
+                .author-info {
+                    font-size: 0.8rem;
+                    margin-bottom: 20px;
+                    opacity: 0.9;
+                }
+
+                .cta-button {
+                    display: inline-block;
+                    background: #5da85c;
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 8px;
+                    text-decoration: none;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                }
+            }
+
+            .image-section {
+                position: relative;
+
+                .hero-image {
+                    width: 100%;
+                    height: auto;
+                    max-height: 250px;
+                    object-fit: cover;
+                    border-radius: 15px;
+                }
+            }
+
+           
+        }
+    }
+}
+
+/* Styles pour l'inspecteur */
+.components-panel__body {
+    .components-radio-control__option {
+        margin-bottom: 8px;
+    }
+
+    .components-select-control__input {
+        margin-top: 8px;
+    }
+}
