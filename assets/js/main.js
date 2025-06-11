@@ -179,6 +179,167 @@
         });
     }
 
+    // Search toggle functionality
+    function setupSearchToggle() {
+        const searchToggle = document.querySelector('.search-toggle');
+        const searchForm = document.querySelector('.header-search-form');
+
+        if (!searchToggle || !searchForm) return;
+
+        searchToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            searchForm.classList.toggle('active');
+            const input = searchForm.querySelector('input[type="search"]');
+            if (input && searchForm.classList.contains('active')) {
+                input.focus();
+            }
+        });
+
+        // Close search on escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && searchForm.classList.contains('active')) {
+                searchForm.classList.remove('active');
+            }
+        });
+    }
+
+    // Load more functionality
+    function setupLoadMore() {
+        const loadMoreBtn = document.querySelector('.load-more-btn');
+
+        if (!loadMoreBtn) return;
+
+        loadMoreBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const button = e.target;
+            const page = parseInt(button.dataset.page) || 1;
+            const maxPages = parseInt(button.dataset.maxPages) || 1;
+
+            if (page >= maxPages) {
+                button.style.display = 'none';
+                return;
+            }
+
+            button.textContent = 'Chargement...';
+            button.disabled = true;
+
+            // Here you would typically make an AJAX call to load more posts
+            // For now, we'll just simulate it
+            setTimeout(() => {
+                button.textContent = 'Charger plus';
+                button.disabled = false;
+                button.dataset.page = page + 1;
+
+                if (page + 1 >= maxPages) {
+                    button.style.display = 'none';
+                }
+            }, 1000);
+        });
+    }
+
+    // Form validation enhancement
+    function setupFormValidation() {
+        const forms = document.querySelectorAll('form.validate');
+
+        forms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                const emailInputs = form.querySelectorAll('input[type="email"]');
+                const requiredInputs = form.querySelectorAll('input[required], textarea[required]');
+
+                let isValid = true;
+
+                // Validate required fields
+                requiredInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        input.classList.add('error');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('error');
+                    }
+                });
+
+                // Validate email fields
+                emailInputs.forEach(input => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (input.value && !emailRegex.test(input.value)) {
+                        input.classList.add('error');
+                        isValid = false;
+                    } else if (input.value) {
+                        input.classList.remove('error');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+
+    // Scroll to top functionality
+    function setupScrollToTop() {
+        const scrollToTopBtn = document.querySelector('.scroll-to-top');
+
+        if (!scrollToTopBtn) return;
+
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Initialize sliders
+    function initializeSliders() {
+        // This would typically initialize any slider/carousel functionality
+        // For now, we'll just add basic functionality for elements with slider class
+        const sliders = document.querySelectorAll('.slider, .carousel');
+
+        sliders.forEach(slider => {
+            const slides = slider.querySelectorAll('.slide, .carousel-item');
+            const prevBtn = slider.querySelector('.prev, .carousel-prev');
+            const nextBtn = slider.querySelector('.next, .carousel-next');
+
+            if (slides.length === 0) return;
+
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentSlide = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
+                    showSlide(currentSlide);
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentSlide = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
+                    showSlide(currentSlide);
+                });
+            }
+
+            // Initialize first slide
+            showSlide(0);
+        });
+    }
+
     // Document ready
     $(document).ready(function () {
         toggleMobileMenu();
