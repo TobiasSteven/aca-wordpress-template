@@ -27,7 +27,7 @@
     <div id="page" class="site">
         <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e('Aller au contenu', 'mon-theme-aca'); ?></a>
         <!-- Barre de navigation -->
-        <nav class="bg-white shadow-md mb-8">
+        <nav class="bg-white shadow-md">
             <div class="container mx-auto px-6 py-3 flex items-center justify-between">
                 <!-- Section Logo -->
                 <div class="flex items-center">
@@ -111,6 +111,13 @@
                 <?php } ?>
             </div>
         </nav>
+        <?php
+        /**
+         * Hook pour ajouter du contenu juste après le header
+         * Utilisation: add_action('mon_theme_aca_after_header', 'votre_fonction');
+         */
+        do_action('mon_theme_aca_after_header');
+        ?>
         <script>
             // Script pour le menu mobile
             const mobileMenuButton = document.getElementById('mobile-menu-button');
