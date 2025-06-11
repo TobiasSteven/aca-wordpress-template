@@ -21,3 +21,19 @@ require_once MON_THEME_ACA_DIR . '/functions-parts/menu-filters.php';
 require_once MON_THEME_ACA_DIR . '/functions-parts/events.php';
 require_once MON_THEME_ACA_DIR . '/functions-parts/blocks.php';
 require_once MON_THEME_ACA_DIR . '/functions-parts/theme-includes.php';
+
+/**
+ * Ensure threaded comments are enabled
+ */
+function mon_theme_aca_enable_threaded_comments()
+{
+    if (!get_option('thread_comments')) {
+        update_option('thread_comments', 1);
+    }
+
+    // Set maximum comment depth to 5 if not already set
+    if (get_option('thread_comments_depth') < 3) {
+        update_option('thread_comments_depth', 5);
+    }
+}
+add_action('after_setup_theme', 'mon_theme_aca_enable_threaded_comments');

@@ -142,13 +142,55 @@
         }
     }
 
+    // Comments system enhancements
+    function setupCommentSystem() {
+        // Smooth scroll to comment form when reply link is clicked
+        $(document).on('click', '.comment-reply-link', function (e) {
+            // Let WordPress handle the reply functionality first
+            setTimeout(function () {
+                const respondElement = document.getElementById('respond');
+                if (respondElement) {
+                    respondElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }, 100);
+        });
+
+        // Smooth scroll to comment form when cancel reply link is clicked
+        $(document).on('click', '#cancel-comment-reply-link', function (e) {
+            setTimeout(function () {
+                const respondElement = document.getElementById('respond');
+                if (respondElement) {
+                    respondElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }, 100);
+        });
+
+        // Add visual feedback for comment submission
+        $('#commentform').on('submit', function () {
+            const submitButton = $(this).find('input[type="submit"]');
+            submitButton.prop('disabled', true);
+            submitButton.val('Publication en cours...');
+        });
+    }
+
     // Document ready
     $(document).ready(function () {
         toggleMobileMenu();
         setupSubMenuToggles();
         setupSmoothScroll();
-        setupBackToTop();
-        setupNewsletterForm();
+        setupSearchToggle();
+        setupLoadMore();
+        setupFormValidation();
+        setupScrollToTop();
+        initializeSliders();
+        // Add comment system enhancements
+        setupCommentSystem();
     });
 
 })(jQuery);

@@ -202,11 +202,9 @@
                         <?php
                         // Affichage dynamique des commentaires WordPress
                         if (comments_open() || get_comments_number()) :
+                            comments_template();
+                        endif;
                         ?>
-                            <div class="mt-12">
-                                <?php comments_template(); ?>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 </article>
                 <aside class="w-full lg:w-1/3 space-y-8">

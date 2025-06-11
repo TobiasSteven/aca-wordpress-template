@@ -37,6 +37,9 @@ if (post_password_required()) {
                     'avatar_size' => 40,
                     'format'      => 'html5',
                     'callback'    => 'mon_theme_aca_comment_callback',
+                    'end-callback' => 'mon_theme_aca_comment_end_callback',
+                    'type'        => 'all',
+                    'reverse_top_level' => false,
                 )
             );
             ?>

@@ -35,6 +35,7 @@ function mon_theme_aca_scripts()
     // Enqueue main.js
     wp_enqueue_script('mon-theme-aca-main', MON_THEME_ACA_URI . '/assets/js/main.js', array('jquery'), MON_THEME_ACA_VERSION, true);
 
+    // Enqueue comment reply script for threaded comments
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');
     }
