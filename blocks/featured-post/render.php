@@ -28,10 +28,22 @@ if ($filter_type === 'category' && $selected_category > 0) {
 // Effectuer la requête
 $featured_post_query = new WP_Query($query_args);
 
-// Obtenir les classes du block
+// Obtenir les classes du block avec alignement par défaut
 $wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'wp-block-mon-theme-aca-featured-post'
+    'class' => 'wp-block-mon-theme-aca-featured-post alignfull'
 ]);
+
+// Si l'attribut align existe et n'est pas "full", on ajuste la classe
+if (isset($attributes['align']) && $attributes['align'] !== 'full') {
+    $wrapper_attributes = get_block_wrapper_attributes([
+        'class' => 'wp-block-mon-theme-aca-featured-post align' . $attributes['align']
+    ]);
+} else {
+    // Par défaut, on met en pleine largeur
+    $wrapper_attributes = get_block_wrapper_attributes([
+        'class' => 'wp-block-mon-theme-aca-featured-post alignfull'
+    ]);
+}
 
 // Fonction pour obtenir l'extrait personnalisé
 if (!function_exists('get_custom_excerpt')) {

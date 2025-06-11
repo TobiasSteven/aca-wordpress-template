@@ -3,6 +3,16 @@
  */
 
 .wp-block-mon-theme-aca-featured-post {
+    // Force la pleine largeur par défaut
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 0;
+    margin-bottom: 0;
+
     * {
         margin: 0;
         padding: 0;
@@ -22,12 +32,34 @@
         padding: 40px 20px;
         position: relative;
         overflow: hidden;
+        width: 100%;
     }
 
     .container {
         max-width: 1200px;
         margin: 0 auto;
         width: 100%;
+        padding: 0 20px;
+    }
+
+    /* Alignement pour les blocs larges et pleine largeur */
+    &.alignwide .container {
+        max-width: 1400px;
+    }
+
+    &.alignfull .container {
+        max-width: none;
+        padding: 0 40px;
+    }
+
+    /* Style spécial pour forcer la pleine largeur */
+    &.alignfull {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
     }
 
     .content-wrapper {
