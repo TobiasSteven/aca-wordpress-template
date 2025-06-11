@@ -184,22 +184,67 @@
 }
 
 .theme-comment-form .form-submit {
-  margin-top: 1rem;
+  text-align: left;
+  margin-top: 1.5rem;
 }
 
-.btn-success-green {
+.btn-success-green,
+.theme-comment-form input[type="submit"],
+.theme-comment-form #submit,
+.comment-form input[type="submit"] {
   background: var(--teal-green);
   color: var(--white);
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: normal;
+  font-family: inherit;
+  box-shadow: 0 2px 4px rgba(45, 155, 138, 0.2);
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
 }
 
-.btn-success-green:hover {
+.btn-success-green:hover,
+.theme-comment-form input[type="submit"]:hover,
+.theme-comment-form #submit:hover,
+.comment-form input[type="submit"]:hover {
   background: var(--dark-teal);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success-green:focus,
+.theme-comment-form input[type="submit"]:focus,
+.theme-comment-form #submit:focus,
+.comment-form input[type="submit"]:focus {
+  outline: none;
+  background: var(--dark-teal);
+  box-shadow: 0 0 0 3px rgba(168, 230, 207, 0.3);
+}
+
+.btn-success-green:active,
+.theme-comment-form input[type="submit"]:active,
+.theme-comment-form #submit:active,
+.comment-form input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation pour le bouton lors de la soumission */
+.btn-success-green:disabled,
+.theme-comment-form input[type="submit"]:disabled,
+.theme-comment-form #submit:disabled,
+.comment-form input[type="submit"]:disabled {
+  background: var(--medium-gray);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Message "pas de commentaires" */
@@ -432,10 +477,13 @@
 
 .theme-comment-form .form-submit {
   text-align: left;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
-.btn-success-green {
+.btn-success-green,
+.theme-comment-form input[type="submit"],
+.theme-comment-form #submit,
+.comment-form input[type="submit"] {
   background: var(--teal-green);
   color: var(--white);
   border: none;
@@ -447,12 +495,48 @@
   transition: all 0.3s ease;
   text-transform: none;
   letter-spacing: normal;
+  font-family: inherit;
+  box-shadow: 0 2px 4px rgba(45, 155, 138, 0.2);
+  min-width: 160px;
+  position: relative;
+  overflow: hidden;
 }
 
-.btn-success-green:hover {
+.btn-success-green:hover,
+.theme-comment-form input[type="submit"]:hover,
+.theme-comment-form #submit:hover,
+.comment-form input[type="submit"]:hover {
   background: var(--dark-teal);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-success-green:focus,
+.theme-comment-form input[type="submit"]:focus,
+.theme-comment-form #submit:focus,
+.comment-form input[type="submit"]:focus {
+  outline: none;
+  background: var(--dark-teal);
+  box-shadow: 0 0 0 3px rgba(168, 230, 207, 0.3);
+}
+
+.btn-success-green:active,
+.theme-comment-form input[type="submit"]:active,
+.theme-comment-form #submit:active,
+.comment-form input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation pour le bouton lors de la soumission */
+.btn-success-green:disabled,
+.theme-comment-form input[type="submit"]:disabled,
+.theme-comment-form #submit:disabled,
+.comment-form input[type="submit"]:disabled {
+  background: var(--medium-gray);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Message "pas de commentaires" */
