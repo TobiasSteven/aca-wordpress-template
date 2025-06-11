@@ -589,8 +589,18 @@ button.member-button:hover {
 .main-navigation .current-page-ancestor > a,
 .nav-link.current,
 #primary-menu .current-menu-item a,
-#primary-menu .current_page_item a {
+#primary-menu .current_page_item a,
+/* Nouvelles classes pour nos walkers personnalisés */
+.nav-link.current-menu-item,
+.nav-link.current_page_item,
+.nav-link.current-page-ancestor,
+.nav-link.current-menu-ancestor,
+.mobile-menu-item.current-menu-item,
+.mobile-menu-item.current_page_item,
+.mobile-menu-item.current-page-ancestor,
+.mobile-menu-item.current-menu-ancestor {
   color: var(--teal-green) !important;
+  font-weight: 600 !important;
 }
 
 /* Bordure des éléments actifs avec couleur primaire */
@@ -599,7 +609,21 @@ button.member-button:hover {
 .main-navigation .current-page-ancestor > a::before,
 .nav-link.current::before,
 #primary-menu .current-menu-item a::before,
-#primary-menu .current_page_item a::before {
+#primary-menu .current_page_item a::before,
+/* Nouvelles classes pour nos walkers personnalisés */
+.nav-link.current-menu-item::before,
+.nav-link.current_page_item::before,
+.nav-link.current-page-ancestor::before,
+.nav-link.current-menu-ancestor::before {
+  width: 100% !important;
+  background-color: var(--teal-green) !important;
+}
+
+/* Styles spéciaux pour les éléments actifs du menu mobile */
+.mobile-menu-item.current-menu-item::after,
+.mobile-menu-item.current_page_item::after,
+.mobile-menu-item.current-page-ancestor::after,
+.mobile-menu-item.current-menu-ancestor::after {
   width: 100% !important;
   background-color: var(--teal-green) !important;
 }

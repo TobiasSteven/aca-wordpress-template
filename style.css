@@ -122,6 +122,27 @@ img {
   display: block;
   transition: color 0.3s ease;
 }
+/* Styles pour les éléments de navigation actifs */
+.nav-link.current-menu-item,
+.nav-link.current_page_item,
+.nav-link.current-page-ancestor,
+.nav-link.current-menu-ancestor,
+.main-navigation .current-menu-item > a,
+.main-navigation .current_page_item > a,
+.main-navigation .current-page-ancestor > a {
+  color: var(--teal-green) !important;
+  font-weight: 700 !important;
+}
+
+/* Styles pour le menu mobile actif */
+.mobile-menu-item.current-menu-item,
+.mobile-menu-item.current_page_item,
+.mobile-menu-item.current-page-ancestor,
+.mobile-menu-item.current-menu-ancestor {
+  color: var(--teal-green) !important;
+  background-color: var(--light-gray) !important;
+  font-weight: 600 !important;
+}
 
 /* Articles */
 .post {
