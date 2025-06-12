@@ -488,6 +488,48 @@
                         .card-image-container {
                             height: 200px;
                             position: relative;
+                            overflow: hidden;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+
+                            .placeholder-image {
+                                width: 100%;
+                                height: 100%;
+                                background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                color: #6c757d;
+                                font-size: 14px;
+                            }
+
+                            .card-date {
+                                position: absolute;
+                                top: 12px;
+                                right: 12px;
+                                background: rgba(45, 155, 138, 0.9);
+                                color: white;
+                                padding: 6px 12px;
+                                border-radius: 6px;
+                                font-size: 11px;
+                                font-weight: 600;
+                                text-transform: uppercase;
+                                letter-spacing: 0.5px;
+                                backdrop-filter: blur(4px);
+                                z-index: 2;
+                                
+                                &.date-green {
+                                    background: rgba(40, 167, 69, 0.9);
+                                }
+                                
+                                &.date-blue {
+                                    background: rgba(45, 155, 138, 0.9);
+                                }
+                            }
                         }
 
                         .card-content {
@@ -495,11 +537,24 @@
                             flex: 1;
                             display: flex;
                             flex-direction: column;
+                            position: relative;
+                            z-index: 1;
 
                             h3 {
                                 font-size: 1.25rem;
                                 margin-bottom: 12px;
                                 line-height: 1.3;
+                                color: #1F6B5C;
+                                
+                                a {
+                                    color: inherit;
+                                    text-decoration: none;
+                                    transition: color 0.3s ease;
+                                    
+                                    &:hover {
+                                        color: #2D9B8A;
+                                    }
+                                }
                             }
 
                             p {
@@ -507,13 +562,81 @@
                                 margin-bottom: 16px;
                                 line-height: 1.5;
                                 flex: 1;
+                                color: #6C757D;
                             }
 
-                            .article-meta,
-                            .article-tags,
+                            .content-header {
+                                flex: 1;
+                                margin-bottom: 16px;
+                            }
+
+                            .article-meta {
+                                font-size: 12px;
+                                color: #6C757D;
+                                margin-bottom: 8px;
+                                font-weight: 500;
+                            }
+
+                            .content-footer {
+                                margin-top: auto;
+                            }
+
+                            .article-tags {
+                                display: flex;
+                                gap: 6px;
+                                flex-wrap: wrap;
+                                margin-bottom: 12px;
+
+                                .tag {
+                                    font-size: 10px;
+                                    padding: 4px 8px;
+                                    background: rgba(45, 155, 138, 0.1);
+                                    color: #2D9B8A;
+                                    border-radius: 12px;
+                                    font-weight: 500;
+                                    border: 1px solid rgba(45, 155, 138, 0.2);
+                                }
+                            }
+
                             .article-author {
                                 font-size: 12px;
-                                margin-bottom: 8px;
+                                color: #6C757D;
+                                margin-bottom: 12px;
+                                
+                                &::before {
+                                    content: '👤 ';
+                                    margin-right: 4px;
+                                }
+                            }
+
+                            .article-actions {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-top: 8px;
+
+                                .read-more {
+                                    display: inline-block;
+                                    padding: 8px 16px;
+                                    background: linear-gradient(135deg, #2D9B8A, #A8E6CF);
+                                    color: white;
+                                    text-decoration: none;
+                                    border-radius: 6px;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    transition: all 0.3s ease;
+                                    
+                                    &:hover {
+                                        background: linear-gradient(135deg, #1F6B5C, #2D9B8A);
+                                        transform: translateY(-1px);
+                                        box-shadow: 0 4px 12px rgba(45, 155, 138, 0.3);
+                                    }
+                                }
+
+                                .action-buttons {
+                                    display: flex;
+                                    gap: 8px;
+                                }
                             }
                         }
                     }
