@@ -801,6 +801,11 @@
                                 display: none;
                             }
 
+                            // Masquer la date dans la vue liste pour un design plus cohérent
+                            .card-date {
+                                display: none;
+                            }
+
                             @media (max-width: 768px) {
                                 width: 60px;
                                 height: 60px;
