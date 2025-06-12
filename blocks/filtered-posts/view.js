@@ -228,12 +228,14 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                     if (result.success) {
                         this.postsGrid.innerHTML = result.data.posts_html;
 
-                        // Réappliquer la vue sélectionnée après le chargement AJAX
-                        const activeViewBtn = this.block.querySelector('.view-btn.active');
-                        if (activeViewBtn) {
-                            const currentView = activeViewBtn.dataset.view;
-                            this.changeView(currentView);
-                        }
+                        // Réappliquer la vue sélectionnée après le chargement AJAX avec un petit délai
+                        setTimeout(() => {
+                            const activeViewBtn = this.block.querySelector('.view-btn.active');
+                            if (activeViewBtn) {
+                                const currentView = activeViewBtn.dataset.view;
+                                this.changeView(currentView);
+                            }
+                        }, 50);
 
                         if (result.data.pagination_html) {
                             if (this.pagination) {
@@ -322,12 +324,14 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                                 existingContainer.appendChild(post);
                             });
 
-                            // Réappliquer la vue sélectionnée après l'ajout de nouveaux posts
-                            const activeViewBtn = this.block.querySelector('.view-btn.active');
-                            if (activeViewBtn) {
-                                const currentView = activeViewBtn.dataset.view;
-                                this.changeView(currentView);
-                            }
+                            // Réappliquer la vue sélectionnée après l'ajout de nouveaux posts avec un petit délai
+                            setTimeout(() => {
+                                const activeViewBtn = this.block.querySelector('.view-btn.active');
+                                if (activeViewBtn) {
+                                    const currentView = activeViewBtn.dataset.view;
+                                    this.changeView(currentView);
+                                }
+                            }, 50);
                         }
 
                         // Masquer le bouton s'il n'y a plus de posts
@@ -431,7 +435,10 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
 
         changeView(viewType) {
             const container = this.postsGrid.querySelector('.news-cards-container');
-            if (!container) return;
+            if (!container) {
+                console.warn('FilteredPostsHandler: .news-cards-container not found in', this.postsGrid);
+                return;
+            }
 
             // Supprimer les classes de vue existantes
             container.classList.remove('view-grid', 'view-cards', 'view-list');
@@ -441,6 +448,8 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
 
             // Sauvegarder la préférence dans localStorage
             localStorage.setItem('filtered-posts-view', viewType);
+
+            console.log('FilteredPostsHandler: Applied view', viewType, 'to container', container);
         }
 
         initializeView() {
