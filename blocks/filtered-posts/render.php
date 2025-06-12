@@ -42,6 +42,9 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
 
             $output .= '<div class="card-content">';
 
+            // En-tête de l'article
+            $output .= '<div class="content-header">';
+
             // Métadonnées de l'article
             $output .= '<div class="article-meta">';
             $output .= esc_html(get_the_date('j F Y')) . ' • ' .
@@ -54,6 +57,11 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
 
             $output .= '<p>' . wp_trim_words(get_the_excerpt(), 20, '...') . '</p>';
 
+            $output .= '</div>'; // fin content-header
+
+            // Pied de l'article 
+            $output .= '<div class="content-footer">';
+
             // Tags de l'article
             $post_tags = get_the_tags();
             if (!empty($post_tags)) {
@@ -62,6 +70,8 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
                     $output .= '<span class="tag">#' . esc_html($tag->name) . '</span>';
                 }
                 $output .= '</div>';
+            } else {
+                $output .= '<div class="article-tags"></div>'; // div vide pour maintenir la structure
             }
 
             // Auteur de l'article
@@ -79,6 +89,8 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             $output .= '<button class="action-btn bookmark-btn" title="' . __('Marquer comme favori', 'mon-theme-aca') . '"></button>';
             $output .= '</div>';
             $output .= '</div>';
+
+            $output .= '</div>'; // fin content-footer
 
             $output .= '</div>';
             $output .= '</article>';

@@ -449,7 +449,10 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
             // Sauvegarder la préférence dans localStorage
             localStorage.setItem('filtered-posts-view', viewType);
 
-            console.log('FilteredPostsHandler: Applied view', viewType, 'to container', container);
+            // Log silencieux pour le débogage seulement en mode développement
+            if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev')) {
+                console.log('FilteredPostsHandler: Applied view', viewType, 'to container', container);
+            }
         }
 
         initializeView() {
