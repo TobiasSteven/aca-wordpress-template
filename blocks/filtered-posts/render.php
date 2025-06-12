@@ -189,8 +189,6 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 <div <?php echo $wrapper_attributes; ?>>
     <div class="filtered-posts-container">
-        <h2 class="section-title"><?php echo esc_html($section_title); ?></h2>
-
         <div class="filtered-posts-layout">
             <!-- Barre latérale de filtres -->
             <aside class="filters-sidebar">
@@ -286,9 +284,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 <?php if ($show_sort_controls) : ?>
                     <div class="posts-controls">
                         <div class="view-controls">
-                            <button class="view-btn" data-view="grid" title="<?php _e('Vue en grille', 'mon-theme-aca'); ?>">⊞</button>
-                            <button class="view-btn active" data-view="cards" title="<?php _e('Vue en cartes', 'mon-theme-aca'); ?>">☰</button>
-                            <button class="view-btn" data-view="list" title="<?php _e('Vue en liste', 'mon-theme-aca'); ?>">▤</button>
+                            <button class="view-btn" data-view="grid" title="<?php _e('Vue en grille', 'mon-theme-aca'); ?>"></button>
+                            <button class="view-btn active" data-view="cards" title="<?php _e('Vue en cartes', 'mon-theme-aca'); ?>"></button>
+                            <button class="view-btn" data-view="list" title="<?php _e('Vue en liste', 'mon-theme-aca'); ?>"></button>
                         </div>
 
                         <div class="sort-controls">

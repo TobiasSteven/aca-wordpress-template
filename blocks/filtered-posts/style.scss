@@ -20,26 +20,6 @@
     margin: 0 auto;
     padding: 0 20px;
 
-    .section-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #1F6B5C;
-        margin-bottom: 3rem;
-        text-align: center;
-        position: relative;
-        
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #2D9B8A, #A8E6CF);
-            border-radius: 2px;
-        }
-    }
 
     .filtered-posts-layout {
         display: grid;
@@ -368,6 +348,7 @@
                     justify-content: center;
                     transition: all 0.3s ease;
                     font-size: 12px;
+                    position: relative;
 
                     &:hover {
                         background: #F8F9FA;
@@ -378,6 +359,39 @@
                         background: #2D9B8A;
                         color: white;
                         border-color: #2D9B8A;
+                    }
+
+                    // Icônes pour les différents types de vue
+                    &[data-view="grid"]::before {
+                        content: '⋮⋮';
+                        font-size: 14px;
+                        font-weight: bold;
+                        line-height: 1;
+                        color: #6C757D;
+                    }
+
+                    &[data-view="cards"]::before {
+                        content: '▦';
+                        font-size: 14px;
+                        color: #6C757D;
+                    }
+
+                    &[data-view="list"]::before {
+                        content: '☰';
+                        font-size: 14px;
+                        color: #6C757D;
+                    }
+
+                    &.active::before {
+                        color: white;
+                    }
+
+                    &:hover::before {
+                        color: #2D9B8A;
+                    }
+
+                    &.active:hover::before {
+                        color: white;
                     }
                 }
             }

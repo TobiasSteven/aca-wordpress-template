@@ -228,6 +228,13 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                     if (result.success) {
                         this.postsGrid.innerHTML = result.data.posts_html;
 
+                        // Réappliquer la vue sélectionnée après le chargement AJAX
+                        const activeViewBtn = this.block.querySelector('.view-btn.active');
+                        if (activeViewBtn) {
+                            const currentView = activeViewBtn.dataset.view;
+                            this.changeView(currentView);
+                        }
+
                         if (result.data.pagination_html) {
                             if (this.pagination) {
                                 this.pagination.innerHTML = result.data.pagination_html;
@@ -314,6 +321,13 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                             newPosts.forEach(post => {
                                 existingContainer.appendChild(post);
                             });
+
+                            // Réappliquer la vue sélectionnée après l'ajout de nouveaux posts
+                            const activeViewBtn = this.block.querySelector('.view-btn.active');
+                            if (activeViewBtn) {
+                                const currentView = activeViewBtn.dataset.view;
+                                this.changeView(currentView);
+                            }
                         }
 
                         // Masquer le bouton s'il n'y a plus de posts

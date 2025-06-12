@@ -144,7 +144,6 @@ export default function Edit({ attributes, setAttributes }) {
             </InspectorControls>
 
             <div className="wp-block-mon-theme-aca-filtered-posts-preview">
-                <h2>{sectionTitle}</h2>
                 <div className="filtered-posts-layout">
                     <div className="filters-sidebar">
                         <h3>{__('Filtres', 'mon-theme-aca')}</h3>
