@@ -245,27 +245,6 @@ function mon_theme_aca_force_block_styles()
             filemtime(get_template_directory() . '/blocks/filtered-posts/build/style-index.css')
         );
     }
-
-    // Enqueue forcé du script JavaScript du block filtered-posts
-    if (file_exists(get_template_directory() . '/blocks/filtered-posts/view.js')) {
-        wp_enqueue_script(
-            'mon-theme-aca-filtered-posts-view-js',
-            get_template_directory_uri() . '/blocks/filtered-posts/view.js',
-            array(),
-            filemtime(get_template_directory() . '/blocks/filtered-posts/view.js'),
-            true
-        );
-
-        // Localiser le script avec les données AJAX
-        wp_localize_script(
-            'mon-theme-aca-filtered-posts-view-js',
-            'filteredPostsAjax',
-            array(
-                'ajaxurl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('filtered_posts_nonce'),
-            )
-        );
-    }
 }
 add_action('wp_enqueue_scripts', 'mon_theme_aca_force_block_styles', 20);
 
