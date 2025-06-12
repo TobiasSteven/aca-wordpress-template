@@ -43,12 +43,26 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
             this.orderSelect = this.block.querySelector('.order-select');
             this.perPageSelect = this.block.querySelector('.per-page-select');
 
-            // Zones d'affichage
+            // Zones d'affichage (critiques)
             this.postsGrid = this.block.querySelector('.posts-grid');
             this.pagination = this.block.querySelector('.posts-pagination');
             this.loadingOverlay = this.block.querySelector('.loading-overlay');
             this.noPostsFound = this.block.querySelector('.no-posts-found');
             this.loadMoreBtn = this.block.querySelector('.load-more-btn');
+
+            // Débogage : vérifier que les éléments critiques existent
+            if (!this.postsGrid) {
+                console.error('FilteredPostsHandler: .posts-grid element not found in block', this.block);
+            }
+            if (!this.pagination) {
+                console.warn('FilteredPostsHandler: .posts-pagination element not found in block', this.block);
+            }
+            if (!this.loadingOverlay) {
+                console.warn('FilteredPostsHandler: .loading-overlay element not found in block', this.block);
+            }
+            if (!this.noPostsFound) {
+                console.warn('FilteredPostsHandler: .no-posts-found element not found in block', this.block);
+            }
         }
 
         attachEventListeners() {
@@ -199,10 +213,14 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                         this.postsGrid.innerHTML = result.data.posts_html;
 
                         if (result.data.pagination_html) {
-                            this.pagination.innerHTML = result.data.pagination_html;
-                            this.pagination.style.display = 'block';
+                            if (this.pagination) {
+                                this.pagination.innerHTML = result.data.pagination_html;
+                                this.pagination.style.display = 'block';
+                            }
                         } else {
-                            this.pagination.style.display = 'none';
+                            if (this.pagination) {
+                                this.pagination.style.display = 'none';
+                            }
                         }
 
                         // Mise à jour du bouton "Charger plus"
@@ -218,9 +236,13 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
 
                         // Afficher/masquer le message "aucun résultat"
                         if (result.data.posts_html.trim() === '' || result.data.total_posts === 0) {
-                            this.noPostsFound.style.display = 'block';
+                            if (this.noPostsFound) {
+                                this.noPostsFound.style.display = 'block';
+                            }
                         } else {
-                            this.noPostsFound.style.display = 'none';
+                            if (this.noPostsFound) {
+                                this.noPostsFound.style.display = 'none';
+                            }
                         }
 
                         // Scroll vers le haut de la grille si ce n'est pas la première page
@@ -280,7 +302,9 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
 
                         // Masquer le bouton s'il n'y a plus de posts
                         if (!result.data.has_more_posts || this.currentPage >= result.data.max_pages) {
-                            this.loadMoreBtn.style.display = 'none';
+                            if (this.loadMoreBtn) {
+                                this.loadMoreBtn.style.display = 'none';
+                            }
                         }
                     } else {
                         console.error('Erreur lors du chargement des posts:', result.data);

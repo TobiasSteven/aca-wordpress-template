@@ -294,11 +294,11 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 </div>
 
                 <!-- Pagination -->
-                <?php if ($show_pagination && $posts_query->max_num_pages > 1) : ?>
-                    <div class="posts-pagination" id="<?php echo esc_attr($block_id); ?>-pagination">
+                <div class="posts-pagination" id="<?php echo esc_attr($block_id); ?>-pagination">
+                    <?php if ($show_pagination && $posts_query->max_num_pages > 1) : ?>
                         <?php echo mon_theme_aca_render_pagination_with_current($posts_query, $pagination_type, 1); ?>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
 
                 <!-- Aucun résultat -->
                 <div class="no-posts-found" style="display: none;">
