@@ -4,6 +4,92 @@
  * Render template for Filtered Posts block
  */
 
+/**
+ * Fonction helper pour rendre la grille d'articles
+ */
+if (!function_exists('mon_theme_aca_render_posts_grid')) {
+    function mon_theme_aca_render_posts_grid($posts_query)
+    {
+        if (!$posts_query->have_posts()) {
+            return '<p class="no-posts">' . __('Aucun article trouvé.', 'mon-theme-aca') . '</p>';
+        }
+
+        $date_colors = ['date-green', 'date-blue', 'date-green'];
+        $output = '<div class="news-cards-container">';
+        $post_index = 0;
+
+        while ($posts_query->have_posts()) :
+            $posts_query->the_post();
+            $date_color_class = $date_colors[$post_index % count($date_colors)];
+            $post_index++;
+
+            $output .= '<article class="news-card">';
+            $output .= '<div class="card-image-container">';
+
+            if (has_post_thumbnail()) {
+                $output .= get_the_post_thumbnail(get_the_ID(), 'medium', [
+                    'alt' => get_the_title(),
+                    'loading' => 'lazy'
+                ]);
+            } else {
+                $output .= '<div class="placeholder-image">' . __('Pas d\'image', 'mon-theme-aca') . '</div>';
+            }
+
+            $output .= '<span class="card-date ' . esc_attr($date_color_class) . '">';
+            $output .= strtoupper(get_the_date('j M Y'));
+            $output .= '</span>';
+            $output .= '</div>';
+
+            $output .= '<div class="card-content">';
+            $output .= '<h3><a href="' . get_permalink() . '" title="' . esc_attr(get_the_title()) . '">';
+            $output .= get_the_title();
+            $output .= '</a></h3>';
+            $output .= '<p>' . wp_trim_words(get_the_excerpt(), 20, '...') . '</p>';
+            $output .= '<a href="' . get_permalink() . '" class="read-more" title="' . esc_attr(get_the_title()) . '">';
+            $output .= __('Lire plus', 'mon-theme-aca') . ' →';
+            $output .= '</a>';
+            $output .= '</div>';
+            $output .= '</article>';
+        endwhile;
+
+        $output .= '</div>';
+        return $output;
+    }
+}
+
+/**
+ * Fonction helper pour rendre la pagination
+ */
+if (!function_exists('mon_theme_aca_render_pagination')) {
+    function mon_theme_aca_render_pagination($posts_query, $pagination_type)
+    {
+        if ($pagination_type === 'load-more') {
+            if ($posts_query->max_num_pages > 1) {
+                return '<button class="load-more-btn" data-page="1" data-max-pages="' . $posts_query->max_num_pages . '">' .
+                    __('Charger plus d\'articles', 'mon-theme-aca') . '</button>';
+            }
+            return '';
+        }
+
+        // Pagination numérotée
+        $pagination = paginate_links([
+            'total' => $posts_query->max_num_pages,
+            'current' => 1,
+            'format' => '?paged=%#%',
+            'show_all' => false,
+            'end_size' => 1,
+            'mid_size' => 2,
+            'prev_next' => true,
+            'prev_text' => '← ' . __('Précédent', 'mon-theme-aca'),
+            'next_text' => __('Suivant', 'mon-theme-aca') . ' →',
+            'type' => 'plain',
+            'add_args' => false,
+        ]);
+
+        return $pagination ? '<nav class="pagination-nav">' . $pagination . '</nav>' : '';
+    }
+}
+
 // Récupérer les attributs du block
 $section_title = $attributes['sectionTitle'] ?? __('Articles', 'mon-theme-aca');
 $posts_per_page = $attributes['postsPerPage'] ?? 6;
@@ -70,7 +156,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ?>
 
 <div <?php echo $wrapper_attributes; ?>>
-    <section class="filtered-posts">
+    <div class="filtered-posts-container">
         <h2 class="section-title"><?php echo esc_html($section_title); ?></h2>
 
         <div class="filtered-posts-layout">
@@ -220,91 +306,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 </div>
             </main>
         </div>
-    </section>
+    </div>
 </div>
 
 <?php
 wp_reset_postdata();
-
-/**
- * Fonction helper pour rendre la grille d'articles
- */
-function mon_theme_aca_render_posts_grid($posts_query)
-{
-    if (!$posts_query->have_posts()) {
-        return '<p class="no-posts">' . __('Aucun article trouvé.', 'mon-theme-aca') . '</p>';
-    }
-
-    $date_colors = ['date-green', 'date-blue', 'date-green'];
-    $output = '<div class="news-cards-container">';
-    $post_index = 0;
-
-    while ($posts_query->have_posts()) :
-        $posts_query->the_post();
-        $date_color_class = $date_colors[$post_index % count($date_colors)];
-        $post_index++;
-
-        $output .= '<article class="news-card">';
-        $output .= '<div class="card-image-container">';
-
-        if (has_post_thumbnail()) {
-            $output .= get_the_post_thumbnail(get_the_ID(), 'medium', [
-                'alt' => get_the_title(),
-                'loading' => 'lazy'
-            ]);
-        } else {
-            $output .= '<div class="placeholder-image">' . __('Pas d\'image', 'mon-theme-aca') . '</div>';
-        }
-
-        $output .= '<span class="card-date ' . esc_attr($date_color_class) . '">';
-        $output .= strtoupper(get_the_date('j M Y'));
-        $output .= '</span>';
-        $output .= '</div>';
-
-        $output .= '<div class="card-content">';
-        $output .= '<h3><a href="' . get_permalink() . '" title="' . esc_attr(get_the_title()) . '">';
-        $output .= get_the_title();
-        $output .= '</a></h3>';
-        $output .= '<p>' . wp_trim_words(get_the_excerpt(), 20, '...') . '</p>';
-        $output .= '<a href="' . get_permalink() . '" class="read-more" title="' . esc_attr(get_the_title()) . '">';
-        $output .= __('Lire plus', 'mon-theme-aca') . ' →';
-        $output .= '</a>';
-        $output .= '</div>';
-        $output .= '</article>';
-    endwhile;
-
-    $output .= '</div>';
-    return $output;
-}
-
-/**
- * Fonction helper pour rendre la pagination
- */
-function mon_theme_aca_render_pagination($posts_query, $pagination_type)
-{
-    if ($pagination_type === 'load-more') {
-        if ($posts_query->max_num_pages > 1) {
-            return '<button class="load-more-btn" data-page="1" data-max-pages="' . $posts_query->max_num_pages . '">' .
-                __('Charger plus d\'articles', 'mon-theme-aca') . '</button>';
-        }
-        return '';
-    }
-
-    // Pagination numérotée
-    $pagination = paginate_links([
-        'total' => $posts_query->max_num_pages,
-        'current' => 1,
-        'format' => '?paged=%#%',
-        'show_all' => false,
-        'end_size' => 1,
-        'mid_size' => 2,
-        'prev_next' => true,
-        'prev_text' => '← ' . __('Précédent', 'mon-theme-aca'),
-        'next_text' => __('Suivant', 'mon-theme-aca') . ' →',
-        'type' => 'plain',
-        'add_args' => false,
-    ]);
-
-    return $pagination ? '<nav class="pagination-nav">' . $pagination . '</nav>' : '';
-}
 ?>

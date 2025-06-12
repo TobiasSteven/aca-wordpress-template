@@ -86,6 +86,16 @@ function mon_theme_aca_enqueue_block_assets()
         );
     }
 
+    // S'assurer que les styles du block filtered-posts sont chargés
+    if (has_block('mon-theme-aca/filtered-posts')) {
+        wp_enqueue_style(
+            'mon-theme-aca-filtered-posts-style',
+            get_template_directory_uri() . '/blocks/filtered-posts/build/style-index.css',
+            array(),
+            filemtime(get_template_directory() . '/blocks/filtered-posts/build/style-index.css')
+        );
+    }
+
     // Enqueue des scripts JavaScript pour les blocs
     if (has_block('mon-theme-aca/events')) {
         wp_enqueue_script(
@@ -317,96 +327,114 @@ add_filter('block_categories_all', 'mon_theme_aca_block_categories', 10, 2);
  */
 function mon_theme_aca_filtered_posts_ajax_handler()
 {
+    // Nettoyer tout output buffer pour éviter les fuites HTML
+    if (ob_get_level()) {
+        ob_clean();
+    }
+
     // Vérifier le nonce
     if (!wp_verify_nonce($_POST['nonce'], 'filtered_posts_nonce')) {
-        wp_die('Security check failed');
+        wp_send_json_error('Security check failed');
+        return;
     }
 
-    // Récupérer les paramètres
-    $page = intval($_POST['page']) ?: 1;
-    $posts_per_page = intval($_POST['posts_per_page']) ?: 6;
-    $orderby = sanitize_text_field($_POST['orderby']) ?: 'date';
-    $order = sanitize_text_field($_POST['order']) ?: 'desc';
-    $search = sanitize_text_field($_POST['search']) ?: '';
-    $categories = isset($_POST['categories']) ? array_map('intval', $_POST['categories']) : [];
-    $temporal_filter = intval($_POST['temporal_filter']) ?: 0;
-    $geographic_filter = intval($_POST['geographic_filter']) ?: 0;
-    $load_more = isset($_POST['load_more']) && $_POST['load_more'] === 'true';
+    try {
+        // Récupérer les paramètres
+        $page = intval($_POST['page']) ?: 1;
+        $posts_per_page = intval($_POST['posts_per_page']) ?: 6;
+        $orderby = sanitize_text_field($_POST['orderby']) ?: 'date';
+        $order = sanitize_text_field($_POST['order']) ?: 'desc';
+        $search = sanitize_text_field($_POST['search']) ?: '';
+        $categories = isset($_POST['categories']) ? array_map('intval', $_POST['categories']) : [];
+        $temporal_filter = intval($_POST['temporal_filter']) ?: 0;
+        $geographic_filter = intval($_POST['geographic_filter']) ?: 0;
+        $load_more = isset($_POST['load_more']) && $_POST['load_more'] === 'true';
 
-    // Arguments de base pour WP_Query
-    $query_args = [
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => $posts_per_page,
-        'paged' => $page,
-        'orderby' => $orderby,
-        'order' => $order,
-    ];
-
-    // Ajouter la recherche
-    if (!empty($search)) {
-        $query_args['s'] = $search;
-    }
-
-    // Ajouter les catégories
-    if (!empty($categories)) {
-        $query_args['category__in'] = $categories;
-    }
-
-    // Ajouter les meta_query pour les taxonomies personnalisées
-    $tax_query = [];
-
-    if (!empty($temporal_filter) && taxonomy_exists('filtres_temporels')) {
-        $tax_query[] = [
-            'taxonomy' => 'filtres_temporels',
-            'field' => 'term_id',
-            'terms' => $temporal_filter,
+        // Arguments de base pour WP_Query
+        $query_args = [
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'posts_per_page' => $posts_per_page,
+            'paged' => $page,
+            'orderby' => $orderby,
+            'order' => $order,
         ];
-    }
 
-    if (!empty($geographic_filter) && taxonomy_exists('filtres_geographiques')) {
-        $tax_query[] = [
-            'taxonomy' => 'filtres_geographiques',
-            'field' => 'term_id',
-            'terms' => $geographic_filter,
+        // Ajouter la recherche
+        if (!empty($search)) {
+            $query_args['s'] = $search;
+        }
+
+        // Ajouter les catégories
+        if (!empty($categories)) {
+            $query_args['category__in'] = $categories;
+        }
+
+        // Ajouter les meta_query pour les taxonomies personnalisées
+        $tax_query = [];
+
+        if (!empty($temporal_filter) && taxonomy_exists('filtres_temporels')) {
+            $tax_query[] = [
+                'taxonomy' => 'filtres_temporels',
+                'field' => 'term_id',
+                'terms' => $temporal_filter,
+            ];
+        }
+
+        if (!empty($geographic_filter) && taxonomy_exists('filtres_geographiques')) {
+            $tax_query[] = [
+                'taxonomy' => 'filtres_geographiques',
+                'field' => 'term_id',
+                'terms' => $geographic_filter,
+            ];
+        }
+
+        if (!empty($tax_query)) {
+            $query_args['tax_query'] = $tax_query;
+            if (count($tax_query) > 1) {
+                $query_args['tax_query']['relation'] = 'AND';
+            }
+        }
+
+        // Effectuer la requête
+        $posts_query = new WP_Query($query_args);
+
+        // Préparer la réponse
+        $response = [
+            'posts_html' => '',
+            'pagination_html' => '',
+            'total_posts' => $posts_query->found_posts,
+            'max_pages' => $posts_query->max_num_pages,
+            'current_page' => $page,
+            'has_more_posts' => $page < $posts_query->max_num_pages,
         ];
-    }
 
-    if (!empty($tax_query)) {
-        $query_args['tax_query'] = $tax_query;
-        if (count($tax_query) > 1) {
-            $query_args['tax_query']['relation'] = 'AND';
+        // Générer le HTML des posts
+        if ($posts_query->have_posts()) {
+            // Utiliser un buffer pour capturer toute sortie inattendue
+            ob_start();
+            $posts_html = mon_theme_aca_render_posts_grid($posts_query);
+            $unwanted_output = ob_get_clean();
+
+            $response['posts_html'] = $posts_html;
+
+            // Générer la pagination si ce n'est pas un "load more"
+            if (!$load_more && $posts_query->max_num_pages > 1) {
+                ob_start();
+                $pagination_html = mon_theme_aca_render_pagination_with_current($posts_query, 'numbered', $page);
+                $unwanted_output2 = ob_get_clean();
+                $response['pagination_html'] = $pagination_html;
+            }
+        } else {
+            $response['posts_html'] = '<p class="no-posts">' . __('Aucun article trouvé avec ces critères.', 'mon-theme-aca') . '</p>';
         }
+
+        wp_reset_postdata();
+
+        wp_send_json_success($response);
+    } catch (Exception $e) {
+        wp_send_json_error('Une erreur est survenue: ' . $e->getMessage());
     }
-
-    // Effectuer la requête
-    $posts_query = new WP_Query($query_args);
-
-    // Préparer la réponse
-    $response = [
-        'posts_html' => '',
-        'pagination_html' => '',
-        'total_posts' => $posts_query->found_posts,
-        'max_pages' => $posts_query->max_num_pages,
-        'current_page' => $page,
-        'has_more_posts' => $page < $posts_query->max_num_pages,
-    ];
-
-    // Générer le HTML des posts
-    if ($posts_query->have_posts()) {
-        $response['posts_html'] = mon_theme_aca_render_posts_grid($posts_query);
-
-        // Générer la pagination si ce n'est pas un "load more"
-        if (!$load_more && $posts_query->max_num_pages > 1) {
-            $response['pagination_html'] = mon_theme_aca_render_pagination($posts_query, 'numbered', $page);
-        }
-    } else {
-        $response['posts_html'] = '<p class="no-posts">' . __('Aucun article trouvé avec ces critères.', 'mon-theme-aca') . '</p>';
-    }
-
-    wp_reset_postdata();
-
-    wp_send_json_success($response);
 }
 
 // Enregistrer les handlers AJAX
