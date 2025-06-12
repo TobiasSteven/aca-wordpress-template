@@ -78,7 +78,7 @@
             position: relative;
             
             &::after {
-                content: '🔍';
+                content: '';
                 position: absolute;
                 right: 0;
                 top: 0;
@@ -124,7 +124,7 @@
                 position: relative;
                 
                 &::before {
-                    content: '🔍';
+                    content: '';
                     position: absolute;
                     left: 12px;
                     top: 35px;
@@ -279,6 +279,47 @@
                 background: linear-gradient(135deg, #5A6268, #343A40);
                 transform: translateY(-1px);
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        // Styles pour les boutons d'action
+        .action-buttons {
+            .action-btn {
+                width: 32px;
+                height: 32px;
+                border: 1px solid #e1e5e9;
+                background: white;
+                border-radius: 6px;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                margin-left: 8px;
+                position: relative;
+
+                &:hover {
+                    background: #F8F9FA;
+                    border-color: #2D9B8A;
+                    transform: translateY(-1px);
+                }
+
+                &.share-btn::before {
+                    content: '↗';
+                    font-size: 14px;
+                    font-weight: bold;
+                    color: #6C757D;
+                }
+
+                &.bookmark-btn::before {
+                    content: '★';
+                    font-size: 14px;
+                    color: #6C757D;
+                }
+
+                &:hover::before {
+                    color: #2D9B8A;
+                }
             }
         }
     }
@@ -526,7 +567,7 @@
             border: 2px dashed #e1e5e9;
 
             &::before {
-                content: '📝';
+                content: '';
                 display: block;
                 font-size: 3rem;
                 margin-bottom: 1rem;
@@ -631,7 +672,7 @@
             }
 
             &::before {
-                content: '⟳ ';
+                content: '';
                 margin-right: 8px;
             }
         }
@@ -647,7 +688,7 @@
         border: 2px dashed #e1e5e9;
 
         &::before {
-            content: '🔍';
+            content: '';
             display: block;
             font-size: 4rem;
             margin-bottom: 1rem;
@@ -672,7 +713,7 @@
         box-shadow: 0 2px 8px rgba(220, 53, 69, 0.1);
 
         &::before {
-            content: '⚠️ ';
+            content: '';
             font-size: 1.2rem;
             margin-right: 8px;
         }

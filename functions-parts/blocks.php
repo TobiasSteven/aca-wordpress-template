@@ -539,8 +539,8 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             $output .= __('Lire plus', 'mon-theme-aca');
             $output .= '</a>';
             $output .= '<div class="action-buttons">';
-            $output .= '<button class="action-btn" title="' . __('Partager', 'mon-theme-aca') . '">📤</button>';
-            $output .= '<button class="action-btn" title="' . __('Marquer comme favori', 'mon-theme-aca') . '">🔖</button>';
+            $output .= '<button class="action-btn share-btn" title="' . __('Partager', 'mon-theme-aca') . '"></button>';
+            $output .= '<button class="action-btn bookmark-btn" title="' . __('Marquer comme favori', 'mon-theme-aca') . '"></button>';
             $output .= '</div>';
             $output .= '</div>';
 
