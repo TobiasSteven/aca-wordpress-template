@@ -35,9 +35,13 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
                 $output .= '<div class="placeholder-image">' . __('Pas d\'image', 'mon-theme-aca') . '</div>';
             }
 
-            $output .= '<span class="card-date ' . esc_attr($date_color_class) . '">';
-            $output .= strtoupper(get_the_date('j M Y'));
-            $output .= '</span>';
+            // Afficher la première catégorie en badge sur l'image
+            $categories = get_the_category();
+            if (!empty($categories)) {
+                $first_category = $categories[0];
+                $output .= '<span class="card-category">' . esc_html($first_category->name) . '</span>';
+            }
+
             $output .= '</div>';
 
             $output .= '<div class="card-content">';
@@ -45,10 +49,20 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             // En-tête de l'article
             $output .= '<div class="content-header">';
 
-            // Métadonnées de l'article
+            // Métadonnées de l'article avec catégorie et date
             $output .= '<div class="article-meta">';
-            $output .= esc_html(get_the_date('j F Y')) . ' • ' .
-                esc_html(ceil(str_word_count(strip_tags(get_the_content())) / 200)) . ' min de lecture';
+
+            // Afficher la première catégorie du post
+            $categories = get_the_category();
+            if (!empty($categories)) {
+                $first_category = $categories[0];
+                $output .= '<span class="article-category">' . esc_html($first_category->name) . '</span> • ';
+            }
+
+            // Afficher la date de publication
+            $output .= '<span class="article-date">' . get_the_date() . '</span> • ';
+
+            $output .= esc_html(ceil(str_word_count(strip_tags(get_the_content())) / 200)) . ' min de lecture';
             $output .= '</div>';
 
             $output .= '<h3><a href="' . get_permalink() . '" title="' . esc_attr(get_the_title()) . '">';

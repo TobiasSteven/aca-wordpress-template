@@ -507,28 +507,22 @@
                                 font-size: 14px;
                             }
 
-                            .card-date {
+                            .card-category {
                                 position: absolute;
                                 top: 12px;
-                                right: 12px;
+                                left: 12px;
                                 background: rgba(45, 155, 138, 0.9);
                                 color: white;
-                                padding: 6px 12px;
-                                border-radius: 6px;
-                                font-size: 11px;
+                                padding: 4px 8px;
+                                border-radius: 12px;
+                                font-size: 10px;
                                 font-weight: 600;
                                 text-transform: uppercase;
                                 letter-spacing: 0.5px;
+                                white-space: nowrap;
                                 backdrop-filter: blur(4px);
-                                z-index: 2;
-                                
-                                &.date-green {
-                                    background: rgba(40, 167, 69, 0.9);
-                                }
-                                
-                                &.date-blue {
-                                    background: rgba(45, 155, 138, 0.9);
-                                }
+                                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                                border: 1px solid rgba(255, 255, 255, 0.2);
                             }
                         }
 
@@ -575,6 +569,18 @@
                                 color: #6C757D;
                                 margin-bottom: 8px;
                                 font-weight: 500;
+                                
+                                .article-category {
+                                    color: #2D9B8A;
+                                    font-weight: 600;
+                                    background: rgba(45, 155, 138, 0.1);
+                                    padding: 2px 6px;
+                                    border-radius: 4px;
+                                    font-size: 11px;
+                                    text-transform: uppercase;
+                                    letter-spacing: 0.3px;
+                                    margin-right: 4px;
+                                }
                             }
 
                             .content-footer {
@@ -776,8 +782,8 @@
                                 line-height: 1.2;
                             }
 
-                            // Date repositionnée en petit badge
-                            .card-date {
+                            // Catégorie repositionnée en petit badge
+                            .card-category {
                                 position: absolute;
                                 bottom: 2px;
                                 right: 2px;
@@ -787,10 +793,11 @@
                                 font-weight: 600;
                                 text-transform: uppercase;
                                 letter-spacing: 0.3px;
-                                background: rgba(0, 0, 0, 0.7);
+                                background: rgba(45, 155, 138, 0.9);
                                 color: white;
+                                white-space: nowrap;
                                 
-                                // Masquer la date dans la vue liste
+                                // Masquer la catégorie dans la vue liste pour éviter la duplication avec la meta
                                 display: none;
                             }
 
@@ -911,23 +918,24 @@
 
                                 .read-more {
                                     font-size: 10px;
-                                    color: #2D9B8A;
+                                    color: #FFFFFF;
                                     text-decoration: none;
                                     font-weight: 600;
-                                    padding: 3px 6px;
+                                    padding: 4px 8px;
                                     border-radius: 3px;
-                                    border: 1px solid #2D9B8A;
+                                    background: #2D9B8A;
+                                    border: none;
                                     transition: all 0.2s ease;
                                     white-space: nowrap;
 
                                     &:hover {
-                                        background: #2D9B8A;
-                                        color: white;
+                                        background: #1F6B5C;
+                                        color: #FFFFFF;
                                     }
 
                                     @media (max-width: 768px) {
                                         font-size: 9px;
-                                        padding: 2px 4px;
+                                        padding: 3px 6px;
                                     }
                                 }
 
