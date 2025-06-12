@@ -41,13 +41,45 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             $output .= '</div>';
 
             $output .= '<div class="card-content">';
+
+            // Métadonnées de l'article
+            $output .= '<div class="article-meta">';
+            $output .= esc_html(get_the_date('j F Y')) . ' • ' .
+                esc_html(ceil(str_word_count(strip_tags(get_the_content())) / 200)) . ' min de lecture';
+            $output .= '</div>';
+
             $output .= '<h3><a href="' . get_permalink() . '" title="' . esc_attr(get_the_title()) . '">';
             $output .= get_the_title();
             $output .= '</a></h3>';
+
             $output .= '<p>' . wp_trim_words(get_the_excerpt(), 20, '...') . '</p>';
+
+            // Tags de l'article
+            $post_tags = get_the_tags();
+            if (!empty($post_tags)) {
+                $output .= '<div class="article-tags">';
+                foreach (array_slice($post_tags, 0, 3) as $tag) {
+                    $output .= '<span class="tag">#' . esc_html($tag->name) . '</span>';
+                }
+                $output .= '</div>';
+            }
+
+            // Auteur de l'article
+            $output .= '<div class="article-author">';
+            $output .= sprintf(__('Par: %s', 'mon-theme-aca'), get_the_author());
+            $output .= '</div>';
+
+            // Actions de l'article
+            $output .= '<div class="article-actions">';
             $output .= '<a href="' . get_permalink() . '" class="read-more" title="' . esc_attr(get_the_title()) . '">';
-            $output .= __('Lire plus', 'mon-theme-aca') . ' →';
+            $output .= __('Lire plus', 'mon-theme-aca');
             $output .= '</a>';
+            $output .= '<div class="action-buttons">';
+            $output .= '<button class="action-btn" title="' . __('Partager', 'mon-theme-aca') . '">📤</button>';
+            $output .= '<button class="action-btn" title="' . __('Marquer comme favori', 'mon-theme-aca') . '">🔖</button>';
+            $output .= '</div>';
+            $output .= '</div>';
+
             $output .= '</div>';
             $output .= '</article>';
         endwhile;
@@ -232,6 +264,17 @@ $wrapper_attributes = get_block_wrapper_attributes([
                         </div>
                     <?php endif; ?>
 
+                    <!-- Section Newsletter -->
+                    <div class="newsletter-section">
+                        <h3><?php _e('Newsletter', 'mon-theme-aca'); ?></h3>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="<?php esc_attr_e('Votre email', 'mon-theme-aca'); ?>" required>
+                            <button type="submit" class="subscribe-btn">
+                                <?php _e('S\'inscrire', 'mon-theme-aca'); ?>
+                            </button>
+                        </form>
+                    </div>
+
                     <button type="button" class="reset-filters-btn">
                         <?php _e('Réinitialiser les filtres', 'mon-theme-aca'); ?>
                     </button>
@@ -242,10 +285,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
             <main class="posts-content">
                 <?php if ($show_sort_controls) : ?>
                     <div class="posts-controls">
+                        <div class="view-controls">
+                            <button class="view-btn" data-view="grid" title="<?php _e('Vue en grille', 'mon-theme-aca'); ?>">⊞</button>
+                            <button class="view-btn active" data-view="cards" title="<?php _e('Vue en cartes', 'mon-theme-aca'); ?>">☰</button>
+                            <button class="view-btn" data-view="list" title="<?php _e('Vue en liste', 'mon-theme-aca'); ?>">▤</button>
+                        </div>
+
                         <div class="sort-controls">
-                            <label for="<?php echo esc_attr($block_id); ?>-sort">
-                                <?php _e('Trier par:', 'mon-theme-aca'); ?>
-                            </label>
+                            <span><?php _e('Trier par:', 'mon-theme-aca'); ?></span>
                             <select id="<?php echo esc_attr($block_id); ?>-sort" class="sort-select">
                                 <option value="date" <?php selected($default_sort_by, 'date'); ?>>
                                     <?php _e('Date', 'mon-theme-aca'); ?>
@@ -269,9 +316,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
                         </div>
 
                         <div class="per-page-controls">
-                            <label for="<?php echo esc_attr($block_id); ?>-per-page">
-                                <?php _e('Articles par page:', 'mon-theme-aca'); ?>
-                            </label>
+                            <span><?php echo $posts_per_page; ?> <?php _e('par page', 'mon-theme-aca'); ?></span>
                             <select id="<?php echo esc_attr($block_id); ?>-per-page" class="per-page-select">
                                 <option value="6" <?php selected($posts_per_page, 6); ?>>6</option>
                                 <option value="9" <?php selected($posts_per_page, 9); ?>>9</option>

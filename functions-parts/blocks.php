@@ -505,13 +505,45 @@ if (!function_exists('mon_theme_aca_render_posts_grid')) {
             $output .= '</div>';
 
             $output .= '<div class="card-content">';
+
+            // Métadonnées de l'article
+            $output .= '<div class="article-meta">';
+            $output .= esc_html(get_the_date('j F Y')) . ' • ' .
+                esc_html(ceil(str_word_count(strip_tags(get_the_content())) / 200)) . ' min de lecture';
+            $output .= '</div>';
+
             $output .= '<h3><a href="' . get_permalink() . '" title="' . esc_attr(get_the_title()) . '">';
             $output .= get_the_title();
             $output .= '</a></h3>';
+
             $output .= '<p>' . wp_trim_words(get_the_excerpt(), 20, '...') . '</p>';
+
+            // Tags de l'article
+            $post_tags = get_the_tags();
+            if (!empty($post_tags)) {
+                $output .= '<div class="article-tags">';
+                foreach (array_slice($post_tags, 0, 3) as $tag) {
+                    $output .= '<span class="tag">#' . esc_html($tag->name) . '</span>';
+                }
+                $output .= '</div>';
+            }
+
+            // Auteur de l'article
+            $output .= '<div class="article-author">';
+            $output .= sprintf(__('Par: %s', 'mon-theme-aca'), get_the_author());
+            $output .= '</div>';
+
+            // Actions de l'article
+            $output .= '<div class="article-actions">';
             $output .= '<a href="' . get_permalink() . '" class="read-more" title="' . esc_attr(get_the_title()) . '">';
-            $output .= __('Lire plus', 'mon-theme-aca') . ' →';
+            $output .= __('Lire plus', 'mon-theme-aca');
             $output .= '</a>';
+            $output .= '<div class="action-buttons">';
+            $output .= '<button class="action-btn" title="' . __('Partager', 'mon-theme-aca') . '">📤</button>';
+            $output .= '<button class="action-btn" title="' . __('Marquer comme favori', 'mon-theme-aca') . '">🔖</button>';
+            $output .= '</div>';
+            $output .= '</div>';
+
             $output .= '</div>';
             $output .= '</article>';
         endwhile;

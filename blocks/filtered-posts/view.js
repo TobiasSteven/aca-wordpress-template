@@ -28,6 +28,7 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
 
             this.initializeElements();
             this.attachEventListeners();
+            this.initializeView();
         }
 
         initializeElements() {
@@ -38,10 +39,11 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
             this.geographicSelect = this.block.querySelector('.geographic-select');
             this.resetButton = this.block.querySelector('.reset-filters-btn');
 
-            // Contrôles de tri
+            // Contrôles de tri et de vue
             this.sortSelect = this.block.querySelector('.sort-select');
             this.orderSelect = this.block.querySelector('.order-select');
             this.perPageSelect = this.block.querySelector('.per-page-select');
+            this.viewButtons = this.block.querySelectorAll('.view-btn');
 
             // Zones d'affichage (critiques)
             this.postsGrid = this.block.querySelector('.posts-grid');
@@ -126,6 +128,20 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                     this.loadPosts();
                 });
             }
+
+            // Contrôles de vue
+            this.viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Retirer la classe active de tous les boutons
+                    this.viewButtons.forEach(btn => btn.classList.remove('active'));
+                    // Ajouter la classe active au bouton cliqué
+                    button.classList.add('active');
+
+                    // Appliquer la vue correspondante
+                    const viewType = button.dataset.view;
+                    this.changeView(viewType);
+                });
+            });
 
             // Bouton "Charger plus"
             if (this.loadMoreBtn) {
@@ -397,6 +413,33 @@ if (typeof window.FilteredPostsHandler === 'undefined') {
                 clearTimeout(timeout);
                 timeout = setTimeout(later, wait);
             };
+        }
+
+        changeView(viewType) {
+            const container = this.postsGrid.querySelector('.news-cards-container');
+            if (!container) return;
+
+            // Supprimer les classes de vue existantes
+            container.classList.remove('view-grid', 'view-cards', 'view-list');
+
+            // Ajouter la nouvelle classe de vue
+            container.classList.add(`view-${viewType}`);
+
+            // Sauvegarder la préférence dans localStorage
+            localStorage.setItem('filtered-posts-view', viewType);
+        }
+
+        initializeView() {
+            // Restaurer la vue sauvegardée ou utiliser la vue par défaut (cards)
+            const savedView = localStorage.getItem('filtered-posts-view') || 'cards';
+
+            // Mettre à jour le bouton actif
+            this.viewButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.view === savedView);
+            });
+
+            // Appliquer la vue
+            this.changeView(savedView);
         }
     }
 
