@@ -11,6 +11,7 @@ require_once get_template_directory() . '/inc/customizer-parts/helpers.php';
 require_once get_template_directory() . '/inc/customizer-parts/core-settings.php';
 require_once get_template_directory() . '/inc/customizer-parts/theme-options.php';
 require_once get_template_directory() . '/inc/customizer-parts/footer-options.php';
+require_once get_template_directory() . '/inc/customizer-parts/header-options.php';
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
@@ -27,6 +28,9 @@ function mon_theme_aca_customize_register($wp_customize)
 
     // Register footer options (about, contact, social links)
     mon_theme_aca_register_footer_options($wp_customize);
+    
+    // Register header options (colors, CTA button)
+    mon_theme_aca_register_header_options($wp_customize);
 }
 add_action('customize_register', 'mon_theme_aca_customize_register');
 

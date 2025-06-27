@@ -97,17 +97,19 @@ class Mon_Theme_ACA_Nav_Walker extends Walker_Nav_Menu
         // Filter the CSS class to get WordPress default classes like current-menu-item
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
 
-        // Build the link class with nav-link and any WordPress classes
-        $link_classes = 'nav-link focus:outline-none';
-        if ($class_names) {
-            // Add WordPress classes to the link for styling active items
-            $link_classes .= ' ' . esc_attr($class_names);
-        }
+        // Check if the item is active
+        $is_active = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes);
+        
+        // Build the button class based on active state
+        $button_class = 'px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 ';
+        $button_class .= $is_active 
+            ? 'bg-[#2D9B8A] text-white' 
+            : 'text-white hover:bg-[#A8E6CF] hover:text-[#1F6B5C]';
 
         // Build HTML
-        $output .= '<a href="' . esc_url($item->url) . '"
-                       class="' . $link_classes . '">'
-            . $item->title . '</a>';
+        $output .= '<button onclick="window.location.href=\'' . esc_url($item->url) . '\'"
+                       class="' . $button_class . '">'
+            . $item->title . '</button>';
     }
 }
 
@@ -129,17 +131,19 @@ class Mon_Theme_ACA_Mobile_Nav_Walker extends Walker_Nav_Menu
         // Filter the CSS class to get WordPress default classes like current-menu-item
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args, $depth));
 
-        // Build the link class with mobile-menu-item and any WordPress classes
-        $link_classes = 'mobile-menu-item focus:outline-none block text-[#343A40] hover:text-[#2D9B8A] hover:bg-gray-50 px-4 py-2 text-sm font-medium';
-        if ($class_names) {
-            // Add WordPress classes to the link for styling active items
-            $link_classes .= ' ' . esc_attr($class_names);
-        }
+        // Check if the item is active
+        $is_active = in_array('current-menu-item', $classes) || in_array('current_page_item', $classes);
+        
+        // Build the button class based on active state
+        $button_class = 'block w-full text-left px-4 py-2 rounded-md text-sm font-medium transition-colors ';
+        $button_class .= $is_active 
+            ? 'bg-[#2D9B8A] text-white' 
+            : 'text-white hover:bg-[#A8E6CF] hover:text-[#1F6B5C]';
 
         // Build HTML
-        $output .= '<a href="' . esc_url($item->url) . '"
-                       class="' . $link_classes . '">'
-            . $item->title . '</a>';
+        $output .= '<button onclick="window.location.href=\'' . esc_url($item->url) . '\'"
+                       class="' . $button_class . '">'
+            . $item->title . '</button>';
     }
 }
 
