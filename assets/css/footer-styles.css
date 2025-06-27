@@ -41,7 +41,7 @@
 }
 
 .footer-link:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Ligne de séparation */
@@ -92,7 +92,7 @@
 .site-footer .menu-item a:hover,
 .site-footer nav a:hover,
 .site-footer .widget_nav_menu a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Override Bootstrap text-secondary pour être plus lisible */
@@ -108,7 +108,7 @@
 
 .site-footer .text-secondary:hover,
 .site-footer .text-muted:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* S'assurer que tous les liens du footer ont la couleur correcte */
@@ -117,7 +117,7 @@
 }
 
 .site-footer a:not(.btn):not([class*="btn"]):hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Exclusions pour les icônes sociales qui ont déjà leurs propres styles */
@@ -126,7 +126,7 @@
 }
 
 .site-footer .d-flex a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Override pour tous les menus possibles générés par WordPress */
@@ -140,7 +140,7 @@
 .site-footer .wp-block-navigation a:hover,
 .site-footer .wp-block-navigation-item a:hover,
 .site-footer .wp-block-page-list a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Styles supplémentaires pour tous les types de menus du footer */
@@ -169,7 +169,7 @@
 
 .site-footer .menu li a:hover,
 .site-footer .nav-menu li a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Menus générés par wp_nav_menu sans classes personnalisées */
@@ -180,7 +180,7 @@
 }
 
 .site-footer .menu-item a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Styles pour les widgets de navigation */
@@ -205,7 +205,7 @@
 .site-footer .widget_nav_menu li a:hover,
 .site-footer .widget_pages li a:hover,
 .site-footer .widget_categories li a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Override pour tous les liens dans la section des liens rapides */
@@ -214,7 +214,7 @@
 }
 
 .footer-quick-links a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }
 
 /* Classe générale pour tous les liens de navigation du footer */
@@ -227,5 +227,5 @@
 
 .site-footer nav a:hover,
 .site-footer .navigation a:hover {
-  color: var(--light-green) !important;
+  color: var(--teal-green) !important;
 }

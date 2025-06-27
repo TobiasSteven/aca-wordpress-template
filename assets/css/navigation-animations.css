@@ -241,7 +241,7 @@ a,
   left: 0;
   width: 0;
   height: 1px;
-  background-color: var(--light-green);
+  background-color: var(--teal-green);
   transition: width 0.3s ease;
 }
 
@@ -262,7 +262,7 @@ a,
 .site-footer .menu a:hover,
 .site-footer .menu-item a:hover,
 .footer-quick-links a:hover {
-  color: var(--light-green);
+  color: var(--teal-green);
 }
 
 /* Animation pour les icônes sociales du footer */
@@ -295,7 +295,7 @@ a,
 }
 
 .site-footer .d-flex a:hover {
-  color: var(--light-green);
+  color: var(--teal-green);
   transform: translateY(-2px);
 }
 

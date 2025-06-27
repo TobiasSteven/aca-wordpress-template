@@ -173,3 +173,54 @@ function mon_theme_aca_embed_html($html)
     return '<div class="responsive-embed">' . $html . '</div>';
 }
 add_filter('embed_oembed_html', 'mon_theme_aca_embed_html', 10, 3);
+
+/**
+ * Add custom CSS to ensure all hover states use theme green color
+ */
+function mon_theme_aca_add_hover_styles() {
+    ?>
+<style>
+/* Ensure all hover states use theme green color */
+a:hover,
+button:hover:not(.bg-[#28A745]),
+.nav-link:hover,
+.menu-item a:hover,
+.footer-link:hover,
+.wp-block-button__link:hover,
+.lang-dropdown-item:hover,
+#mobile-menu button:hover,
+#mobile-menu a:hover,
+.site-footer a:hover {
+    color: #2D9B8A !important;
+}
+
+/* Button hover styles */
+button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+    background-color: #2D9B8A !important;
+    color: white !important;
+}
+
+/* Special case for buttons with white text on hover */
+.bg-[#28A745]:hover,
+.member-button:hover,
+button.bg-[#28A745]:hover {
+    background-color: #1F6B5C !important;
+    color: white !important;
+}
+
+/* Ensure all hover underlines use theme green color */
+.nav-link::before,
+.main-navigation a::before,
+#primary-menu a::before,
+[class*="primary-menu"] a::before,
+.menu-item a::before {
+    background-color: #2D9B8A !important;
+}
+</style>
+<?php
+}
+add_action('wp_head', 'mon_theme_aca_add_hover_styles', 100);

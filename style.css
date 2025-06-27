@@ -51,6 +51,26 @@ a:hover {
   color: var(--dark-teal);
 }
 
+/* Assurer que tous les liens au survol utilisent la couleur verte du thème */
+a:hover,
+button:hover,
+.nav-link:hover,
+.menu-item a:hover,
+.footer-link:hover,
+.wp-block-button__link:hover {
+  color: var(--teal-green) !important;
+}
+
+/* Styles spécifiques pour les boutons au survol */
+button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+  background-color: var(--teal-green) !important;
+  color: var(--white) !important;
+}
+
 img {
   max-width: 100%;
   height: auto;

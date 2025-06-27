@@ -37,3 +37,42 @@ function mon_theme_aca_enable_threaded_comments()
     }
 }
 add_action('after_setup_theme', 'mon_theme_aca_enable_threaded_comments');
+
+/**
+ * Add custom CSS for button hover styles
+ */
+function mon_theme_aca_button_hover_styles() {
+    ?>
+<style>
+/* Button hover styles */
+button:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+    background-color: #2D9B8A !important;
+    color: white !important;
+}
+
+/* Form buttons */
+.btn:hover,
+.button:hover,
+.wp-block-button__link:hover,
+.wp-element-button:hover {
+    background-color: #2D9B8A !important;
+    color: white !important;
+}
+
+/* Special buttons that need to maintain white text */
+.bg-[#28A745]:hover,
+.member-button:hover,
+button.bg-[#28A745]:hover,
+.btn-success:hover,
+.btn-primary:hover {
+    background-color: #1F6B5C !important;
+    color: white !important;
+}
+</style>
+<?php
+}
+add_action('wp_head', 'mon_theme_aca_button_hover_styles', 101);

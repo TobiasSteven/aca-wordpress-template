@@ -118,14 +118,16 @@
                             </button>
                             <div id="lang-menu"
                                 class="absolute right-0 mt-2 w-24 bg-white rounded-md shadow-lg py-1 z-50 hidden">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">FR</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">EN</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:text-[#2D9B8A] hover:bg-gray-100">FR</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:text-[#2D9B8A] hover:bg-gray-100">EN</a>
                             </div>
                         </div>
 
                         <!-- CTA Button -->
                         <a href="<?php echo esc_url(get_theme_mod('header_cta_url', '#')); ?>"
-                            class="ml-4 bg-[#28A745] text-white px-6 py-2 rounded-lg font-medium hover:bg-green-600 transition-colors header-cta-button">
+                            class="ml-4 bg-[#28A745] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#1F6B5C] transition-colors">
                             <?php echo esc_html(get_theme_mod('header_cta_text', 'Devenir Membre')); ?>
                         </a>
                     </nav>
@@ -194,7 +196,7 @@
                     <?php } ?>
                     <div class="pt-4 border-t border-[#2D9B8A]">
                         <a href="<?php echo esc_url(get_theme_mod('header_cta_url', '#')); ?>"
-                            class="block w-full bg-[#28A745] text-white px-4 py-2 rounded-lg font-medium hover:bg-green-600 transition-colors text-center header-cta-button">
+                            class="block w-full bg-[#28A745] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#1F6B5C] transition-colors text-center">
                             <?php echo esc_html(get_theme_mod('header_cta_text', 'Devenir Membre')); ?>
                         </a>
                     </div>
