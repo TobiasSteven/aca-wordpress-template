@@ -2,45 +2,54 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "mon-theme-aca/events",
-    "version": "1.0.0",
-    "title": "Événements",
+    "version": "1.2.0",
+    "title": "Événements (Configurable)",
     "category": "mon-theme-aca",
     "icon": "calendar-alt",
-    "description": "Affiche un calendrier et une liste des événements à venir avec filtrage et options d'affichage.",
+    "description": "Affiche un calendrier et une liste d'événements entièrement personnalisables.",
     "supports": {
         "html": false,
-        "align": [
-            "wide",
-            "full"
-        ],
-        "spacing": {
-            "margin": true,
-            "padding": true
-        }
+        "align": ["wide", "full"]
     },
-    "textdomain": "mon-theme-aca",
-    "editorScript": "file:./build/index.js",
-    "editorStyle": "file:./build/index.css",
-    "style": "file:./build/style-index.css",
-    "render": "file:./render.php",
     "attributes": {
         "sectionTitle": {
             "type": "string",
-            "default": "Événements À Venir"
+            "default": "Événements à Venir"
         },
-        "numberOfEvents": {
-            "type": "number",
-            "default": 6
+        "sectionSubtitle": {
+            "type": "string",
+            "default": "Participez aux événements qui façonnent l'avenir de la filière cotonnière africaine"
         },
         "showCalendar": {
             "type": "boolean",
             "default": true
         },
-        "showEventType": {
-            "type": "boolean",
-            "default": true
+        "eventItems": {
+            "type": "array",
+            "default": [
+                {
+                    "id": 1,
+                    "date": "2024-11-25",
+                    "title": "Forum International du Coton Africain",
+                    "location": "Abidjan, Côte d'Ivoire",
+                    "time": "09:00 - 17:00",
+                    "participants": "150",
+                    "type": "Conférence",
+                    "link": "#"
+                },
+                {
+                    "id": 2,
+                    "date": "2024-12-05",
+                    "title": "Atelier Innovation Textile",
+                    "location": "Dakar, Sénégal",
+                    "time": "14:00 - 18:00",
+                    "participants": "80",
+                    "type": "Atelier",
+                    "link": "#"
+                }
+            ]
         },
-        "showLocation": {
+        "showEventType": {
             "type": "boolean",
             "default": true
         },
@@ -48,21 +57,19 @@
             "type": "boolean",
             "default": true
         },
-        "selectedEventTypes": {
-            "type": "array",
-            "default": []
+        "showLocation": {
+            "type": "boolean",
+            "default": true
         },
-        "orderBy": {
-            "type": "string",
-            "default": "event_date"
-        },
-        "order": {
-            "type": "string",
-            "default": "asc"
-        },
-        "calendarDefaultDate": {
-            "type": "string",
-            "default": ""
+        "showParticipants": {
+            "type": "boolean",
+            "default": true
         }
-    }
+    },
+    "textdomain": "mon-theme-aca",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css",
+    "render": "file:./render.php",
+    "viewScript": "file:./view.js"
 }

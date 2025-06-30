@@ -1,428 +1,110 @@
 <?php
-
 /**
- * Server-side rendering for Events Block
+ * Server-side rendering for Events Block (Configurable)
  *
  * @package Mon-Theme-ACA
  */
 
-// CSS inline de fallback pour s'assurer que les styles s'appliquent correctement
-$inline_css = "
-<style>
-.wp-block-mon-theme-aca-events {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    background-color: #f0f2f5 !important;
-    padding: 20px !important;
-}
-.wp-block-mon-theme-aca-events .main-container {
-    display: flex !important;
-    gap: 30px !important;
-    background-color: #f0f2f5 !important;
-    padding: 20px !important;
-    border-radius: 10px !important;
-}
-.wp-block-mon-theme-aca-events .calendar-container {
-    background-color: #ffffff !important;
-    padding: 25px !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-    width: 320px !important;
-    height: fit-content !important;
-}
-.wp-block-mon-theme-aca-events .event-card {
-    background-color: #ffffff !important;
-    border-radius: 12px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-    margin-bottom: 20px !important;
-    display: flex !important;
-    padding: 18px !important;
-    align-items: flex-start !important;
-}
-.wp-block-mon-theme-aca-events .event-date {
-    background-color: #4CAF50 !important;
-    color: white !important;
-    border-radius: 8px !important;
-    padding: 8px 0 !important;
-    width: 60px !important;
-    text-align: center !important;
-    margin-right: 18px !important;
-    flex-shrink: 0 !important;
-}
-.wp-block-mon-theme-aca-events .event-date .day {
-    font-size: 24px !important;
-    font-weight: bold !important;
-    display: block !important;
-    line-height: 1.1 !important;
-    margin: 0 !important;
-}
-.wp-block-mon-theme-aca-events .event-date .month {
-    font-size: 12px !important;
-    text-transform: uppercase !important;
-    display: block !important;
-    font-weight: 500 !important;
-    margin: 0 !important;
-}
-.wp-block-mon-theme-aca-events .event-details h2 {
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    color: #333 !important;
-    margin: 0 0 5px 0 !important;
-}
-.wp-block-mon-theme-aca-events .event-details .time,
-.wp-block-mon-theme-aca-events .event-details .location,
-.wp-block-mon-theme-aca-events .event-details .end-date {
-    font-size: 13px !important;
-    color: #777 !important;
-    margin-bottom: 3px !important;
-    display: flex !important;
-    align-items: center !important;
-    flex-wrap: wrap !important;
-}
-.wp-block-mon-theme-aca-events .event-details .time-label,
-.wp-block-mon-theme-aca-events .event-details .date-label {
-    color: #555 !important;
-    font-weight: 600 !important;
-    margin-right: 5px !important;
-    font-size: 12px !important;
-}
-.wp-block-mon-theme-aca-events .event-details .time-separator {
-    margin: 0 5px !important;
-    color: #999 !important;
-}
-.wp-block-mon-theme-aca-events .event-tag {
-    display: inline-block !important;
-    background-color: #e6f4e7 !important;
-    color: #4CAF50 !important;
-    font-size: 11px !important;
-    font-weight: 500 !important;
-    padding: 4px 10px !important;
-    border-radius: 12px !important;
-    margin-top: 10px !important;
-}
-</style>
-";
+// Attributs du bloc
+$attributes = $attributes ?? [];
+$section_title = $attributes['sectionTitle'] ?? __('Événements à Venir', 'mon-theme-aca');
+$section_subtitle = $attributes['sectionSubtitle'] ?? __("Participez aux événements qui façonnent l'avenir de la filière cotonnière africaine", 'mon-theme-aca');
+$show_calendar = $attributes['showCalendar'] ?? true;
+$event_items = $attributes['eventItems'] ?? [];
 
-echo $inline_css;
+// Nouveaux attributs pour l'affichage
+$show_event_type = $attributes['showEventType'] ?? true;
+$show_time = $attributes['showTime'] ?? true;
+$show_location = $attributes['showLocation'] ?? true;
+$show_participants = $attributes['showParticipants'] ?? true;
 
-// Vérifier que $attributes existe et est un tableau
-if (!isset($attributes) || !is_array($attributes)) {
-    $attributes = [];
-}
+// Récupérer uniquement les dates pour le calendrier
+$all_event_dates = array_column($event_items, 'date');
 
-// Vérifier les attributs avec des valeurs par défaut sécurisées
-$section_title = isset($attributes['sectionTitle']) && is_string($attributes['sectionTitle'])
-    ? $attributes['sectionTitle']
-    : __('Événements À Venir', 'mon-theme-aca');
-
-$number_of_events = isset($attributes['numberOfEvents']) && is_numeric($attributes['numberOfEvents'])
-    ? intval($attributes['numberOfEvents'])
-    : 6;
-
-$show_calendar = isset($attributes['showCalendar']) && is_bool($attributes['showCalendar'])
-    ? $attributes['showCalendar']
-    : true;
-
-$show_event_type = isset($attributes['showEventType']) && is_bool($attributes['showEventType'])
-    ? $attributes['showEventType']
-    : true;
-
-$show_location = isset($attributes['showLocation']) && is_bool($attributes['showLocation'])
-    ? $attributes['showLocation']
-    : true;
-
-$show_time = isset($attributes['showTime']) && is_bool($attributes['showTime'])
-    ? $attributes['showTime']
-    : true;
-
-$selected_event_types = isset($attributes['selectedEventTypes']) && is_array($attributes['selectedEventTypes'])
-    ? $attributes['selectedEventTypes']
-    : [];
-
-$order_by = isset($attributes['orderBy']) && is_string($attributes['orderBy'])
-    ? $attributes['orderBy']
-    : 'event_date';
-
-$order = isset($attributes['order']) && is_string($attributes['order'])
-    ? $attributes['order']
-    : 'asc';
-
-$calendar_default_date = isset($attributes['calendarDefaultDate']) && is_string($attributes['calendarDefaultDate'])
-    ? $attributes['calendarDefaultDate']
-    : '';
-
-// S'assurer que les valeurs sont valides
-$number_of_events = max(1, min(20, $number_of_events));
-$order_by = in_array($order_by, ['event_date', 'date', 'title']) ? $order_by : 'event_date';
-$order = in_array($order, ['asc', 'desc']) ? $order : 'asc';
-
-// Construire les arguments de la requête WP_Query
-$query_args = [
-    'post_type' => 'event',
-    'posts_per_page' => $number_of_events,
-    'post_status' => 'publish',
-    'order' => $order,
-    'suppress_filters' => false,
-];
-
-// Gérer l'orderby selon le type
-if ($order_by === 'event_date') {
-    $query_args['meta_key'] = 'event_date';
-    $query_args['orderby'] = 'meta_value';
-    $query_args['meta_type'] = 'DATE';
-} else {
-    $query_args['orderby'] = $order_by;
-}
-
-// Filtrer par types d'événements si sélectionnés
-if (!empty($selected_event_types) && is_array($selected_event_types)) {
-    // S'assurer que les IDs sont des entiers
-    $valid_event_types = array_filter(array_map('intval', $selected_event_types));
-    if (!empty($valid_event_types)) {
-        $query_args['tax_query'] = [
-            [
-                'taxonomy' => 'event_type',
-                'field'    => 'term_id',
-                'terms'    => $valid_event_types,
-            ],
-        ];
-    }
-}
-
-// Exécuter la requête avec gestion d'erreur
-try {
-    $events_query = new WP_Query($query_args);
-} catch (Exception $e) {
-    // En cas d'erreur, créer une requête vide
-    $events_query = new WP_Query(['post_type' => 'event', 'posts_per_page' => 0]);
-}
-
-// Fonction pour générer le calendrier avec gestion d'erreur
-if (!function_exists('generate_calendar_php')) {
-    function generate_calendar_php($default_date = '')
-    {
-        try {
-            $today = new DateTime();
-
-            // Valider et parser la date par défaut
-            if (!empty($default_date) && is_string($default_date)) {
-                try {
-                    $current_date = new DateTime($default_date);
-                } catch (Exception $e) {
-                    $current_date = $today;
-                }
-            } else {
-                $current_date = $today;
-            }
-
-            $current_month = intval($current_date->format('n')) - 1; // 0-based
-            $current_year = intval($current_date->format('Y'));
-
-            $first_day = new DateTime("$current_year-" . ($current_month + 1) . "-01");
-            $last_day = new DateTime($first_day->format('Y-m-t'));
-
-            $start_date = clone $first_day;
-            $days_back = intval($first_day->format('w')); // 0 = dimanche
-            if ($days_back > 0) {
-                $start_date->modify("-$days_back days");
-            }
-
-            $calendar = [];
-            $day_names = ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM'];
-
-            // Ajouter les noms des jours
-            foreach ($day_names as $day) {
-                $calendar[] = '<div class="day-name">' . esc_html($day) . '</div>';
-            }
-
-            // Générer les jours du mois
-            for ($i = 0; $i < 42; $i++) {
-                $date = clone $start_date;
-                $date->modify("+$i days");
-
-                $is_current_month = intval($date->format('n')) === ($current_month + 1);
-                $is_today = $date->format('Y-m-d') === $today->format('Y-m-d');
-
-                $classes = ['day-number'];
-                if (!$is_current_month) {
-                    $classes[] = 'empty';
-                }
-                if ($is_today) {
-                    $classes[] = 'today';
-                }
-
-                $day_content = $is_current_month ? $date->format('j') : '';
-                $calendar[] = '<div class="' . esc_attr(implode(' ', $classes)) . '">' . esc_html($day_content) . '</div>';
-            }
-
-            return implode('', $calendar);
-        } catch (Exception $e) {
-            // En cas d'erreur, retourner un calendrier vide
-            return '<div class="calendar-error">Erreur lors de la génération du calendrier</div>';
+// Fonctions helpers
+if (!function_exists('mon_theme_aca_get_event_type_color')) {
+    function mon_theme_aca_get_event_type_color($type) {
+        switch (strtolower($type)) {
+            case 'conférence': return 'bg-conference';
+            case 'atelier': return 'bg-atelier';
+            case 'assemblée': return 'bg-assemblee';
+            default: return 'bg-default';
         }
     }
 }
 
-// Fonction pour obtenir le nom du mois
-if (!function_exists('get_month_name_php')) {
-    function get_month_name_php($month_index)
-    {
-        $months = [
-            'Janvier',
-            'Février',
-            'Mars',
-            'Avril',
-            'Mai',
-            'Juin',
-            'Juillet',
-            'Août',
-            'Septembre',
-            'Octobre',
-            'Novembre',
-            'Décembre'
-        ];
+// Icônes SVG
+$icon_map_pin = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
+$icon_clock = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+$icon_users = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
 
-        // Valider l'index du mois
-        if (!is_numeric($month_index) || $month_index < 0 || $month_index > 11) {
-            return 'Mois inconnu';
-        }
-
-        return $months[intval($month_index)] ?? 'Mois inconnu';
-    }
-}
-
-// Initialiser la date par défaut de manière sécurisée
-try {
-    $current_date = !empty($calendar_default_date) && is_string($calendar_default_date)
-        ? new DateTime($calendar_default_date)
-        : new DateTime();
-} catch (Exception $e) {
-    $current_date = new DateTime();
-}
-
-// Obtenir les classes du block
-$wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'wp-block-mon-theme-aca-events'
-]);
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
-    <section class="events-section-frontend">
-        <div class="main-container">
+<div <?php echo get_block_wrapper_attributes(['class' => 'wp-block-mon-theme-aca-events']); ?>>
+    <section class="events-container">
+        <div class="section-header">
+            <h2 class="section-title"><?php echo esc_html($section_title); ?></h2>
+            <p class="section-subtitle"><?php echo esc_html($section_subtitle); ?></p>
+        </div>
+
+        <div class="events-layout">
             <?php if ($show_calendar) : ?>
-                <div class="calendar-container">
-                    <div class="calendar-header">
-                        <button class="calendar-nav-btn" data-direction="prev">&lt;</button>
-                        <span class="month-year">
-                            <?php echo get_month_name_php($current_date->format('n') - 1) . ' ' . $current_date->format('Y'); ?>
-                        </span>
-                        <button class="calendar-nav-btn" data-direction="next">&gt;</button>
-                    </div>
-                    <div class="calendar-grid">
-                        <?php echo generate_calendar_php($calendar_default_date); ?>
+                <div class="calendar-wrapper">
+                    <div class="calendar-component" data-event-dates='<?php echo json_encode($all_event_dates); ?>'>
+                        <div class="calendar-header-controls">
+                            <h3 class="calendar-month-year-title"></h3>
+                            <div class="calendar-nav">
+                                <button class="calendar-nav-btn" data-direction="prev" aria-label="<?php esc_attr_e('Mois précédent', 'mon-theme-aca'); ?>">‹</button>
+                                <button class="calendar-nav-btn" data-direction="next" aria-label="<?php esc_attr_e('Mois suivant', 'mon-theme-aca'); ?>">›</button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid-header"></div>
+                        <div class="calendar-grid-body"></div>
                     </div>
                 </div>
             <?php endif; ?>
 
-            <div class="events-section">
-                <h1 data-original-title="<?php echo esc_attr($section_title); ?>"><?php echo esc_html($section_title); ?></h1>
-
-                <?php if ($events_query->have_posts()) : ?>
-                    <div class="events-list">
-                        <?php while ($events_query->have_posts()) :
-                            $events_query->the_post();
-
-                            $event_date = get_post_meta(get_the_ID(), 'event_date', true);
-                            $event_time = get_post_meta(get_the_ID(), 'event_time', true);
-                            $event_location = get_post_meta(get_the_ID(), 'event_location', true);
-                            $event_end_date = get_post_meta(get_the_ID(), 'event_end_date', true);
-                            $event_end_time = get_post_meta(get_the_ID(), 'event_end_time', true);
-
-                            if (empty($event_date)) {
-                                $event_date = get_the_date('Y-m-d');
-                            }
-
-                            try {
-                                $date = new DateTime($event_date);
-                                $day = $date->format('j');
-                                $month = strtoupper($date->format('M'));
-                            } catch (Exception $e) {
-                                // En cas d'erreur de date, utiliser la date de publication
-                                $date = new DateTime(get_the_date('Y-m-d'));
-                                $day = $date->format('j');
-                                $month = strtoupper($date->format('M'));
-                            }
-
-                            // Traduction des mois
-                            $month_translations = [
-                                'JAN' => 'JAN',
-                                'FEB' => 'FÉV',
-                                'MAR' => 'MAR',
-                                'APR' => 'AVR',
-                                'MAY' => 'MAI',
-                                'JUN' => 'JUN',
-                                'JUL' => 'JUL',
-                                'AUG' => 'AOÛT',
-                                'SEP' => 'SEP',
-                                'OCT' => 'OCT',
-                                'NOV' => 'NOV',
-                                'DEC' => 'DÉC'
-                            ];
-                            $month = $month_translations[$month] ?? $month;
-
-                            $event_types = wp_get_post_terms(get_the_ID(), 'event_type');
-                        ?>
-                            <div class="event-card" data-event-date="<?php echo esc_attr($event_date); ?>">
-                                <div class="event-date">
-                                    <span class="day"><?php echo $day; ?></span>
-                                    <span class="month"><?php echo $month; ?></span>
-                                </div>
-                                <div class="event-details">
-                                    <h2><?php the_title(); ?></h2>
-                                    <?php if ($show_time && !empty($event_time)) : ?>
-                                        <p class="time">
-                                            <span class="time-label">Début:</span> <?php echo esc_html($event_time); ?>
-                                            <?php if (!empty($event_end_time)) : ?>
-                                                <span class="time-separator">-</span> <?php echo esc_html($event_end_time); ?>
-                                            <?php endif; ?>
-                                        </p>
-                                    <?php endif; ?>
-
-                                    <?php if ($show_time && !empty($event_end_date) && $event_end_date != $event_date) : ?>
-                                        <p class="end-date">
-                                            <span class="date-label">Jusqu'au:</span>
-                                            <?php
-                                            try {
-                                                $end_date = new DateTime($event_end_date);
-                                                echo esc_html($end_date->format('j') . ' ' . $month_translations[strtoupper($end_date->format('M'))] ?? strtoupper($end_date->format('M')) . ' ' . $end_date->format('Y'));
-                                            } catch (Exception $e) {
-                                                echo esc_html($event_end_date);
-                                            }
-                                            ?>
-                                        </p>
-                                    <?php endif; ?>
-
-                                    <?php if ($show_location && !empty($event_location)) : ?>
-                                        <p class="location"><?php echo esc_html($event_location); ?></p>
-                                    <?php endif; ?>
-                                    <?php if ($show_event_type && !empty($event_types) && !is_wp_error($event_types)) : ?>
-                                        <span class="event-tag">
-                                            <?php echo esc_html($event_types[0]->name); ?>
+            <div class="events-list-wrapper">
+                <?php if (!empty($event_items)) : ?>
+                    <?php foreach ($event_items as $event) :
+                        $date_obj = new DateTime($event['date'] ?? 'now');
+                    ?>
+                        <div class="event-card">
+                            <div class="event-card-date">
+                                <div class="day"><?php echo esc_html($date_obj->format('d')); ?></div>
+                                <div class="month"><?php echo esc_html(ucfirst($date_obj->format('M'))); ?></div>
+                            </div>
+                            <div class="event-card-details">
+                                <div class="event-header">
+                                    <h3 class="event-title"><?php echo esc_html($event['title'] ?? ''); ?></h3>
+                                    <?php if ($show_event_type && !empty($event['type'])) : ?>
+                                        <span class="event-type-badge <?php echo esc_attr(mon_theme_aca_get_event_type_color($event['type'])); ?>">
+                                            <?php echo esc_html($event['type']); ?>
                                         </span>
                                     <?php endif; ?>
                                 </div>
+                                <div class="event-meta">
+                                    <?php if ($show_location && !empty($event['location'])) : ?>
+                                        <div class="meta-item"><?php echo $icon_map_pin; ?><span><?php echo esc_html($event['location']); ?></span></div>
+                                    <?php endif; ?>
+                                    <?php if ($show_time && !empty($event['time'])) : ?>
+                                        <div class="meta-item"><?php echo $icon_clock; ?><span><?php echo esc_html($event['time']); ?></span></div>
+                                    <?php endif; ?>
+                                    <?php if ($show_participants && !empty($event['participants'])) : ?>
+                                        <div class="meta-item"><?php echo $icon_users; ?><span><?php echo esc_html($event['participants']); ?> participants attendus</span></div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="event-actions">
+                                    <a href="#" class="btn btn-primary"><?php _e("S'inscrire", 'mon-theme-aca'); ?></a>
+                                    <a href="<?php echo esc_url($event['link'] ?? '#'); ?>" class="btn btn-secondary"><?php _e('Voir détails', 'mon-theme-aca'); ?></a>
+                                </div>
                             </div>
-                        <?php endwhile; ?>
-                    </div>
+                        </div>
+                    <?php endforeach; ?>
                 <?php else : ?>
-                    <div class="no-events-message">
-                        <p><?php _e('Aucun événement à afficher pour le moment.', 'mon-theme-aca'); ?></p>
-                    </div>
+                    <p><?php _e("Il n'y a pas d'événements à venir pour le moment.", 'mon-theme-aca'); ?></p>
                 <?php endif; ?>
             </div>
         </div>
     </section>
 </div>
-
-<?php
-wp_reset_postdata();
-?>

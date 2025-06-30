@@ -2,314 +2,218 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import {
     PanelBody,
-    RangeControl,
-    SelectControl,
+    TextControl,
+    Button,
     ToggleControl,
-    CheckboxControl,
-    TextControl
+    DatePicker,
+    SelectControl,
+    BaseControl
 } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
-import { useEntityRecords } from '@wordpress/core-data';
+import { useState } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes }) {
-    const {
-        sectionTitle,
-        numberOfEvents,
-        showCalendar,
-        showEventType,
-        showLocation,
-        showTime,
-        selectedEventTypes,
-        orderBy,
-        order,
-        calendarDefaultDate
-    } = attributes;
-
-    // Récupérer les types d'événements (taxonomie personnalisée)
-    const { records: eventTypes, isResolving: isLoadingEventTypes } = useEntityRecords('taxonomy', 'event_type', {
-        per_page: -1,
-        hide_empty: true,
-    });
-
-    // Récupérer les événements selon les paramètres
-    const queryArgs = {
-        per_page: numberOfEvents,
-        _embed: true,
-        order: order,
-        orderby: orderBy,
-        meta_key: orderBy === 'event_date' ? 'event_date' : undefined,
+// --- Fonctions d'aide pour le rendu de l'aperçu ---
+const Icon = ({ type }) => {
+    const icons = {
+        map: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
+        clock: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+        users: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>,
     };
+    return <span className="icon-preview">{icons[type]}</span>;
+}
 
-    if (selectedEventTypes.length > 0) {
-        queryArgs.event_type = selectedEventTypes;
-    }
-
-    const { records: events, isResolving: isLoadingEvents } = useEntityRecords('postType', 'event', queryArgs);
-
-    const blockProps = useBlockProps();
-
-    const onEventTypeChange = (eventTypeId, checked) => {
-        let newEventTypes = [...selectedEventTypes];
-        if (checked) {
-            newEventTypes.push(eventTypeId);
-        } else {
-            newEventTypes = newEventTypes.filter(id => id !== eventTypeId);
-        }
-        setAttributes({ selectedEventTypes: newEventTypes });
-    };
-
-    // Fonction pour générer le calendrier
-    const generateCalendar = () => {
+const CalendarPreview = ({ events }) => {
+    const [currentMonth, setCurrentMonth] = useState(new Date());
+    // ... (Le reste du composant CalendarPreview reste identique)
+    const renderCalendar = () => {
+        const month = currentMonth.getMonth();
+        const year = currentMonth.getFullYear();
         const today = new Date();
-        const currentDate = calendarDefaultDate ? new Date(calendarDefaultDate) : today;
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
+        today.setHours(0, 0, 0, 0);
 
-        const firstDay = new Date(currentYear, currentMonth, 1);
-        const lastDay = new Date(currentYear, currentMonth + 1, 0);
-        const startDate = new Date(firstDay);
-        startDate.setDate(startDate.getDate() - firstDay.getDay());
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        const eventDatesInMonth = events
+            .map(e => new Date(e.date))
+            .filter(d => d.getFullYear() === year && d.getMonth() === month)
+            .map(d => d.getDate());
 
-        const calendar = [];
-        const dayNames = ['DIM', 'LUN', 'MAR', 'MER', 'JEU', 'VEN', 'SAM'];
-
-        // Ajouter les noms des jours
-        dayNames.forEach(day => {
-            calendar.push(<div key={day} className="day-name">{day}</div>);
+        const dayNames = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map(day => <div className="day-name">{day}</div>);
+        
+        const emptyCells = Array.from({ length: firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1 }, (_, i) => <div key={`empty-${i}`} className="day-cell other-month"></div>);
+        
+        const dayCells = Array.from({ length: daysInMonth }, (_, i) => {
+            const day = i + 1;
+            const thisDate = new Date(year, month, day);
+            let classes = 'day-cell';
+            if (eventDatesInMonth.includes(day)) classes += ' has-event';
+            if (thisDate.setHours(0,0,0,0) === today.getTime()) classes += ' is-today';
+            return <div key={day} className={classes}>{day}</div>;
         });
 
-        // Générer les jours du mois
-        for (let i = 0; i < 42; i++) {
-            const date = new Date(startDate);
-            date.setDate(startDate.getDate() + i);
+        return [...dayNames, ...emptyCells, ...dayCells];
+    };
 
-            const isCurrentMonth = date.getMonth() === currentMonth;
-            const isToday = date.toDateString() === today.toDateString();
-
-            calendar.push(
-                <div
-                    key={`day-${i}`}
-                    className={`day-number ${!isCurrentMonth ? 'empty' : ''} ${isToday ? 'today' : ''}`}
-                >
-                    {isCurrentMonth ? date.getDate() : ''}
+     return (
+        <div className="calendar-component">
+            <div className="calendar-header-controls">
+                <h3 className="calendar-month-year-title">
+                    {currentMonth.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' })}
+                </h3>
+                <div className="calendar-nav">
+                    <Button onClick={() => setCurrentMonth(new Date(currentMonth.setMonth(currentMonth.getMonth() - 1)))}>{'<'}</Button>
+                    <Button onClick={() => setCurrentMonth(new Date(currentMonth.setMonth(currentMonth.getMonth() + 1)))}>{'>'}</Button>
                 </div>
-            );
+            </div>
+            <div className="calendar-grid">
+                {renderCalendar()}
+            </div>
+        </div>
+    );
+};
+
+
+export default function Edit({ attributes, setAttributes }) {
+    const { sectionTitle, sectionSubtitle, showCalendar, eventItems, showEventType, showTime, showLocation, showParticipants } = attributes;
+    const blockProps = useBlockProps();
+    const [currentItemIndex, setCurrentItemIndex] = useState(0);
+
+    const updateItem = (index, field, value) => {
+        const newItems = [...eventItems];
+        newItems[index][field] = value;
+        setAttributes({ eventItems: newItems });
+    };
+
+    const addItem = () => {
+        const newItem = {
+            id: new Date().getTime(),
+            date: new Date().toISOString().split('T')[0],
+            title: __('Nouvel événement', 'mon-theme-aca'),
+            location: 'Lieu',
+            time: '10:00 - 12:00',
+            participants: '0',
+            type: 'Conférence',
+            link: '#'
+        };
+        const newItems = [...eventItems, newItem];
+        setAttributes({ eventItems: newItems });
+        setCurrentItemIndex(newItems.length - 1);
+    };
+
+    const removeItem = (index) => {
+        const newItems = eventItems.filter((_, i) => i !== index);
+        if (index <= currentItemIndex) {
+            setCurrentItemIndex(Math.max(0, currentItemIndex - 1));
         }
-
-        return calendar;
+        setAttributes({ eventItems: newItems });
     };
 
-    // Fonction pour formater les mois
-    const getMonthName = (monthIndex) => {
-        const months = [
-            'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-            'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-        ];
-        return months[monthIndex];
-    };
+    const goToNextItem = () => setCurrentItemIndex((prev) => (prev + 1) % eventItems.length);
+    const goToPrevItem = () => setCurrentItemIndex((prev) => (prev - 1 + eventItems.length) % eventItems.length);
 
-    const currentDate = calendarDefaultDate ? new Date(calendarDefaultDate) : new Date();
+    const currentItem = eventItems[currentItemIndex] || null;
+
+    const getEventTypeColorClass = (type) => {
+        switch (String(type).toLowerCase()) {
+            case 'conférence': return 'bg-conference';
+            case 'atelier': return 'bg-atelier';
+            case 'assemblée': return 'bg-assemblee';
+            default: return 'bg-default';
+        }
+    };
 
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Paramètres généraux', 'mon-theme-aca')} initialOpen={true}>
-                    <TextControl
-                        label={__('Titre de la section', 'mon-theme-aca')}
-                        value={sectionTitle}
-                        onChange={(value) => setAttributes({ sectionTitle: value })}
-                    />
-                    <RangeControl
-                        label={__('Nombre d\'événements', 'mon-theme-aca')}
-                        value={numberOfEvents}
-                        onChange={(value) => setAttributes({ numberOfEvents: value })}
-                        min={1}
-                        max={20}
-                    />
-                    <SelectControl
-                        label={__('Trier par', 'mon-theme-aca')}
-                        value={orderBy}
-                        options={[
-                            { label: __('Date de l\'événement', 'mon-theme-aca'), value: 'event_date' },
-                            { label: __('Date de création', 'mon-theme-aca'), value: 'date' },
-                            { label: __('Titre', 'mon-theme-aca'), value: 'title' },
-                        ]}
-                        onChange={(value) => setAttributes({ orderBy: value })}
-                    />
-                    <SelectControl
-                        label={__('Ordre', 'mon-theme-aca')}
-                        value={order}
-                        options={[
-                            { label: __('Croissant', 'mon-theme-aca'), value: 'asc' },
-                            { label: __('Décroissant', 'mon-theme-aca'), value: 'desc' },
-                        ]}
-                        onChange={(value) => setAttributes({ order: value })}
-                    />
+                <PanelBody title={__('Paramètres Généraux', 'mon-theme-aca')}>
+                    <TextControl label={__('Titre de la section', 'mon-theme-aca')} value={sectionTitle} onChange={(val) => setAttributes({ sectionTitle: val })} />
+                    <TextControl label={__('Sous-titre', 'mon-theme-aca')} value={sectionSubtitle} onChange={(val) => setAttributes({ sectionSubtitle: val })} />
                 </PanelBody>
 
-                <PanelBody title={__('Options d\'affichage', 'mon-theme-aca')} initialOpen={false}>
-                    <ToggleControl
-                        label={__('Afficher le calendrier', 'mon-theme-aca')}
-                        checked={showCalendar}
-                        onChange={(value) => setAttributes({ showCalendar: value })}
-                    />
-                    <ToggleControl
-                        label={__('Afficher le type d\'événement', 'mon-theme-aca')}
-                        checked={showEventType}
-                        onChange={(value) => setAttributes({ showEventType: value })}
-                    />
-                    <ToggleControl
-                        label={__('Afficher l\'heure', 'mon-theme-aca')}
-                        checked={showTime}
-                        onChange={(value) => setAttributes({ showTime: value })}
-                    />
-                    <ToggleControl
-                        label={__('Afficher le lieu', 'mon-theme-aca')}
-                        checked={showLocation}
-                        onChange={(value) => setAttributes({ showLocation: value })}
-                    />
+                <PanelBody title={__('Options d\'Affichage', 'mon-theme-aca')}>
+                    <ToggleControl label={__('Afficher le calendrier', 'mon-theme-aca')} checked={showCalendar} onChange={(val) => setAttributes({ showCalendar: val })} />
+                    <ToggleControl label={__('Afficher le type d\'événement', 'mon-theme-aca')} checked={showEventType} onChange={(val) => setAttributes({ showEventType: val })} />
+                    <ToggleControl label={__('Afficher l\'heure', 'mon-theme-aca')} checked={showTime} onChange={(val) => setAttributes({ showTime: val })} />
+                    <ToggleControl label={__('Afficher le lieu', 'mon-theme-aca')} checked={showLocation} onChange={(val) => setAttributes({ showLocation: val })} />
+                    <ToggleControl label={__('Afficher les participants', 'mon-theme-aca')} checked={showParticipants} onChange={(val) => setAttributes({ showParticipants: val })} />
                 </PanelBody>
 
-                <PanelBody title={__('Types d\'événements', 'mon-theme-aca')} initialOpen={false}>
-                    {isLoadingEventTypes && <p>{__('Chargement des types d\'événements...', 'mon-theme-aca')}</p>}
-                    {eventTypes && eventTypes.map((eventType) => (
-                        <CheckboxControl
-                            key={eventType.id}
-                            label={eventType.name}
-                            checked={selectedEventTypes.includes(eventType.id)}
-                            onChange={(checked) => onEventTypeChange(eventType.id, checked)}
-                        />
-                    ))}
-                    {!isLoadingEventTypes && (!eventTypes || eventTypes.length === 0) && (
-                        <p>{__('Aucun type d\'événement trouvé. Veuillez d\'abord créer des types d\'événements.', 'mon-theme-aca')}</p>
+                <PanelBody title={__('Gestion des Événements', 'mon-theme-aca')}>
+                    <Button variant="primary" onClick={addItem} style={{ marginBottom: '1rem' }}>{__('Ajouter un événement', 'mon-theme-aca')}</Button>
+                    
+                    {eventItems.length > 0 && currentItem && (
+                        <>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderTop: '1px solid #ddd', paddingTop: '1rem' }}>
+                                <Button onClick={goToPrevItem} disabled={eventItems.length <= 1}>{'<'}</Button>
+                                <strong>{`Événement ${currentItemIndex + 1}`}</strong>
+                                <Button onClick={goToNextItem} disabled={eventItems.length <= 1}>{'>'}</Button>
+                            </div>
+
+                            <div>
+                                <TextControl label={__('Titre', 'mon-theme-aca')} value={currentItem.title} onChange={(val) => updateItem(currentItemIndex, 'title', val)} />
+                                <BaseControl label={__('Date', 'mon-theme-aca')} id={`event-date-picker-${currentItem.id}`}>
+                                    <DatePicker currentDate={currentItem.date} onChange={(newDate) => updateItem(currentItemIndex, 'date', newDate.split('T')[0])} />
+                                </BaseControl>
+                                <TextControl label={__('Lieu', 'mon-theme-aca')} value={currentItem.location} onChange={(val) => updateItem(currentItemIndex, 'location', val)} />
+                                <TextControl label={__('Heure', 'mon-theme-aca')} value={currentItem.time} onChange={(val) => updateItem(currentItemIndex, 'time', val)} />
+                                <TextControl label={__('Participants', 'mon-theme-aca')} value={currentItem.participants} onChange={(val) => updateItem(currentItemIndex, 'participants', val)} />
+                                <SelectControl
+                                    label={__('Type', 'mon-theme-aca')}
+                                    value={currentItem.type}
+                                    options={[ { label: 'Conférence', value: 'Conférence' }, { label: 'Atelier', value: 'Atelier' }, { label: 'Assemblée', value: 'Assemblée' }, { label: 'Autre', value: 'Autre' }]}
+                                    onChange={(val) => updateItem(currentItemIndex, 'type', val)} />
+                                <TextControl label={__('Lien', 'mon-theme-aca')} value={currentItem.link} onChange={(val) => updateItem(currentItemIndex, 'link', val)} />
+                                
+                                <Button isDestructive style={{ marginTop: '1rem' }} onClick={() => removeItem(currentItemIndex)}>{__('Supprimer', 'mon-theme-aca')}</Button>
+                            </div>
+                        </>
                     )}
                 </PanelBody>
             </InspectorControls>
 
             <div {...blockProps}>
-                <div className="events-editor">
-                    <div className="main-container">
+                <section className="events-container">
+                    <div className="section-header">
+                        <h2 className="section-title">{sectionTitle}</h2>
+                        <p className="section-subtitle">{sectionSubtitle}</p>
+                    </div>
+                    <div className="events-layout">
                         {showCalendar && (
-                            <div className="calendar-container">
-                                <div className="calendar-header">
-                                    <button>&lt;</button>
-                                    <span className="month-year">
-                                        {getMonthName(currentDate.getMonth())} {currentDate.getFullYear()}
-                                    </span>
-                                    <button>&gt;</button>
-                                </div>
-                                <div className="calendar-grid">
-                                    {generateCalendar()}
-                                </div>
+                            <div className="calendar-wrapper">
+                                <CalendarPreview events={eventItems} />
                             </div>
                         )}
-
-                        <div className="events-section">
-                            <h1>{sectionTitle || __('Événements À Venir', 'mon-theme-aca')}</h1>
-
-                            {isLoadingEvents && (
-                                <p>{__('Chargement des événements...', 'mon-theme-aca')}</p>
-                            )}
-
-                            {events && events.length === 0 && (
-                                <p>{__('Aucun événement trouvé avec ces paramètres.', 'mon-theme-aca')}</p>
-                            )}
-
-                            {events && events.length > 0 && (
-                                <div className="events-list">
-                                    {events.map((event, index) => {
-                                        const eventDate = event.meta?.event_date || event.date;
-                                        const eventTime = event.meta?.event_time || '';
-                                        const eventLocation = event.meta?.event_location || '';
-                                        const eventEndDate = event.meta?.event_end_date || '';
-                                        const eventEndTime = event.meta?.event_end_time || '';
-
-                                        const date = new Date(eventDate);
-                                        const day = date.getDate();
-
-                                        // Traduction des mois pour correspondre au frontend
-                                        const monthTranslations = {
-                                            'JAN': 'JAN',
-                                            'FEB': 'FÉV',
-                                            'MAR': 'MAR',
-                                            'APR': 'AVR',
-                                            'MAY': 'MAI',
-                                            'JUN': 'JUN',
-                                            'JUL': 'JUL',
-                                            'AUG': 'AOÛT',
-                                            'SEP': 'SEP',
-                                            'OCT': 'OCT',
-                                            'NOV': 'NOV',
-                                            'DEC': 'DÉC'
-                                        };
-
-                                        const monthEn = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
-                                        const month = monthTranslations[monthEn] || monthEn;
-
-                                        return (
-                                            <div key={event.id} className="event-card">
-                                                <div className="event-date">
-                                                    <span className="day">{day}</span>
-                                                    <span className="month">{month}</span>
-                                                </div>
-                                                <div className="event-details">
-                                                    <h2 dangerouslySetInnerHTML={{ __html: event.title.rendered }} />
-
-                                                    {showTime && eventTime && (
-                                                        <p className="time">
-                                                            <span className="time-label">Début:</span> {eventTime}
-                                                            {eventEndTime && (
-                                                                <>
-                                                                    <span className="time-separator">-</span> {eventEndTime}
-                                                                </>
-                                                            )}
-                                                        </p>
-                                                    )}
-
-                                                    {showTime && eventEndDate && eventEndDate !== eventDate && (
-                                                        <p className="end-date">
-                                                            <span className="date-label">Jusqu'au:</span>
-                                                            {(() => {
-                                                                try {
-                                                                    const endDate = new Date(eventEndDate);
-                                                                    const endDay = endDate.getDate();
-                                                                    const endMonthEn = endDate.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
-                                                                    const endMonth = monthTranslations[endMonthEn] || endMonthEn;
-                                                                    const endYear = endDate.getFullYear();
-                                                                    return `${endDay} ${endMonth} ${endYear}`;
-                                                                } catch (e) {
-                                                                    return eventEndDate;
-                                                                }
-                                                            })()}
-                                                        </p>
-                                                    )}
-
-                                                    {showLocation && eventLocation && (
-                                                        <p className="location">{eventLocation}</p>
-                                                    )}
-
-                                                    {showEventType && event._embedded && event._embedded['wp:term'] && (
-                                                        <span className="event-tag">
-                                                            {event._embedded['wp:term'][0]?.[0]?.name || __('Événement', 'mon-theme-aca')}
-                                                        </span>
-                                                    )}
-                                                </div>
+                        <div className="events-list-wrapper">
+                            {eventItems.map(event => {
+                                const dateObj = new Date(event.date);
+                                return (
+                                    <div className="event-card" key={event.id}>
+                                        <div className="event-card-date">
+                                            <div className="day">{dateObj.getDate() || '??'}</div>
+                                            <div className="month">{dateObj.toLocaleDateString('fr-FR', { month: 'short' }) || '???'}</div>
+                                        </div>
+                                        <div className="event-card-details">
+                                            <div className="event-header">
+                                                <h3 className="event-title">{event.title}</h3>
+                                                {showEventType && <span className={`event-type-badge ${getEventTypeColorClass(event.type)}`}>{event.type}</span>}
                                             </div>
-                                        );
-                                    })}
-                                </div>
-                            )}
-
-                            {!isLoadingEvents && (!events || events.length === 0) && (
-                                <div className="no-events-message">
-                                    <p>{__('Aucun événement à afficher pour le moment.', 'mon-theme-aca')}</p>
-                                    <p><small>{__('Ajoutez des événements depuis l\'administration WordPress.', 'mon-theme-aca')}</small></p>
-                                </div>
-                            )}
+                                            <div className="event-meta">
+                                                {showLocation && <div className="meta-item"><Icon type="map" /><span>{event.location}</span></div>}
+                                                {showTime && <div className="meta-item"><Icon type="clock" /><span>{event.time}</span></div>}
+                                                {showParticipants && <div className="meta-item"><Icon type="users" /><span>{`${event.participants} participants attendus`}</span></div>}
+                                            </div>
+                                            <div className="event-actions">
+                                                <Button isPrimary>{__("S'inscrire", 'mon-theme-aca')}</Button>
+                                                <Button isSecondary>{__('Voir détails', 'mon-theme-aca')}</Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </>
     );
