@@ -2,47 +2,75 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "mon-theme-aca/recent-news",
-    "version": "0.1.0",
+    "version": "1.2.0",
     "title": "Actualités Récentes",
     "category": "mon-theme-aca",
-    "icon": "admin-post",
-    "description": "Affiche un nombre donné d'articles selon les catégories sélectionnées.",
-    "example": {},
+    "icon": "megaphone",
+    "description": "Affiche une grille d'actualités personnalisables avec un design moderne.",
+    "keywords": ["actualités", "nouvelles", "articles", "blog", "grid"],
     "supports": {
         "html": false,
-        "align": [
-            "wide",
-            "full"
-        ]
+        "align": ["wide", "full"]
     },
     "attributes": {
         "sectionTitle": {
             "type": "string",
-            "default": "Actualités Récentes"
+            "default": "Dernières Actualités"
         },
-        "numberOfPosts": {
-            "type": "number",
-            "default": 3
+        "sectionSubtitle": {
+            "type": "string",
+            "default": "Restez informé des dernières nouvelles et développements de la filière cotonnière africaine"
         },
-        "selectedCategories": {
+        "newsItems": {
             "type": "array",
-            "default": []
+            "default": [
+                {
+                    "id": 1,
+                    "image": "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop",
+                    "category": "Production",
+                    "date": "15 Nov 2024",
+                    "title": "Nouvelle technologie de transformation du coton en Côte d'Ivoire",
+                    "excerpt": "L'ACA accompagne l'installation d'équipements modernes pour améliorer la qualité et le rendement de la transformation cotonnière.",
+                    "readTime": "5 min",
+                    "link": "#"
+                },
+                {
+                    "id": 2,
+                    "image": "https://images.pexels.com/photos/2132250/pexels-photo-2132250.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop",
+                    "category": "Marché",
+                    "date": "12 Nov 2024",
+                    "title": "Accord commercial historique entre producteurs africains",
+                    "excerpt": "Signature d'un partenariat stratégique pour renforcer les échanges commerciaux et stabiliser les prix du coton africain.",
+                    "readTime": "3 min",
+                    "link": "#"
+                },
+                {
+                    "id": 3,
+                    "image": "https://images.pexels.com/photos/1595108/pexels-photo-1595108.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop",
+                    "category": "Innovation",
+                    "date": "10 Nov 2024",
+                    "title": "Programme de formation digitale pour les producteurs",
+                    "excerpt": "Lancement d'une plateforme e-learning dédiée aux bonnes pratiques agricoles et aux nouvelles technologies.",
+                    "readTime": "4 min",
+                    "link": "#"
+                }
+            ]
+        },
+        "showCategory": {
+            "type": "boolean",
+            "default": true
         },
         "showDate": {
             "type": "boolean",
             "default": true
         },
-        "showExcerpt": {
+        "showReadTime": {
             "type": "boolean",
             "default": true
         },
-        "orderBy": {
-            "type": "string",
-            "default": "date"
-        },
-        "order": {
-            "type": "string",
-            "default": "desc"
+        "showReadMore": {
+            "type": "boolean",
+            "default": true
         }
     },
     "textdomain": "mon-theme-aca",
