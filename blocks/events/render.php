@@ -41,7 +41,7 @@ $icon_users = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" vi
 ?>
 
 <div <?php echo get_block_wrapper_attributes(['class' => 'wp-block-mon-theme-aca-events']); ?>>
-    <section class="events-container">
+    <section class="container">
         <div class="section-header">
             <h2 class="section-title"><?php echo esc_html($section_title); ?></h2>
             <p class="section-subtitle"><?php echo esc_html($section_subtitle); ?></p>
