@@ -29,6 +29,10 @@
             "type": "string",
             "default": "Témoignages"
         },
+        "sectionDescription": {
+            "type": "string",
+            "default": "Découvrez comment l'ACA accompagne ses membres vers l'excellence"
+        },
         "testimonials": {
             "type": "array",
             "default": [
@@ -53,6 +57,7 @@
             ]
         }
     },
+    "viewScript": "file:./frontend.js",
     "textdomain": "mon-theme-aca",
     "editorScript": "file:./build/index.js",
     "editorStyle": "file:./build/index.css",
