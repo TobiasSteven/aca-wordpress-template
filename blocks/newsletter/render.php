@@ -1,204 +1,119 @@
 <?php
-
 /**
- * Render du bloc Newsletter
+ * Render du bloc Newsletter (Version dynamique)
  *
  * @package Mon-Theme-ACA
  */
 
-// Extraction des attributs
-$section_title = $attributes['sectionTitle'] ?? 'Abonnez-vous à notre newsletter';
-$subtitle = $attributes['subtitle'] ?? 'Restez informé des dernières actualités, événements et initiatives de l\'ACA.';
-$button_text = $attributes['buttonText'] ?? 'S\'inscrire';
+// Extraction des attributs avec valeurs par défaut
+$attributes = $attributes ?? [];
+$section_title = $attributes['sectionTitle'] ?? 'Restez Informé';
+$subtitle = $attributes['subtitle'] ?? 'Recevez les dernières actualités, analyses de marché et opportunités...';
+$button_text = $attributes['buttonText'] ?? "S'abonner";
 $placeholder_text = $attributes['placeholderText'] ?? 'Votre adresse email';
-$background_color = $attributes['backgroundColor'] ?? '#28A745';
+$background_color = $attributes['backgroundColor'] ?? '#2D9B8A';
 $text_color = $attributes['textColor'] ?? '#FFFFFF';
-$button_color = $attributes['buttonColor'] ?? '#2D9B8A'; // Updated to theme's teal green
-$button_text_color = $attributes['buttonTextColor'] ?? '#FFFFFF'; // Updated to white
+$button_color = $attributes['buttonColor'] ?? '#28A745';
+$button_text_color = $attributes['buttonTextColor'] ?? '#FFFFFF';
+$accent_color = '#A8E6CF'; // Couleur d'accent pour les sous-textes
 
-// Génération d'un ID unique pour le formulaire
-$form_id = 'newsletter-form-' . uniqid();
-
-// Styles spécifiques pour ce bloc
-$styles = "
-    .newsletter-section-{$form_id} {
-        background-color: {$background_color};
-        color: {$text_color};
-        padding: 60px 20px;
-        text-align: center;
-    }
-    
-    .newsletter-section-{$form_id} h2 {
-        font-size: 2.2em;
-        margin-top: 0;
-        margin-bottom: 15px;
-        font-weight: 600;
-    }
-    
-    .newsletter-section-{$form_id} .subtitle {
-        font-size: 1.1em;
-        margin-bottom: 35px;
-        line-height: 1.6;
-        max-width: 550px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .newsletter-section-{$form_id} .newsletter-form {
-        display: flex;
-        justify-content: center;
-        align-items: stretch;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .newsletter-section-{$form_id} .newsletter-form input[type='email'] {
-        flex-grow: 1;
-        padding: 15px 20px;
-        font-size: 1em;
-        border: none;
-        border-radius: 5px;
-        background-color: #FFFFFF;
-        color: #343A40;
-        margin-right: -1px;
-        z-index: 1;
-    }
-    
-    .newsletter-section-{$form_id} .newsletter-form input[type='email']::placeholder {
-        color: #6C757D;
-        opacity: 1;
-    }
-    
-    .newsletter-section-{$form_id} .newsletter-form input[type='email']:focus {
-        outline: 2px solid #1F6B5C;
-        outline-offset: -1px;
-    }
-    
-    .newsletter-section-{$form_id} .newsletter-form button {
-        padding: 15px 25px;
-        font-size: 1em;
-        border: none;
-        border-radius: 5px;
-        background-color: {$button_color};
-        color: {$button_text_color};
-        cursor: pointer;
-        font-weight: bold;
-        white-space: nowrap;
-        margin-left: 10px;
-        transition: background-color 0.3s ease;
-    }
-    
-    .newsletter-section-{$form_id} .newsletter-form button:hover {
-        background-color: #1F6B5C; /* Dark Teal on hover */
-    }
-    
-    @media (max-width: 600px) {
-        .newsletter-section-{$form_id} h2 {
-            font-size: 1.8em;
-        }
-        
-        .newsletter-section-{$form_id} .subtitle {
-            font-size: 1em;
-        }
-        
-        .newsletter-section-{$form_id} .newsletter-form {
-            flex-direction: column;
-        }
-        
-        .newsletter-section-{$form_id} .newsletter-form input[type='email'] {
-            margin-right: 0;
-            margin-bottom: 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        .newsletter-section-{$form_id} .newsletter-form button {
-            width: 100%;
-            box-sizing: border-box;
-            margin-left: 0;
-        }
-    }
-";
+// Génération d'un ID unique pour le formulaire et la section
+$unique_id = 'newsletter-' . uniqid();
 
 // Classes du bloc
 $wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'newsletter-section newsletter-section-' . $form_id . ' alignfull'
+    'id' => esc_attr($unique_id) . '-section',
+    'class' => 'newsletter-container-block',
+    'style' => 'background-color:' . esc_attr($background_color) . '; color:' . esc_attr($text_color) . ';'
 ]);
-
-// Si l'attribut align existe et n'est pas "full", on supprime la classe alignfull
-if (isset($attributes['align']) && $attributes['align'] !== 'full') {
-    $wrapper_attributes = get_block_wrapper_attributes([
-        'class' => 'newsletter-section newsletter-section-' . $form_id
-    ]);
-} else {
-    // Par défaut, on met en pleine largeur
-    $wrapper_attributes = get_block_wrapper_attributes([
-        'class' => 'newsletter-section newsletter-section-' . $form_id . ' alignfull'
-    ]);
-}
-
 ?>
 
-<style>
-    <?php echo $styles; ?>
-</style>
-
 <section <?php echo $wrapper_attributes; ?>>
-    <h2><?php echo esc_html($section_title); ?></h2>
-    <p class="subtitle"><?php echo esc_html($subtitle); ?></p>
+    <div class="newsletter-background-pattern">
+        <div class="shape1"></div>
+        <div class="shape2"></div>
+        <div class="shape3"></div>
+        <div class="shape4"></div>
+    </div>
 
-    <form class="newsletter-form" id="<?php echo esc_attr($form_id); ?>" action="#" method="post">
-        <?php wp_nonce_field('newsletter_subscription', 'newsletter_nonce'); ?>
-        <input type="email" name="newsletter_email" placeholder="<?php echo esc_attr($placeholder_text); ?>" required>
-        <button type="submit"><?php echo esc_html($button_text); ?></button>
-    </form>
+    <div class="newsletter-content-wrapper">
+        <div class="newsletter-header">
+            <svg class="newsletter-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <h2 class="newsletter-title" style="color: <?php echo esc_attr($text_color); ?>;"><?php echo esc_html($section_title); ?></h2>
+            <p class="newsletter-subtitle" style="color: <?php echo esc_attr($accent_color); ?>;"><?php echo esc_html($subtitle); ?></p>
+        </div>
+
+        <form id="<?php echo esc_attr($unique_id); ?>-form" class="newsletter-form">
+            <div class="newsletter-input-group">
+                <input type="email" name="email" placeholder="<?php echo esc_attr($placeholder_text); ?>" class="newsletter-input" required>
+            </div>
+            <button type="submit" class="newsletter-button" style="background-color: <?php echo esc_attr($button_color); ?>; color: <?php echo esc_attr($button_text_color); ?>;">
+                <span class="newsletter-button-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </span>
+                <span class="newsletter-button-text"><?php echo esc_html($button_text); ?></span>
+                <span class="newsletter-button-loader"></span>
+            </button>
+        </form>
+
+        <p class="newsletter-privacy-text" style="color: <?php echo esc_attr($accent_color); ?>;">Nous respectons votre vie privée. Désabonnement possible à tout moment.</p>
+
+        <div class="newsletter-features">
+            <div class="newsletter-feature-item">
+                <div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                <h3 class="feature-title">Newsletter Hebdomadaire</h3>
+                <p class="feature-description" style="color: <?php echo esc_attr($accent_color); ?>;">Actualités et analyses chaque semaine</p>
+            </div>
+            <div class="newsletter-feature-item">
+                <div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                <h3 class="feature-title">Contenu Exclusif</h3>
+                <p class="feature-description" style="color: <?php echo esc_attr($accent_color); ?>;">Rapports et études réservés aux abonnés</p>
+            </div>
+            <div class="newsletter-feature-item">
+                <div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div>
+                <h3 class="feature-title">Invitations Prioritaires</h3>
+                <p class="feature-description" style="color: <?php echo esc_attr($accent_color); ?>;">Accès privilégié aux événements ACA</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="newsletter-success-message" style="display: none;">
+        <div class="success-content">
+             <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <h2 class="success-title">Merci pour votre inscription !</h2>
+            <p class="success-text" style="color: <?php echo esc_attr($accent_color); ?>;">Vous recevrez bientôt nos dernières actualités et informations exclusives sur la filière cotonnière africaine.</p>
+        </div>
+    </div>
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('<?php echo esc_js($form_id); ?>');
+document.addEventListener('DOMContentLoaded', function() {
+    const section = document.getElementById('<?php echo esc_js($unique_id); ?>-section');
+    if (!section) return;
 
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+    const form = document.getElementById('<?php echo esc_js($unique_id); ?>-form');
+    const contentWrapper = section.querySelector('.newsletter-content-wrapper');
+    const successMessage = section.querySelector('.newsletter-success-message');
+    const button = form.querySelector('.newsletter-button');
+    const buttonText = button.querySelector('.newsletter-button-text');
+    const buttonLoader = button.querySelector('.newsletter-button-loader');
 
-                const email = this.querySelector('input[name="newsletter_email"]').value;
-                const nonce = this.querySelector('input[name="newsletter_nonce"]').value;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = form.querySelector('input[type="email"]').value;
+        if (!email) return;
 
-                // Ici vous pouvez ajouter le code pour envoyer les données à votre API d'inscription newsletter
-                // Par exemple avec fetch :
+        button.disabled = true;
+        buttonText.style.display = 'none';
+        buttonLoader.style.display = 'inline-block';
 
-                /*
-                fetch(ajaxurl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        action: 'newsletter_subscription',
-                        email: email,
-                        nonce: nonce
-                    })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Merci pour votre inscription !');
-                        this.reset();
-                    } else {
-                        alert(data.data.message || 'Une erreur est survenue.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur:', error);
-                    alert('Une erreur est survenue lors de l\'inscription.');
-                });
-                */
-
-                // Pour l'instant, affichons simplement un message
-                alert('Merci de vous être inscrit avec l\'email: ' + email);
-                this.reset();
-            });
-        }
+        setTimeout(() => {
+            button.disabled = false;
+            buttonText.style.display = 'inline';
+            buttonLoader.style.display = 'none';
+            contentWrapper.style.display = 'none';
+            successMessage.style.display = 'flex';
+        }, 1500);
     });
+});
 </script>

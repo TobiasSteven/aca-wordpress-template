@@ -2,33 +2,28 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "mon-theme-aca/newsletter",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "title": "Abonnement Newsletter",
     "category": "mon-theme-aca",
     "icon": "email",
     "description": "Permet aux visiteurs de s'abonner à la newsletter.",
-    "example": {},
+    "keywords": ["newsletter", "abonnement", "email"],
     "supports": {
         "html": false,
-        "align": [
-            "wide",
-            "full"
-        ],
-        "alignWide": true,
-        "defaultAlign": "full"
+        "align": ["wide", "full"]
     },
     "attributes": {
         "sectionTitle": {
             "type": "string",
-            "default": "Abonnez-vous à notre newsletter"
+            "default": "Restez Informé"
         },
         "subtitle": {
             "type": "string",
-            "default": "Restez informé des dernières actualités, événements et initiatives de l'ACA."
+            "default": "Recevez les dernières actualités, analyses de marché et opportunités de la filière cotonnière africaine directement dans votre boîte mail."
         },
         "buttonText": {
             "type": "string",
-            "default": "S'inscrire"
+            "default": "S'abonner"
         },
         "placeholderText": {
             "type": "string",
@@ -36,7 +31,7 @@
         },
         "backgroundColor": {
             "type": "string",
-            "default": "#28A745"
+            "default": "#2D9B8A"
         },
         "textColor": {
             "type": "string",
@@ -44,20 +39,15 @@
         },
         "buttonColor": {
             "type": "string",
-            "default": "#2D9B8A"
+            "default": "#28A745"
         },
         "buttonTextColor": {
             "type": "string",
             "default": "#FFFFFF"
-        },
-        "align": {
-            "type": "string",
-            "default": "full"
         }
     },
     "textdomain": "mon-theme-aca",
     "editorScript": "file:./build/index.js",
-    "editorStyle": "file:./build/index.css",
     "style": "file:./build/style-index.css",
     "render": "file:./render.php"
 }
