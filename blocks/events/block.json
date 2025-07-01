@@ -3,7 +3,7 @@
     "apiVersion": 3,
     "name": "mon-theme-aca/events",
     "version": "1.2.0",
-    "title": "Événements (Configurable)",
+    "title": "Événements",
     "category": "mon-theme-aca",
     "icon": "calendar-alt",
     "description": "Affiche un calendrier et une liste d'événements entièrement personnalisables.",
