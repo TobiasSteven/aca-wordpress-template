@@ -1,160 +1,246 @@
 /* Nos Missions Block Styles */
 .nos-missions-block {
-  margin: 40px 0;
+  margin: 0;
   width: 100%;
 }
 
-.missions-full-width-background {
+/* .missions-section {
+  padding: 64px 0;
+  background-color: #F8F9FA;
   width: 100vw;
   position: relative;
   left: 50%;
   right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
-  padding: 50px 0;
-}
+} */
 
 .missions-container {
-  padding: 0 30px;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 16px;
   box-sizing: border-box;
 }
 
-.missions {
+/* Section Header */
+.missions-header {
   text-align: center;
+  margin-bottom: 48px;
 }
 
 .missions-title {
-  color: #1f6b5c;
-  font-size: 2.5em;
-  margin-bottom: 30px;
+  font-size: 2.25rem;
   font-weight: 700;
+  color: #1F6B5C;
+  margin-bottom: 16px;
+  line-height: 1.2;
 }
 
-.missions-cards {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  flex-wrap: wrap;
-  max-width: 100%;
+.missions-subtitle {
+  font-size: 1.125rem;
+  color: #6C757D;
+  max-width: 672px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Missions Grid */
+.missions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 48px;
 }
 
 .mission-card {
-  background-color: #f8f9fa;
-  padding: 35px 25px;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  width: calc(33.333% - 20px);
-  min-width: 300px;
-  box-sizing: border-box;
-  flex: 1;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  border: 2px solid transparent;
+  background-color: white;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  border-left: 4px solid #2D9B8A;
+  position: relative;
+  overflow: hidden;
 }
 
 .mission-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(45, 155, 138, 0.15);
-  border-color: #a8e6cf;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(-8px);
+}
+
+.mission-content {
+  text-align: center;
+}
+
+.mission-icon-wrapper {
+  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #A8E6CF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.mission-card:hover .mission-icon-circle {
+  transform: scale(1.1);
 }
 
 .mission-icon {
-  font-size: 3em;
-  margin-bottom: 15px;
-  display: block;
+  font-size: 2.5rem;
 }
 
-.mission-card h3 {
-  color: #1f6b5c;
-  font-size: 1.4em;
-  margin-bottom: 15px;
-  font-weight: 600;
+.mission-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F6B5C;
+  margin-bottom: 16px;
+  transition: color 0.3s ease;
 }
 
-.mission-card p {
-  color: #6c757d;
-  font-size: 1em;
+.mission-card:hover .mission-title {
+  color: #2D9B8A;
+}
+
+.mission-description {
+  color: #6C757D;
   line-height: 1.6;
   margin: 0;
 }
 
+/* Call to Action */
+.missions-cta {
+  text-align: center;
+}
+
+.cta-content {
+  background: linear-gradient(135deg, #2D9B8A 0%, #A8E6CF 100%);
+  border-radius: 12px;
+  padding: 32px;
+  color: white;
+}
+
+.cta-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.cta-subtitle {
+  font-size: 1.125rem;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.cta-button-wrapper {
+  display: inline-block;
+}
+
+.cta-button {
+  background-color: #28A745;
+  color: white;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+  color: white;
+  text-decoration: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .missions-full-width-background {
-    padding: 30px 0;
-  }
-
+  /* .missions-section {
+    padding: 48px 0;
+  } */
+  
   .missions-container {
     padding: 0 20px;
   }
-
+  
   .missions-title {
-    font-size: 2em;
-    margin-bottom: 25px;
+    font-size: 1.875rem;
   }
-
-  .missions-cards {
-    gap: 20px;
+  
+  .missions-subtitle {
+    font-size: 1rem;
   }
-
+  
+  .missions-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
   .mission-card {
-    width: calc(50% - 15px);
-    min-width: 280px;
-    padding: 25px 15px;
+    padding: 24px;
   }
-
+  
+  .mission-icon-circle {
+    width: 64px;
+    height: 64px;
+  }
+  
   .mission-icon {
-    font-size: 2.5em;
+    font-size: 2rem;
   }
-
-  .mission-card h3 {
-    font-size: 1.2em;
+  
+  .cta-content {
+    padding: 24px;
+  }
+  
+  .cta-title {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 576px) {
-  .missions-full-width-background {
-    padding: 20px 0;
-  }
-
+  /* .missions-section {
+    padding: 32px 0;
+  } */
+  
   .missions-container {
-    padding: 0 15px;
+    padding: 0 16px;
   }
-
+  
   .missions-title {
-    font-size: 1.8em;
-    margin-bottom: 20px;
+    font-size: 1.5rem;
   }
-
-  .missions-cards {
-    gap: 15px;
-    flex-direction: column;
-    align-items: stretch;
+  
+  .missions-header {
+    margin-bottom: 32px;
   }
-
+  
+  .missions-grid {
+    margin-bottom: 32px;
+  }
+  
   .mission-card {
-    width: 100%;
-    min-width: auto;
-    padding: 20px 15px;
-    margin-bottom: 15px;
+    padding: 20px;
   }
-
-  .mission-icon {
-    font-size: 2.2em;
+  
+  .cta-content {
+    padding: 20px;
   }
-
-  .mission-card h3 {
-    font-size: 1.1em;
-    margin-bottom: 12px;
-  }
-
-  .mission-card p {
-    font-size: 0.95em;
+  
+  .cta-button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
   }
 }
 
@@ -163,7 +249,18 @@
   cursor: pointer;
 }
 
-.wp-block-mon-theme-aca-nos-missions .mission-card:hover {
-  border-color: #2d9b8a;
-  background-color: #a8e6cf;
+.wp-block-mon-theme-aca-nos-missions .missions-section {
+  background-color: #F8F9FA;
+  padding: 40px 20px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.wp-block-mon-theme-aca-nos-missions .missions-container {
+  max-width: 100%;
+  position: static;
+  left: auto;
+  right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }

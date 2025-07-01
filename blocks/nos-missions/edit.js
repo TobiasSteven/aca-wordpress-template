@@ -1,46 +1,54 @@
-/**
- * WordPress dependencies
+/** 
+ * WordPress dependencies 
  */
 import { __ } from '@wordpress/i18n';
-import {
-    useBlockProps,
-    InspectorControls,
-    RichText,
-    ColorPalette,
+import { 
+  useBlockProps, 
+  InspectorControls, 
+  RichText 
 } from '@wordpress/block-editor';
-import {
-    PanelBody,
-    Button,
-    TextControl,
-    TextareaControl,
+import { 
+  PanelBody, 
+  Button, 
+  TextControl, 
+  TextareaControl,
+  ToggleControl,
+  __experimentalDivider as Divider
 } from '@wordpress/components';
 
-/**
- * Edit component
+/** 
+ * Edit component 
  */
 export default function Edit({ attributes, setAttributes }) {
-    const { title, missions, backgroundColor } = attributes;
+    const { 
+        title, 
+        subtitle, 
+        missions, 
+        showCallToAction, 
+        ctaTitle, 
+        ctaSubtitle, 
+        ctaButtonText, 
+        ctaButtonUrl 
+    } = attributes;
+    
     const blockProps = useBlockProps({
         className: 'nos-missions-block',
     });
 
     const updateMission = (index, field, value) => {
         const newMissions = [...missions];
-        newMissions[index] = {
-            ...newMissions[index],
-            [field]: value,
-        };
+        newMissions[index] = { ...newMissions[index], [field]: value };
         setAttributes({ missions: newMissions });
     };
 
     const addMission = () => {
         const newMissions = [
-            ...missions,
-            {
-                icon: '✨',
-                title: __('Nouvelle Mission', 'mon-theme-aca'),
-                description: __('Description de la mission...', 'mon-theme-aca'),
-            },
+        ...missions,
+        {
+            icon: '✨',
+            title: __('Nouvelle Mission', 'mon-theme-aca'),
+            description: __('Description de la mission...', 'mon-theme-aca'),
+        },
         ];
         setAttributes({ missions: newMissions });
     };
@@ -52,106 +60,179 @@ export default function Edit({ attributes, setAttributes }) {
 
     return (
         <>
-            <InspectorControls>
-                <PanelBody title={__('Paramètres des Missions', 'mon-theme-aca')}>
-                    <TextControl
-                        label={__('Titre de la section', 'mon-theme-aca')}
-                        value={title}
-                        onChange={(value) => setAttributes({ title: value })}
-                    />
-                    <Button
-                        isPrimary
-                        onClick={addMission}
-                        style={{ marginTop: '10px' }}
-                    >
-                        {__('Ajouter une mission', 'mon-theme-aca')}
-                    </Button>
-                </PanelBody>
+        <InspectorControls>
+            <PanelBody title={__('Paramètres Généraux', 'mon-theme-aca')}>
+            <TextControl
+                label={__('Titre de la section', 'mon-theme-aca')}
+                value={title}
+                onChange={(value) => setAttributes({ title: value })}
+            />
+            <TextareaControl
+                label={__('Sous-titre', 'mon-theme-aca')}
+                value={subtitle}
+                onChange={(value) => setAttributes({ subtitle: value })}
+                rows={3}
+            />
+            </PanelBody>
 
-                <PanelBody title={__('Couleurs', 'mon-theme-aca')}>
-                    <p>{__('Couleur de fond de la section', 'mon-theme-aca')}</p>
-                    <ColorPalette
-                        value={backgroundColor}
-                        onChange={(value) => setAttributes({ backgroundColor: value || '#ffffff' })}
-                        colors={[
-                            { name: 'Blanc', color: '#ffffff' },
-                            { name: 'Vert Teal', color: '#2D9B8A' },
-                            { name: 'Vert Clair', color: '#A8E6CF' },
-                            { name: 'Vert Foncé', color: '#1F6B5C' },
-                            { name: 'Gris Clair', color: '#F8F9FA' },
-                            { name: 'Gris', color: '#6C757D' },
-                            { name: 'Gris Foncé', color: '#343A40' },
-                        ]}
-                    />
-                </PanelBody>
-
-                {missions.map((mission, index) => (
-                    <PanelBody
-                        key={index}
-                        title={`${__('Mission', 'mon-theme-aca')} ${index + 1}: ${mission.title}`}
-                        initialOpen={false}
-                    >
-                        <TextControl
-                            label={__('Icône (Emoji)', 'mon-theme-aca')}
-                            value={mission.icon}
-                            onChange={(value) => updateMission(index, 'icon', value)}
-                        />
-                        <TextControl
-                            label={__('Titre', 'mon-theme-aca')}
-                            value={mission.title}
-                            onChange={(value) => updateMission(index, 'title', value)}
-                        />
-                        <TextareaControl
-                            label={__('Description', 'mon-theme-aca')}
-                            value={mission.description}
-                            onChange={(value) => updateMission(index, 'description', value)}
-                            rows={4}
-                        />
-                        <Button
-                            isDestructive
-                            onClick={() => removeMission(index)}
-                            style={{ marginTop: '10px' }}
-                        >
-                            {__('Supprimer cette mission', 'mon-theme-aca')}
-                        </Button>
-                    </PanelBody>
-                ))}
-            </InspectorControls>
-
-            <div {...blockProps}>
-                <div
-                    className="missions-container"
-                    style={{ backgroundColor: backgroundColor }}
+            <PanelBody title={__('Missions', 'mon-theme-aca')}>
+            <Button 
+                isPrimary 
+                onClick={addMission}
+                style={{ marginBottom: '15px' }}
+            >
+                {__('Ajouter une mission', 'mon-theme-aca')}
+            </Button>
+            
+            {missions.map((mission, index) => (
+                <div key={index} style={{ marginBottom: '20px', padding: '15px', border: '1px solid #ddd', borderRadius: '4px' }}>
+                <h4>{__('Mission', 'mon-theme-aca')} {index + 1}</h4>
+                <TextControl
+                    label={__('Icône (Emoji)', 'mon-theme-aca')}
+                    value={mission.icon}
+                    onChange={(value) => updateMission(index, 'icon', value)}
+                />
+                <TextControl
+                    label={__('Titre', 'mon-theme-aca')}
+                    value={mission.title}
+                    onChange={(value) => updateMission(index, 'title', value)}
+                />
+                <TextareaControl
+                    label={__('Description', 'mon-theme-aca')}
+                    value={mission.description}
+                    onChange={(value) => updateMission(index, 'description', value)}
+                    rows={4}
+                />
+                <Button 
+                    isDestructive 
+                    onClick={() => removeMission(index)}
+                    style={{ marginTop: '10px' }}
                 >
-                    <RichText
-                        tagName="h2"
-                        className="missions-title"
-                        value={title}
-                        onChange={(value) => setAttributes({ title: value })}
-                        placeholder={__('Titre de la section...', 'mon-theme-aca')}
-                    />
+                    {__('Supprimer cette mission', 'mon-theme-aca')}
+                </Button>
+                </div>
+            ))}
+            </PanelBody>
 
-                    <div className="missions-cards">
-                        {missions.map((mission, index) => (
-                            <div key={index} className="mission-card">
-                                <div className="mission-icon">{mission.icon}</div>
-                                <RichText
-                                    tagName="h3"
-                                    value={mission.title}
-                                    onChange={(value) => updateMission(index, 'title', value)}
-                                    placeholder={__('Titre de la mission...', 'mon-theme-aca')}
-                                />
-                                <RichText
-                                    tagName="p"
-                                    value={mission.description}
-                                    onChange={(value) => updateMission(index, 'description', value)}
-                                    placeholder={__('Description de la mission...', 'mon-theme-aca')}
-                                />
-                            </div>
-                        ))}
+            <PanelBody title={__('Call to Action', 'mon-theme-aca')}>
+            <ToggleControl
+                label={__('Afficher le Call to Action', 'mon-theme-aca')}
+                checked={showCallToAction}
+                onChange={(value) => setAttributes({ showCallToAction: value })}
+            />
+            
+            {showCallToAction && (
+                <>
+                <TextControl
+                    label={__('Titre CTA', 'mon-theme-aca')}
+                    value={ctaTitle}
+                    onChange={(value) => setAttributes({ ctaTitle: value })}
+                />
+                <TextareaControl
+                    label={__('Sous-titre CTA', 'mon-theme-aca')}
+                    value={ctaSubtitle}
+                    onChange={(value) => setAttributes({ ctaSubtitle: value })}
+                    rows={2}
+                />
+                <TextControl
+                    label={__('Texte du bouton', 'mon-theme-aca')}
+                    value={ctaButtonText}
+                    onChange={(value) => setAttributes({ ctaButtonText: value })}
+                />
+                <TextControl
+                    label={__('URL du bouton', 'mon-theme-aca')}
+                    value={ctaButtonUrl}
+                    onChange={(value) => setAttributes({ ctaButtonUrl: value })}
+                />
+                </>
+            )}
+            </PanelBody>
+        </InspectorControls>
+
+        <div {...blockProps}>
+            {/* <section className="missions-section"> */}
+            <section>
+            <div className="missions-container">
+                {/* Section Header */}
+                <div className="missions-header">
+                <RichText
+                    tagName="h2"
+                    className="missions-title"
+                    value={title}
+                    onChange={(value) => setAttributes({ title: value })}
+                    placeholder={__('Titre de la section...', 'mon-theme-aca')}
+                />
+                <RichText
+                    tagName="p"
+                    className="missions-subtitle"
+                    value={subtitle}
+                    onChange={(value) => setAttributes({ subtitle: value })}
+                    placeholder={__('Sous-titre...', 'mon-theme-aca')}
+                />
+                </div>
+
+                {/* Missions Grid */}
+                <div className="missions-grid">
+                {missions.map((mission, index) => (
+                    <div key={index} className="mission-card">
+                    <div className="mission-content">
+                        <div className="mission-icon-wrapper">
+                        <div className="mission-icon-circle">
+                            <span className="mission-icon">{mission.icon}</span>
+                        </div>
+                        </div>
+                        <RichText
+                        tagName="h3"
+                        className="mission-title"
+                        value={mission.title}
+                        onChange={(value) => updateMission(index, 'title', value)}
+                        placeholder={__('Titre de la mission...', 'mon-theme-aca')}
+                        />
+                        <RichText
+                        tagName="p"
+                        className="mission-description"
+                        value={mission.description}
+                        onChange={(value) => updateMission(index, 'description', value)}
+                        placeholder={__('Description de la mission...', 'mon-theme-aca')}
+                        />
+                    </div>
+                    </div>
+                ))}
+                </div>
+
+                {/* Call to Action */}
+                {showCallToAction && (
+                <div className="missions-cta">
+                    <div className="cta-content">
+                    <RichText
+                        tagName="h3"
+                        className="cta-title"
+                        value={ctaTitle}
+                        onChange={(value) => setAttributes({ ctaTitle: value })}
+                        placeholder={__('Titre CTA...', 'mon-theme-aca')}
+                    />
+                    <RichText
+                        tagName="p"
+                        className="cta-subtitle"
+                        value={ctaSubtitle}
+                        onChange={(value) => setAttributes({ ctaSubtitle: value })}
+                        placeholder={__('Sous-titre CTA...', 'mon-theme-aca')}
+                    />
+                    <div className="cta-button-wrapper">
+                        <RichText
+                        tagName="span"
+                        className="cta-button"
+                        value={ctaButtonText}
+                        onChange={(value) => setAttributes({ ctaButtonText: value })}
+                        placeholder={__('Texte du bouton...', 'mon-theme-aca')}
+                        />
+                    </div>
                     </div>
                 </div>
+                )}
             </div>
+            </section>
+        </div>
         </>
     );
-}
+    }

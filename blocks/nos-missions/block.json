@@ -16,42 +16,62 @@
     "supports": {
         "html": false,
         "align": [
-            "wide",
-            "full"
+        "wide",
+        "full"
         ],
         "spacing": {
-            "margin": true,
-            "padding": true
+        "margin": true,
+        "padding": true
         }
     },
     "attributes": {
         "title": {
-            "type": "string",
-            "default": "Nos Missions"
+        "type": "string",
+        "default": "Nos Missions"
+        },
+        "subtitle": {
+        "type": "string",
+        "default": "L'ACA s'engage à transformer et développer la filière cotonnière africaine à travers trois axes stratégiques"
         },
         "missions": {
-            "type": "array",
-            "default": [
-                {
-                    "icon": "🌱",
-                    "title": "Soutenir les Agriculteurs",
-                    "description": "Nous offrons des ressources et des formations pour aider les agriculteurs à améliorer leurs pratiques et leurs revenus."
-                },
-                {
-                    "icon": "🌿",
-                    "title": "Promouvoir la Durabilité",
-                    "description": "Nous encourageons des pratiques agricoles durables pour préserver l'environnement et assurer la viabilité à long terme."
-                },
-                {
-                    "icon": "🤝",
-                    "title": "Renforcer la Coopération",
-                    "description": "Nous facilitons la coopération entre les acteurs de la filière pour un développement harmonieux."
-                }
-            ]
+        "type": "array",
+        "default": [
+            {
+            "icon": "🎯",
+            "title": "Promotion de la Filière Coton",
+            "description": "Développer et promouvoir l'excellence de la filière cotonnière africaine à travers des initiatives stratégiques et des partenariats durables."
+            },
+            {
+            "icon": "👥",
+            "title": "Coopération entre Acteurs",
+            "description": "Faciliter la collaboration entre producteurs, transformateurs, négociants et institutions pour renforcer l'écosystème cotonnier."
+            },
+            {
+            "icon": "📈",
+            "title": "Valorisation des Productions",
+            "description": "Accompagner la montée en gamme et l'amélioration de la qualité des productions cotonnières africaines sur les marchés internationaux."
+            }
+        ]
         },
-        "backgroundColor": {
-            "type": "string",
-            "default": "#ffffff"
+        "showCallToAction": {
+        "type": "boolean",
+        "default": true
+        },
+        "ctaTitle": {
+        "type": "string",
+        "default": "Rejoignez Notre Mission"
+        },
+        "ctaSubtitle": {
+        "type": "string",
+        "default": "Participez au développement de l'excellence cotonnière africaine"
+        },
+        "ctaButtonText": {
+        "type": "string",
+        "default": "Devenir Partenaire"
+        },
+        "ctaButtonUrl": {
+        "type": "string",
+        "default": "#"
         }
     },
     "textdomain": "mon-theme-aca",
